@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'users', :action => 'index'
+  map.root :controller => 'home'
   
   # NOTE users should be last route set to avoid namespace issues
   map.with_options :controller => 'users' do |u|
