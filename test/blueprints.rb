@@ -1,16 +1,31 @@
 require 'machinist/active_record'
-require 'faker'
 require 'sham'
+require 'populator'
+require 'faker'
 
-# Sham.body { Faker::Lorem.sentences(3).join('.') }
-# Sham.file_name { Faker::Lorem.words(2).join('.') }
-# Sham.title { Faker::Lorem.words(3).join('.') }
-# 
-# Page.blueprint do
-#   title { Sham.title }
-#   body { Sham.body }
-# end
-# 
-# Upload.blueprint do
-#   attachment_file_name { Sham.file_name }
-# end
+Sham.login { "#{Faker::Name.first_name}_#{Faker::Name.last_name}".gsub(/'/, '')[0,15].downcase }
+Sham.sentence { Faker::Lorem.sentence }
+Sham.sentences { Faker::Lorem.sentences(rand(10) + 1) }
+Sham.paragraphs { Faker::Lorem.paragraphs }
+
+FeedItem.blueprint do
+  post { Post.make }
+  user { User.make }
+  post_id { post.id }
+  poster_id { post.user_id }
+  post_created_at { post.created_at }
+end
+
+Follow.blueprint do
+  follower { User.make }
+  following { User.make }
+end
+
+Post.blueprint do
+  user { User.make }
+  body { Sham.sentences }
+end
+
+User.blueprint do
+  login { Sham.login }
+end

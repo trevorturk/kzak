@@ -8,5 +8,11 @@ class ActiveSupport::TestCase
   setup do
     Sham.reset
   end
+  
+  def login!(options = {})
+    user = User.make(options)
+    @request.session[:user_id] = user.id
+    user
+  end
       
 end
