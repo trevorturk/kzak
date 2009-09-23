@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_format_of :login, :with => /^[a-zA-Z]/, :message => "must begin with a letter"
   validates_uniqueness_of :login
   
-  default_scope :order => 'login DESC'
+  default_scope :order => 'login ASC'
   
   def follow(user)
     Follow.create {|r| r.follower = self; r.following = user}
