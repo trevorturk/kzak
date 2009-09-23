@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   has_many :followers, :through => :follows_where_they_are_being_followed
   
   validates_presence_of :login
+  validates_length_of :login, :maximum => 15
+  validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and underscores"
+  validates_format_of :login, :with => /^[a-zA-Z]/, :message => "must begin with a letter"
+  validates_uniqueness_of :login
   
   default_scope :order => 'login DESC'
   

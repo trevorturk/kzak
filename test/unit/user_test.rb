@@ -7,7 +7,37 @@ class UserTest < ActiveSupport::TestCase
       User.make
     end
   end
+    
+  test "is not valid without login" do
+    u = User.new
+    assert_equal false, u.valid?
+    assert u.errors[:login]
+  end
   
+  test "is not valid without unique login" do
+    User.make(:login => 'test')
+    u = User.new(:login => 'test')
+    assert_equal false, u.valid?
+    assert u.errors[:login]
+  end
+  
+  test "is not valid with login greater than 15" do
+    u = User.new(:login => '1234567890123456')
+    assert_equal false, u.valid?
+    assert u.errors[:login]
+  end
+  
+  test "is not valid with login that begins with a number or underscore " do
+    u = User.new(:login => '1a'); assert_equal false, u.valid?; assert u.errors[:login]
+    u = User.new(:login => '_a'); assert_equal false, u.valid?; assert u.errors[:login]
+  end
+  
+  test "is not valid with login that's not all letters, numbers, and underscores" do
+    u = User.new(:login => '@'); assert_equal false, u.valid?; assert u.errors[:login]
+    u = User.new(:login => '!'); assert_equal false, u.valid?; assert u.errors[:login]
+    u = User.new(:login => '~'); assert_equal false, u.valid?; assert u.errors[:login]
+  end
+
   test "has many posts" do
     u = User.make
     r = Post.make(:user => u)
