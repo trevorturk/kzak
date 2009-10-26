@@ -68,7 +68,7 @@ class FeedItemTest < ActiveSupport::TestCase
     follower.reload
     assert_difference 'Post.count' do
       assert_difference 'FeedItem.count', 2 do
-        p = Post.make(:body => 'test', :user => poster)
+        p = Post.make(:user => poster)
         assert_equal p, poster.feed_items.first.post
         assert_equal p, follower.feed_items.first.post
       end

@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'home'
+  map.root :controller => 'posts'
+  map.resources :posts, :only => [:index, :create, :destroy]
+  map.login '/login', :controller => 'home'
   
   # NOTE users should be last route set to avoid namespace issues
   map.with_options :controller => 'users' do |u|
