@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_filter :require_login
+  before_filter :require_login, :only => [:create, :destroy]
   
   def index
     @posts = Post.all :include => [:user]
