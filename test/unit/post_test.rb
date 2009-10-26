@@ -26,11 +26,11 @@ class PostTest < ActiveSupport::TestCase
   end
 
   test "should create an post via (stubbed out) url" do
-    Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/rails.png"))
-    r = Post.create! { |r| r.user = User.make; r.attachment = nil; r.attachment_url = 'rails.png' }
-    assert_equal 'rails.png', r.attachment_remote_url # check for correct original attachment_url value
-    assert_equal 'image/png', r.attachment_content_type # check for correct type
-    assert_equal 6646, r.attachment_file_size # check for correct file size
+    Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/audio.mp3"))
+    r = Post.create! { |r| r.user = User.make; r.attachment = nil; r.attachment_url = 'audio.mp3' }
+    assert_equal 'audio.mp3', r.attachment_remote_url # check for correct original attachment_url value
+    assert_equal 'application/x-mp3', r.attachment_content_type # check for correct type
+    assert_equal 174208, r.attachment_file_size # check for correct file size
   end
 
   test "should require post provided via (stubbed out) url to be valid" do

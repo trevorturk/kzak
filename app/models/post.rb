@@ -24,7 +24,8 @@ class Post < ActiveRecord::Base
   validates_presence_of :user_id, :attachment_file_name
   validates_presence_of :attachment_remote_url, :if => :attachment_url_provided?, :message => 'is invalid or inaccessible'
   validates_uniqueness_of :attachment_file_name
-
+  validates_attachment_content_type :attachment, :content_type => /mp3/
+  
   after_create :create_feed_items
   
   default_scope :order => 'created_at DESC'

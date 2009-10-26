@@ -1,0 +1,15 @@
+<h2>Posts</h2>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li><b><%= link_to h(post.user), post.user %></b> <%=h post %></li>
+  <% end if @posts %>
+</ul>
+
+<h2>Users</h2>
+
+<ul>
+  <% @users.each do |user| %>
+    <li><b><%= link_to h(user), user %></b></li>
+  <% end if @users %>
+</ul>

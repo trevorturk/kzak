@@ -15,16 +15,16 @@ class PostsControllerTest < ActionController::TestCase
   test "should create post" do
     login!
     assert_difference('Post.count') do
-      post :create, :post => { :attachment => fixture_file_upload('files/rails.png', 'image/png') }
+      post :create, :post => { :attachment => fixture_file_upload('files/audio.mp3', 'audio/mp3') }
     end
     assert_redirected_to root_path
   end
 
   test "should create post via (stubbed out) url" do
     login!
-    Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/rails.png"))
+    Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/audio.mp3"))
     assert_difference 'Post.count' do
-      post :create, :post => { :attachment_url => 'rails.png' }
+      post :create, :post => { :attachment_url => 'audio.mp3' }
     end
     assert_redirected_to root_path
   end

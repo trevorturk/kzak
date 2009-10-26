@@ -7,7 +7,7 @@ Sham.login { "#{Faker::Name.first_name}_#{Faker::Name.last_name}".gsub(/'/, '')[
 Sham.sentence { Faker::Lorem.sentence }
 Sham.sentences { Faker::Lorem.sentences(rand(10) + 1) }
 Sham.paragraphs { Faker::Lorem.paragraphs }
-Sham.file_name { Faker::Lorem.words(2).join('.') }
+Sham.mp3_file_name { "#{Faker::Lorem.words(1)}.mp3" }
 
 FeedItem.blueprint do
   post { Post.make }
@@ -24,7 +24,7 @@ end
 
 Post.blueprint do
   user { User.make }
-  attachment_file_name { Sham.file_name }
+  attachment_file_name { Sham.mp3_file_name }
 end
 
 User.blueprint do
