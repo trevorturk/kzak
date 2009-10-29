@@ -24,7 +24,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :user_id, :attachment_file_name
   validates_presence_of :attachment_remote_url, :if => :attachment_url_provided?, :message => 'is invalid or inaccessible'
   validates_uniqueness_of :attachment_file_name
-  validates_attachment_content_type :attachment, :content_type => /mp3/
+  validates_attachment_content_type :attachment, :content_type => ['application/mp3','application/x-mp3','audio/mpeg','audio/mp3']
   
   after_create :create_feed_items
   

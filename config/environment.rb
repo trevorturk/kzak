@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'thoughtbot-paperclip', :version => '2.3.0', :lib => 'paperclip', :source => 'http://gems.github.com'
   config.gem 'right_aws', :version => '1.9.0'
   config.gem 'right_http_connection', :version => '1.2.4'
+  config.gem 'ruby-mp3info', :lib => 'mp3info'
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
