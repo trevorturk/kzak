@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091026213640) do
+ActiveRecord::Schema.define(:version => 20091029045018) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -34,6 +34,10 @@ ActiveRecord::Schema.define(:version => 20091026213640) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_remote_url"
+    t.string   "title"
+    t.string   "artist"
+    t.string   "album"
+    t.integer  "length"
   end
 
   create_table "users", :force => true do |t|

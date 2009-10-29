@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
+  require 'mp3info'
   require 'open-uri'
   
-  attr_accessible :attachment, :attachment_url, :attachment_remote_url
+  attr_accessible :attachment, :attachment_url, :attachment_remote_url, :title, :artist, :album
   attr_accessor :attachment_url  
   
   if CONFIG['s3']
@@ -26,9 +27,23 @@ class Post < ActiveRecord::Base
   validates_uniqueness_of :attachment_file_name
   validates_attachment_content_type :attachment, :content_type => ['application/mp3','application/x-mp3','audio/mpeg','audio/mp3']
   
+  before_create :get_mp3_info
+  
   after_create :create_feed_items
   
   default_scope :order => 'created_at DESC'
+  
+  def get_mp3_info
+    Mp3Info.open(self.attachment.path) do |mp3|    
+      self.title = mp3.tag.title
+      self.artist = mp3.tag.artist
+      self.album = mp3.tag.album
+      self.length = mp3.length.to_i
+    end
+    # params[:Filedata].content_type = MIME::Types.type_for(params[:Filedata].original_filename).to_s
+  rescue Mp3InfoError => e
+    nil
+  end
   
   def create_feed_items
     FeedItem.populate(self)
