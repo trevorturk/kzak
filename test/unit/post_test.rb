@@ -19,10 +19,10 @@ class PostTest < ActiveSupport::TestCase
     assert_equal r.attachment_file_name, r.to_s
   end
 
-  test "attachment_file_name is unique" do
-    r1 = Post.make
-    r2 = Post.create { |r| r.user = User.make; r.attachment_file_name = r1.attachment_file_name }
-    assert r2.errors.on(:attachment_file_name)
+  test "file name is randomized on create" do
+    Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/audio.mp3"))
+    r = Post.create! { |r| r.user = User.make; r.attachment = nil; r.attachment_url = 'audio.mp3' }
+    assert r.attachment_file_name != 'audio.mp3'
   end
 
   test "should create an post via (stubbed out) url" do
@@ -34,7 +34,6 @@ class PostTest < ActiveSupport::TestCase
     assert_equal 'The Love Song of J. Alfred Prufrock', r.title
     assert_equal 'T.S. Eliot', r.artist
     assert_equal 'Prufrock and Other Observations', r.album
-    assert_equal 7, r.length
   end
 
   test "should require post provided via (stubbed out) url to be valid" do

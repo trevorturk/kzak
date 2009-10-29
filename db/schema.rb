@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20091029045018) do
     t.string   "title"
     t.string   "artist"
     t.string   "album"
-    t.integer  "length"
   end
 
   create_table "users", :force => true do |t|

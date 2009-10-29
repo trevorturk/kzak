@@ -24,25 +24,27 @@ class Post < ActiveRecord::Base
     
   validates_presence_of :user_id, :attachment_file_name
   validates_presence_of :attachment_remote_url, :if => :attachment_url_provided?, :message => 'is invalid or inaccessible'
-  validates_uniqueness_of :attachment_file_name
   validates_attachment_content_type :attachment, :content_type => ['application/mp3','application/x-mp3','audio/mpeg','audio/mp3']
   
-  before_create :get_mp3_info
+  after_save :get_mp3_info # TODO custom paperclip processor?
   
+  before_create :randomize_file_name
   after_create :create_feed_items
   
   default_scope :order => 'created_at DESC'
   
   def get_mp3_info
-    Mp3Info.open(self.attachment.path) do |mp3|    
-      self.title = mp3.tag.title
-      self.artist = mp3.tag.artist
-      self.album = mp3.tag.album
-      self.length = mp3.length.to_i
+    return true if self.title
+    Mp3Info.open(self.attachment.path.to_s) do |info|
+      self.title = info.tag.title
+      self.artist = info.tag.artist
+      self.album = info.tag.album
+      self.save(false)
     end
     # params[:Filedata].content_type = MIME::Types.type_for(params[:Filedata].original_filename).to_s
-  rescue Mp3InfoError => e
-    nil
+  rescue
+    self.title = self.artist = self.album = 'Unknown'
+    self.save
   end
   
   def create_feed_items
@@ -54,6 +56,11 @@ class Post < ActiveRecord::Base
   end
   
   protected
+  
+  def randomize_file_name
+    extension = File.extname(attachment_file_name).downcase
+    self.attachment.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+  end
   
   def attachment_url_provided?
     !self.attachment_url.blank?
