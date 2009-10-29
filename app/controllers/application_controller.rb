@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   
   def current_user
-    @current_user ||= User.all.shuffle.first
+    @current_user ||= User.first
   end
   
   # def current_user
