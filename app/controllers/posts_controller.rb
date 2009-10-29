@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @posts = Post.all :include => [:user]
     @users = User.all
   end
-  
+    
   def create
     @post = current_user.posts.new(params[:post])
     if @post.save

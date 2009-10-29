@@ -2,15 +2,15 @@ require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
   
-  test "create requires login" do
-    post :create, :post => Post.plan
-    assert_redirected_to login_path
-  end
-  
-  test "destroy requires login" do
-    delete :destroy, :id => Post.make.id
-    assert_redirected_to login_path
-  end
+  # test "create requires login" do
+  #   post :create, :post => Post.plan
+  #   assert_redirected_to login_path
+  # end
+  # 
+  # test "destroy requires login" do
+  #   delete :destroy, :id => Post.make.id
+  #   assert_redirected_to login_path
+  # end
   
   test "should create post" do
     login!

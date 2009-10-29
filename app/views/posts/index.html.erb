@@ -1,8 +1,20 @@
+<% form_for @post || Post.new, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p><%= f.file_field :attachment %></p>
+  <p>...or upload via URL: <%= f.text_field :attachment_url, :class => 'text' %></p>
+  <p><%= f.submit 'Post' %></p>
+<% end %>
+
 <h2>Posts</h2>
 
 <ul>
   <% @posts.each do |post| %>
-    <li><b><%= link_to h(post.user), post.user %></b> <%=h post %></li>
+    <li>
+      <b><%= link_to h(post.user), post.user %></b>
+      <p id="post-<%= post.id %>"><%=h post.title %></p>  
+      <script type="text/javascript">AudioPlayer.embed('<%= "post-#{post.id}" %>', {soundFile:'<%= post.attachment.url %>'});</script>  
+      <%=h post.title %> | <%=h post.artist %> | <%=h post.album %> | <%=h post.length %>
+    </li>
   <% end if @posts %>
 </ul>
 

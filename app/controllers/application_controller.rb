@@ -4,8 +4,12 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   
   def current_user
-    @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
+    @current_user ||= User.all.shuffle.first
   end
+  
+  # def current_user
+  #   @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
+  # end
   
   def logged_in?()
     current_user != 0
