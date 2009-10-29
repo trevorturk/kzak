@@ -11,9 +11,7 @@
   <% @posts.each do |post| %>
     <li>
       <b><%= link_to h(post.user), post.user %></b>
-      <p id="post-<%= post.id %>"><%=h post.title %></p>  
-      <script type="text/javascript">AudioPlayer.embed('<%= "post-#{post.id}" %>', {soundFile:'<%= post.attachment.url %>'});</script>  
-      <%=h post.title %> | <%=h post.artist %> | <%=h post.album %>
+      <%= link_to post.title, post.title, :id => post.attachment_file_name, :class => 'audio' %> | <%=h post.artist %> | <%=h post.album %>
     </li>
   <% end if @posts %>
 </ul>

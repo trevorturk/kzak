@@ -3,9 +3,28 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>KZAK!</title>
-  <%= stylesheet_link_tag 'reset', 'application' %>
-  <script type="text/javascript" src="/javascripts/audio-player.js"></script>  
-  <script type="text/javascript">AudioPlayer.setup("/flash/player.swf", {width: 290});</script>
+  <%= stylesheet_link_tag 'reset', 'application', :cache => true %>
+  <%= javascript_include_tag :all, :cache => true  %>
+  <script>
+    $(document).ready( function(){    
+      
+      soundManager.debugMode = false;
+      soundManager.url = 'flash/';
+      
+      $('a.audio').click( function() {
+        var id = $(this).attr('id');
+        try { soundManager.play(id, 'http://kzak.local/uploads/' + id); } catch(err) { return true; }
+        return false;
+      });
+      
+      $('a.audio').each( function() {
+       var id = $(this).attr('id');
+       $(this).attr('href','http://kzak.local/uploads/' + id);
+      })
+      
+    });
+  </script>
+  
 </head>
 <body>
   <h1><%= link_to 'KZAK!', root_path %>
