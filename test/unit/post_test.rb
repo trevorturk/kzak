@@ -31,9 +31,6 @@ class PostTest < ActiveSupport::TestCase
     assert_equal 'audio.mp3', r.attachment_remote_url
     assert_equal 'application/x-mp3', r.attachment_content_type
     assert_equal 174208, r.attachment_file_size # check for correct file size
-    assert_equal 'The Love Song of J. Alfred Prufrock', r.title
-    assert_equal 'T.S. Eliot', r.artist
-    assert_equal 'Prufrock and Other Observations', r.album
   end
 
   test "should require post provided via (stubbed out) url to be valid" do

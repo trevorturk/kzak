@@ -15,9 +15,15 @@ class PostsControllerTest < ActionController::TestCase
   test "should create post" do
     login!
     assert_difference('Post.count') do
-      post :create, :post => { :attachment => fixture_file_upload('files/audio.mp3', 'audio/mp3') }
+      post :create, :post => { :attachment => fixture_file_upload('files/audio.mp3', 'application/x-mp3') }
     end
     assert_redirected_to root_path
+    r = Post.last
+    assert_equal 'application/x-mp3', r.attachment_content_type
+    assert_equal 174208, r.attachment_file_size # check for correct file size
+    assert_equal 'The Love Song of J. Alfred Prufrock', r.title
+    assert_equal 'T.S. Eliot', r.artist
+    assert_equal 'Prufrock and Other Observations', r.album    
   end
 
   test "should create post via (stubbed out) url" do
