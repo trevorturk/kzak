@@ -8,3 +8,4 @@ p { margin: 1em 0; }
 #nav {float:right;}
 ul.users { margin-top: 20px; }
 ul.playlist { margin-top: 10px !important; }
+img.bplayer2 {float:right;}

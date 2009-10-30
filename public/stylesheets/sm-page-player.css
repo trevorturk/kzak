@@ -63,7 +63,7 @@ ul.playlist li {
  color:#666;
  padding:0.25em 0.5em 0.25em 0.5em;
  border:none;
- background-color:#f9f9f9;
+ background-color:#fff;
  -webkit-transition-property: hover;
  -webkit-transition: background-color 0.15s ease-in-out;
 }
