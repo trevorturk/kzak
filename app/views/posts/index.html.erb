@@ -10,8 +10,10 @@
 <ul>
   <% @posts.each do |post| %>
     <li>
-      <b><%= link_to h(post.user), post.user %></b>
-      <%= link_to post.title, post.title, :id => post.attachment.url, :class => 'audio' %> | <%=h post.artist %> | <%=h post.album %>
+      <%= link_to h(post.user), post.user %> &nbsp; 
+      <%= link_to post.title, post.attachment.url, :class => 'audio' %> &nbsp; 
+      <%=h post.artist %> &nbsp; 
+      <%=h post.album %>
     </li>
   <% end if @posts %>
 </ul>

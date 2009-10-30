@@ -7,24 +7,18 @@
   <%= javascript_include_tag :all, :cache => true  %>
   <script>
     $(document).ready( function(){    
-      
+  
       soundManager.debugMode = false;
-      soundManager.url = 'flash/';
-      
+      soundManager.url = '/flash/';
+  
       $('a.audio').click( function() {
-        var id = $(this).attr('id');
-        try { soundManager.play(id, id); } catch(err) { return true; }
+        var href = $(this).attr('href');
+        try { soundManager.play(href, href); } catch(err) { return true; }
         return false;
       });
-      
-      $('a.audio').each( function() {
-       var id = $(this).attr('id');
-       $(this).attr('href', id);
-      })
-      
+  
     });
   </script>
-  
 </head>
 <body>
   <h1><%= link_to 'KZAK!', root_path %>
