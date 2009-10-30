@@ -11,7 +11,7 @@
   <% @posts.each do |post| %>
     <li>
       <b><%= link_to h(post.user), post.user %></b>
-      <%= link_to post.title, post.title, :id => post.attachment_file_name, :class => 'audio' %> | <%=h post.artist %> | <%=h post.album %>
+      <%= link_to post.title, post.title, :id => post.attachment.url, :class => 'audio' %> | <%=h post.artist %> | <%=h post.album %>
     </li>
   <% end if @posts %>
 </ul>

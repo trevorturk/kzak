@@ -13,13 +13,13 @@
       
       $('a.audio').click( function() {
         var id = $(this).attr('id');
-        try { soundManager.play(id, 'http://kzak.local/uploads/' + id); } catch(err) { return true; }
+        try { soundManager.play(id, id); } catch(err) { return true; }
         return false;
       });
       
       $('a.audio').each( function() {
        var id = $(this).attr('id');
-       $(this).attr('href','http://kzak.local/uploads/' + id);
+       $(this).attr('href', id);
       })
       
     });
