@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   attr_accessor :attachment_url  
   
   if CONFIG['s3']
-    has_attached_file :attachment, :storage => :s3, :path => "/posts/:filename", :bucket => CONFIG['s3_bucket_name'],
+    has_attached_file :attachment, :storage => :s3, :path => "posts/:filename", :bucket => CONFIG['s3_bucket_name'],
                       :s3_host_alias => CONFIG['s3_host_alias'], :url => CONFIG['s3_host_alias'] ? ':s3_alias_url' : nil,
                       :s3_credentials => { :access_key_id => CONFIG['s3_access_id'], :secret_access_key => CONFIG['s3_secret_key'] },
                       :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate }
