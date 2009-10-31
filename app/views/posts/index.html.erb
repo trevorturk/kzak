@@ -6,24 +6,20 @@
       upload_url : '<%= new_post_path_for_swf_upload %>',
       flash_url : '/flash/swfupload.swf',
 
-			button_image_url: "/images/TestImageNoText_65x29.png",	// Relative to the Flash file
-			button_width: "65",
-			button_height: "29",
-			button_placeholder_id: "spanButtonPlaceHolder",
-			button_text: '<span class="theFont">Upload</span>',
-			button_text_style: ".theFont { font-size: 16; }",
-			button_text_left_padding: 12,
-			button_text_top_padding: 3,
+			button_image_url: "/images/upload.png",
+			button_width: "64",
+			button_height: "27",
+			button_placeholder_id: "SwfUploadButton",
 
       file_size_limit : '100000',
-      file_types : '*.*',
+      file_types : '*.mp3',
       file_types_description : 'Files',
       file_upload_limit : '0',
 			custom_settings : {
 				progressTarget : "fsUploadProgress"
 			},
 
-      file_queue_error_handler : fileQueueError,
+      file_queue_error_handler : uploadError,
       file_dialog_complete_handler : fileDialogComplete,
       upload_progress_handler : uploadProgress,
       upload_error_handler : uploadError,
@@ -35,7 +31,7 @@
 			},
 
       custom_settings : { 
-        upload_target : 'divFileProgressContainer',
+        upload_target : 'SwfUploadProgress',
       },
 
       debug: false
@@ -44,18 +40,8 @@
   };
 </script>
 
-<div id="new_post">
-	<% form_for @post || Post.new do |f| %>
-		<div>
-			<span id="spanButtonPlaceHolder"></span>
-		</div>
-	<% end %>
-</div>	
-<div id="divFileProgressContainer"></div>	
-
-
-
-
+<div id="SwfUploadButton"> </div>
+<div id="SwfUploadProgress"> </div>
 
 <ul class="playlist">
   <% @posts.each do |post| %>
