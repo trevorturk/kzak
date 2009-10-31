@@ -1,18 +1,65 @@
-<% form_for @post || Post.new, :html => { :multipart => true } do |f| %>
-  <%= f.error_messages %>
-  <p><%= f.file_field :attachment %></p>
-  <p>...or upload via URL: <%= f.text_field :attachment_url, :class => 'text' %></p>
-  <p><%= f.submit 'Upload', :disable_with => 'Uploading...' %></p>
-<% end %>
+<script type='text/javascript'>
+  var swfu;
+
+  window.onload = function () {
+    swfu = new SWFUpload({
+      upload_url : '<%= new_post_path_for_swf_upload %>',
+      flash_url : '/flash/swfupload.swf',
+
+			button_image_url: "/images/TestImageNoText_65x29.png",	// Relative to the Flash file
+			button_width: "65",
+			button_height: "29",
+			button_placeholder_id: "spanButtonPlaceHolder",
+			button_text: '<span class="theFont">Upload</span>',
+			button_text_style: ".theFont { font-size: 16; }",
+			button_text_left_padding: 12,
+			button_text_top_padding: 3,
+
+      file_size_limit : '100000',
+      file_types : '*.*',
+      file_types_description : 'Files',
+      file_upload_limit : '0',
+			custom_settings : {
+				progressTarget : "fsUploadProgress"
+			},
+
+      file_queue_error_handler : fileQueueError,
+      file_dialog_complete_handler : fileDialogComplete,
+      upload_progress_handler : uploadProgress,
+      upload_error_handler : uploadError,
+      upload_success_handler : uploadSuccess,
+      upload_complete_handler : uploadComplete,
+
+			post_params : {
+				authenticity_token : '<%= u form_authenticity_token -%>',
+			},
+
+      custom_settings : { 
+        upload_target : 'divFileProgressContainer',
+      },
+
+      debug: false
+
+    });
+  };
+</script>
+
+<div id="new_post">
+	<% form_for @post || Post.new do |f| %>
+		<div>
+			<span id="spanButtonPlaceHolder"></span>
+		</div>
+	<% end %>
+</div>	
+<div id="divFileProgressContainer"></div>	
+
+
+
+
 
 <ul class="playlist">
   <% @posts.each do |post| %>
-    <li>
-      <a href="<%= post.attachment.url %>">
-        <span><%= h(post.title) %></span>
-        <%=h post.artist %> &nbsp;|&nbsp; <%=h post.album %>
-      </a>
-    </li>
+    <%= render post %>
   <% end if @posts %>
 </ul>
 
