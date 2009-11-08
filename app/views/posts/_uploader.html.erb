@@ -26,9 +26,10 @@
     	.bind('uploadProgress', function(event, file, bytesLoaded){
     		var percentage=Math.round((bytesLoaded/file.size)*100);
     		$('#swfupload-playlist li#'+file.id).find('div.progress').css('width', percentage+'%');
-    		$('#swfupload-playlist li#'+file.id).find('span.progressvalue').text(percentage+'%');
+    		$('#swfupload-playlist li#'+file.id).find('span.progressvalue').text('Uploading... '+percentage+'%');
     	})
     	.bind('uploadSuccess', function(event, file, serverData){
+    	  $('#swfupload-playlist li#'+file.id).find('span.progressvalue').text('Processing...');
     		$('#swfupload-playlist li#'+file.id).html($(serverData).fadeIn(1000));
     	})
     	.bind('uploadComplete', function(event, file){
