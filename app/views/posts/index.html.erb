@@ -1,36 +1,14 @@
 <div id="swfupload-control">
 	<span id="swfupload-button"></span>
-	<ol id="swfupload-items"></ol>
 </div>
 
-<ul class="playlist">
+<ul id="swfupload-playlist" class="playlist">
   <% @posts.each do |post| %>
-    <%= render post %>
+    <li><%= render post %></li>
   <% end if @posts %>
 </ul>
 
-<div id="control-template">
- <div class="controls">
-  <div class="statusbar">
-   <div class="loading"></div>
-    <div class="position"></div>
-  </div>
- </div>
- <div class="timing">
-  <div id="sm2_timing" class="timing-data">
-   <span class="sm2_position">%s1</span> / <span class="sm2_total">%s2</span></div>
- </div>
- <div class="peak">
-  <div class="peak-box"><span class="l"></span><span class="r"></span>
-  </div>
- </div>
-</div>
-
-<div id="spectrum-container" class="spectrum-container">
- <div class="spectrum-box">
-  <div class="spectrum"></div>
- </div>
-</div> 
+<%= render 'player' %>
 
 <ul class="users">
   <% @users.each do |user| %>
@@ -39,46 +17,5 @@
 </ul>
 
 <% content_for :head do %>
-<script type="text/javascript">
-
-$(function(){
-	$('#swfupload-control').swfupload({
-    upload_url : '<%= new_post_path_for_swf_upload %>',
-    flash_url : '/flash/swfupload.swf',
-    file_size_limit : '100000',
-    file_types : '*.mp3',
-    file_types_description : 'mp3s',
-    file_upload_limit : '0',
-		button_image_url: "/images/upload.png",
-		button_width: "64",
-		button_height: "27",
-		button_placeholder_id: "swfupload-button",
-		debug: false
-	})
-	.bind('fileQueued', function(event, file){
-		var listitem='<li id="'+file.id+'" >'+
-			file.name+' ('+number_to_human_size(file.size)+') <span class="progressvalue">Pending...</span>'+
-			'<div class="progressbar"><div class="progress"></div></div></li>';
-		$('#swfupload-items').append(listitem);
-		$(this).swfupload('startUpload');
-	})
-	.bind('uploadStart', function(event, file){
-		$('#swfupload-items li#'+file.id).find('span.progressvalue').text('0%');
-	})
-	.bind('uploadProgress', function(event, file, bytesLoaded){
-		var percentage=Math.round((bytesLoaded/file.size)*100);
-		$('#swfupload-items li#'+file.id).find('div.progress').css('width', percentage+'%');
-		$('#swfupload-items li#'+file.id).find('span.progressvalue').text(percentage+'%');
-	})
-	.bind('uploadSuccess', function(event, file, serverData){
-		var item=$('#swfupload-items li#'+file.id);
-		item.find('div.progress').css('width', '100%');
-		item.find('span.progressvalue').text('Complete');
-		item.addClass('success');
-	})
-	.bind('uploadComplete', function(event, file){
-		$(this).swfupload('startUpload');
-	})
-});	
-</script>
+  <%= render 'uploader' %>
 <% end %>

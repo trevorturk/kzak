@@ -10,14 +10,10 @@ class PostsController < ApplicationController
     
   def create
     @post = current_user.posts.new(:attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album)
-    respond_to do |format|
-      if @post.save!
-        format.html { render :text => @post }
-        format.xml  { render :xml => @post, :status => :created, :location => root_path }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
-      end
+    if @post.save
+      render :partial => @post
+    else
+     render :action => "new"
     end
   end
   
