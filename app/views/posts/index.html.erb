@@ -1,47 +1,7 @@
-<script type='text/javascript'>
-  var swfu;
-
-  window.onload = function () {
-    swfu = new SWFUpload({
-      upload_url : '<%= new_post_path_for_swf_upload %>',
-      flash_url : '/flash/swfupload.swf',
-
-			button_image_url: "/images/upload.png",
-			button_width: "64",
-			button_height: "27",
-			button_placeholder_id: "SwfUploadButton",
-
-      file_size_limit : '100000',
-      file_types : '*.mp3',
-      file_types_description : 'Files',
-      file_upload_limit : '0',
-			custom_settings : {
-				progressTarget : "fsUploadProgress"
-			},
-
-      file_queue_error_handler : uploadError,
-      file_dialog_complete_handler : fileDialogComplete,
-      upload_progress_handler : uploadProgress,
-      upload_error_handler : uploadError,
-      upload_success_handler : uploadSuccess,
-      upload_complete_handler : uploadComplete,
-
-			post_params : {
-				authenticity_token : '<%= u form_authenticity_token -%>',
-			},
-
-      custom_settings : { 
-        upload_target : 'SwfUploadProgress',
-      },
-
-      debug: false
-
-    });
-  };
-</script>
-
-<div id="SwfUploadButton"> </div>
-<div id="SwfUploadProgress"> </div>
+<div id="swfupload-control">
+	<span id="swfupload-button"></span>
+	<ol id="swfupload-items"></ol>
+</div>
 
 <ul class="playlist">
   <% @posts.each do |post| %>
@@ -50,7 +10,6 @@
 </ul>
 
 <div id="control-template">
- <!-- control markup inserted dynamically after each link -->
  <div class="controls">
   <div class="statusbar">
    <div class="loading"></div>
@@ -78,3 +37,48 @@
     <li><b><%= link_to h(user), user %></b></li>
   <% end if @users %>
 </ul>
+
+<% content_for :head do %>
+<script type="text/javascript">
+
+$(function(){
+	$('#swfupload-control').swfupload({
+    upload_url : '<%= new_post_path_for_swf_upload %>',
+    flash_url : '/flash/swfupload.swf',
+    file_size_limit : '100000',
+    file_types : '*.mp3',
+    file_types_description : 'mp3s',
+    file_upload_limit : '0',
+		button_image_url: "/images/upload.png",
+		button_width: "64",
+		button_height: "27",
+		button_placeholder_id: "swfupload-button",
+		debug: false
+	})
+	.bind('fileQueued', function(event, file){
+		var listitem='<li id="'+file.id+'" >'+
+			file.name+' ('+number_to_human_size(file.size)+') <span class="progressvalue">Pending...</span>'+
+			'<div class="progressbar"><div class="progress"></div></div></li>';
+		$('#swfupload-items').append(listitem);
+		$(this).swfupload('startUpload');
+	})
+	.bind('uploadStart', function(event, file){
+		$('#swfupload-items li#'+file.id).find('span.progressvalue').text('0%');
+	})
+	.bind('uploadProgress', function(event, file, bytesLoaded){
+		var percentage=Math.round((bytesLoaded/file.size)*100);
+		$('#swfupload-items li#'+file.id).find('div.progress').css('width', percentage+'%');
+		$('#swfupload-items li#'+file.id).find('span.progressvalue').text(percentage+'%');
+	})
+	.bind('uploadSuccess', function(event, file, serverData){
+		var item=$('#swfupload-items li#'+file.id);
+		item.find('div.progress').css('width', '100%');
+		item.find('span.progressvalue').text('Complete');
+		item.addClass('success');
+	})
+	.bind('uploadComplete', function(event, file){
+		$(this).swfupload('startUpload');
+	})
+});	
+</script>
+<% end %>

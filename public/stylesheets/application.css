@@ -9,3 +9,9 @@ p { margin: 1em 0; }
 ul.users { margin-top: 20px; }
 ul.playlist { margin-top: 10px !important; }
 img.bplayer2 {float:right;}
+
+#swfupload-items { margin:0; padding:0; width:500px;}
+#swfupload-items li { list-style-position:inside; margin:2px; border:1px solid #ccc; padding:10px; position:relative;}
+#swfupload-items li .progressbar { margin-top: 2px; border:1px solid #666; height:5px; background:#fff; }
+#swfupload-items li .progress { background:#999; width:0%; height:5px; }
+#swfupload-items li.success { background:#efefef; }
