@@ -7,6 +7,7 @@
   <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'swfupload', 'jquery.swfupload', :cache => true  %>
   <%= yield :head %>
   <script type="text/javascript" charset="utf-8">
+    // via http://getsatisfaction.com/schillmania/topics/using_soundmanager_2_as_jquery_plugin
     $.playable = function( url, settings ) { 
     var sm = soundManager, 
     playable = arguments.callee; 
