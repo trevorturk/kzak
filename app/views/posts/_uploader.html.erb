@@ -30,6 +30,7 @@
     	})
     	.bind('uploadSuccess', function(event, file, serverData){
     		$('#swfupload-playlist li#'+file.id).html($(serverData).fadeIn(1000));
+    		$('#swfupload-playlist li#'+file.id).find('a').playable();
     	})
     	.bind('uploadComplete', function(event, file){
     		$(this).swfupload('startUpload');
