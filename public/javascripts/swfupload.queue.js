@@ -16,9 +16,9 @@ if (typeof(SWFUpload) === "function") {
 	SWFUpload.queue = {};
 	
 	SWFUpload.prototype.initSettings = (function (oldInitSettings) {
-		return function () {
+		return function (userSettings) {
 			if (typeof(oldInitSettings) === "function") {
-				oldInitSettings.call(this);
+				oldInitSettings.call(this, userSettings);
 			}
 			
 			this.queueSettings = {};
@@ -31,7 +31,7 @@ if (typeof(SWFUpload) === "function") {
 			this.settings.upload_complete_handler = SWFUpload.queue.uploadCompleteHandler;
 			this.settings.upload_start_handler = SWFUpload.queue.uploadStartHandler;
 			
-			this.settings.queue_complete_handler = this.settings.queue_complete_handler || null;
+			this.settings.queue_complete_handler = userSettings.queue_complete_handler || null;
 		};
 	})(SWFUpload.prototype.initSettings);
 
@@ -87,7 +87,6 @@ if (typeof(SWFUpload) === "function") {
 			if (stats.files_queued > 0 && this.queueSettings.queue_cancelled_flag === false) {
 				this.startUpload();
 			} else if (this.queueSettings.queue_cancelled_flag === false) {
-				console.debug('ydfsdfgsdfgsdfg');
 				this.queueEvent("queue_complete_handler", [this.queueSettings.queue_upload_count]);
 				this.queueSettings.queue_upload_count = 0;
 			} else {
