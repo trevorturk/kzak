@@ -8,7 +8,7 @@
   <%= yield :head %>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
-      $.playable('flash/');
+      $.playable('flash/', {pauseOnly: false});
       $('#swfupload-playlist').playable();
     });
   </script>
