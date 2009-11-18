@@ -13,6 +13,8 @@ Rails::Initializer.run do |config|
   config.gem 'right_http_connection', :version => '1.2.4'
   config.gem 'ruby-mp3info', :lib => 'mp3info'
   config.gem 'mime-types', :lib => 'mime/types'
+  config.gem 'warden', :version => '0.5.1'
+  config.gem 'devise', :version => '0.3.0'
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']

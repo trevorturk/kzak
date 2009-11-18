@@ -1,0 +1,77 @@
+* bug fix
+  * [#15] Allow yml messages to be configured by not using engine locales
+
+* deprecations
+  * Renamed confirm_in to confirm_within
+  * [#14] Do not send confirmation messages when user changes his e-mail
+  * [#13] Renamed authenticable to authenticatable and added deprecation warnings
+
+== 0.2.3
+
+* enhancements
+  * Ensure fail! works inside strategies
+  * [#12] Make unauthenticated message (when you haven't signed in) different from invalid message
+
+* bug fix
+  * Do not redirect on invalid authenticate
+  * Allow model configuration to be set to nil
+
+== 0.2.2
+
+* bug fix
+  * [#9] Fix a bug when using customized resources
+
+== 0.2.1
+
+* refactor
+  * Clean devise_views generator to use devise existing views
+
+* enhancements
+  * [#7] Create instance variables (like @user) for each devise controller
+  * Use Devise::Controller::Helpers only internally
+
+* bug fix
+  * [#6] Fix a bug with Mongrel and Ruby 1.8.6
+
+== 0.2.0
+
+* enhancements
+  * [#4] Allow option :null => true in authenticable migration
+  * [#3] Remove attr_accessible calls from devise modules
+  * Customizable time frame for rememberable with :remember_for config
+  * Customizable time frame for confirmable with :confirm_in config
+  * Generators for creating a resource and copy views
+
+* optimize
+  * Do not load hooks or strategies if they are not used
+
+* bug fixes
+  * [#2] Fixed requiring devise strategies
+
+== 0.1.1
+
+* bug fixes
+  * [#1] Fixed requiring devise mapping
+
+== 0.1.0
+
+* Devise::Authenticable
+* Devise::Confirmable
+* Devise::Recoverable
+* Devise::Validatable
+* Devise::Migratable
+* Devise::Rememberable
+
+* SessionsController
+* PasswordsController
+* ConfirmationsController
+
+* Create an example app
+* devise :all, :except => :rememberable
+* Use sign_in and sign_out in SessionsController
+
+* Mailer subjects namespaced by model
+* Allow stretches and pepper per model
+
+* Store session[:return_to] in session
+* Sign user in automatically after confirming or changing it's password

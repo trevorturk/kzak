@@ -1,0 +1,268 @@
+== Devise
+
+Devise is a flexible authentication solution for Rails based on Warden. It:
+
+* Is Rack based;
+* Is a complete MVC solution based on Rails engines;
+* Allows you to have multiple roles (or models/scopes) signed in at the same time;
+* Is based on a modularity concept: use just what you really need.
+
+Right now it's composed of five mainly modules:
+
+* Authenticatable: responsible for encrypting password and validating authenticity of a user while signing in.
+* Confirmable: responsible for verifying whether an account is already confirmed to sign in, and to send emails with confirmation instructions.
+* Recoverable: takes care of reseting the user password and send reset instructions.
+* Rememberable: manages generating and clearing token for remember the user from a saved cookie.
+* Validatable: creates all needed validations for email and password. It's totally optional, so you're able to to customize validations by yourself.
+
+There's an example application using Devise at http://github.com/plataformatec/devise_example .
+
+== Dependencies
+
+Devise is based on Warden (http://github.com/hassox/warden), a Rack Authentication Framework so you need to install it as a gem. Please ensure you have it installed in order to use devise (see instalation below).
+
+== Installation
+
+All gems are on gemcutter, so you need to add gemcutter to your sources if you haven't yet:
+
+  sudo gem sources -a http://gemcutter.org/
+
+Install warden gem if you don't have it installed (requires 0.5.1 or higher):
+
+  sudo gem install warden
+
+Install devise gem:
+
+  sudo gem install devise
+
+Configure warden and devise gems inside your app:
+
+  config.gem 'warden'
+  config.gem 'devise'
+
+And you're ready to go.
+
+== Basic Usage
+
+This is a walkthrough with all steps you need to setup a devise resource, including model, migration, route files, and optional configuration. You can also check out the *Generators* section below to help you start.
+
+Devise must be setted up within the model (or models) you want to use, and devise routes must be created inside your routes.rb file.
+
+We're assuming here you want a User model. First of all you have to setup a migration with the following fields:
+
+  create_table :users do
+    t.authenticatable
+    t.confirmable
+    t.recoverable
+    t.rememberable
+    t.timestamps
+  end
+
+You may also want to add some indexes to improve performance:
+
+  add_index :your_table, :email
+  add_index :your_table, :confirmation_token    # for confirmable
+  add_index :your_table, :reset_password_token  # for recoverable
+
+Now let's setup a User model adding the devise line to have your authentication working:
+
+  class User < ActiveRecord::Base
+    devise
+  end
+
+This line adds devise authenticatable automatically for you inside your User class. Devise don't rely on _attr_accessible_ or _attr_protected_ inside its modules, so be sure to setup what attributes are accessible or protected in your model.
+
+You could also include the other devise modules as below:
+
+  # Same as using only devise, authenticatable is activated by default
+  devise :authenticatable
+
+  # Include authenticatable + confirmable
+  devise :confirmable
+
+  # Include authenticatable + recoverable + rememberable
+  devise :recoverable, :rememberable
+
+  # Include all of them
+  devise :all
+
+  # Include all except recoverable
+  devise :all, :except => :recoverable
+
+Note that validations aren't added by default, so you're able to customize it. In order to have automatic validations working just include :validatable.
+
+== Configuration values
+
+In addition to :except, you can provide some options to devise call:
+
+* pepper: setup a pepper to generate de encrypted password. By default no pepper is used:
+
+  devise :all, :pepper => 'my_pepper'
+
+* stretches: configure how many times you want the password is reencrypted.
+
+  devise :all, :stretches => 20
+
+* confirm_within: the time the user can access the site before being blocked because his account was not confirmed
+
+  devise :all, :confirm_within => 1.week
+
+* remember_for: the time to store the remember me cookie in the user
+
+  devise :all, :remember_for => 2.weeks
+
+All those values can also be set in a global way by setting them in Devise:
+
+  Devise.confirm_within = 1.week
+
+== Routes
+
+The next step after setting up your model is to configure your routes for devise. You do this by opening up your config/routes.rb and adding:
+
+  map.devise_for :users
+
+This is going to look inside you User model and create the needed routes:
+
+  # Session routes for Authenticatable (default)
+       new_user_session GET  /users/sign_in                    {:controller=>"sessions", :action=>"new"}
+           user_session POST /users/sign_in                    {:controller=>"sessions", :action=>"create"}
+   destroy_user_session GET  /users/sign_out                   {:controller=>"sessions", :action=>"destroy"}
+
+  # Password routes for Recoverable, if User model has :recoverable configured
+      new_user_password GET  /users/password/new(.:format)     {:controller=>"passwords", :action=>"new"}
+     edit_user_password GET  /users/password/edit(.:format)    {:controller=>"passwords", :action=>"edit"}
+          user_password PUT  /users/password(.:format)         {:controller=>"passwords", :action=>"update"}
+                        POST /users/password(.:format)         {:controller=>"passwords", :action=>"create"}
+
+  # Confirmation routes for Confirmable, if User model has :confirmable configured
+  new_user_confirmation GET  /users/confirmation/new(.:format) {:controller=>"confirmations", :action=>"new"}
+      user_confirmation GET  /users/confirmation(.:format)     {:controller=>"confirmations", :action=>"show"}
+                        POST /users/confirmation(.:format)     {:controller=>"confirmations", :action=>"create"}
+
+You can run the routes rake task to verify what routes are being created by devise.
+There are also some options available for configuring your routes:
+
+* :class_name => setup a different class to be looked up by devise, if it cannot be correctly find by the route name.
+
+  map.devise_for :users, :class_name => 'Account'
+
+* :as => allows you to setup path name that will be used, as rails routes does. The following route configuration would setup your route as /accounts instead of /users:
+
+  map.devise_for :users, :as => 'accounts'
+
+* :singular => setup the name used to create named routes. By default, for a :users key, it is going to be the singularized version, :user. To configure a named route like account_session_path instead of user_session_path just do:
+
+  map.devise_for :users, :singular => :account
+
+* :path_names => configure different path names to overwrite defaults :sign_in, :sign_out, :password and :confirmation.
+
+  map.devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification' }
+
+== Controller filters
+
+Devise is gonna create some helpers to use inside your controllers and views. To setup a controller that needs user authentication, just add this before_filter:
+
+  before_filter :authenticate_user!
+
+To verify if a user is signed in, you have the following helper:
+
+  user_signed_in?
+
+And to get the current signed in user this helper is available:
+
+  current_user
+
+You have also access to the session for this scope:
+
+  user_session
+
+After signing in a user, confirming it's account or updating it's password, devise will look for a scoped root path to redirect. Example: For a :user resource, it will use user_root_path if it exists, otherwise default root_path will be used. To do it so, you need to create e default root inside your routes for your application:
+
+  map.root :controller => 'home'
+
+You also need to setup default url options for the mailer, if you are using confirmable or recoverable. Here's is the configuration for development:
+
+  Notifier.sender = "no-reply@yourapp.com"
+  ActionMailer::Base.default_url_options = { :host => 'localhost:3000' }
+
+== Tidying up
+
+Devise let's you setup as many roles as you want, so let's say you already have this User model and also want an Admin model with the same authentication stuff, but not confirmation or password recovery. Just follow the same steps:
+
+  # Create a migration with the required fields
+  create_table :admins do |t|
+    t.authenticatable
+  end
+
+  # Inside your Admin model
+  devise :validatable
+
+  # Inside your routes
+  map.devise_for :admin
+
+  # Inside your protected controller
+  before_filter :authenticate_admin!
+
+  # Inside your controllers and views
+  admin_signed_in?
+  current_admin
+  admin_session
+
+== Generators
+
+Devise comes with some generators to help you start:
+
+  script/generate devise Model
+
+Will generate a model, configured with all devise modules, and add attr_accessible for default fields, so you can setup more accessible attributes later. The generator will also create the migration and configure your route for devise.
+
+You can also copy devise views to your application, being able to modify them based on your needs. To do it so, run the following command:
+
+  script/generate devise_views
+
+This is gonna copy all session, password, confirmation and notifier views to your app/views folder.
+
+== I18n
+
+Devise uses flash messages with I18n with the flash keys :success and :failure. To customize your app, you can setup your locale file this way:
+
+  en:
+    devise:
+      sessions:
+        signed_in: 'Signed in successfully.'
+
+You can also create distinct messages based on the resource you've configured using the singular name given in routes:
+
+  en:
+    devise:
+      sessions:
+        user:
+          signed_in: 'Welcome user, you are signed in.'
+        admin:
+          signed_in: 'Hello admin!'
+
+Devise notifier uses the same pattern to create subject messages:
+
+  en:
+    devise:
+      notifier:
+        confirmation_instructions: 'Hello everybody!'
+        user:
+          confirmation_instructions: 'Hello User! Please confirm your email'
+          reset_password_instructions: 'Reset instructions'
+
+Take a look at our locale file to check all available messages.
+
+== TODO
+
+Please refer to TODO file.
+
+== Bugs and Feedback
+
+If you discover any bugs or want to drop a line, feel free to create an issue on
+GitHub or send an e-mail to the mailing list.
+
+http://github.com/plataformatec/devise/issues
+http://groups.google.com/group/plataformatec-devise
+
+MIT License. Copyright 2009 Plataforma Tecnologia. http://blog.plataformatec.com.br
