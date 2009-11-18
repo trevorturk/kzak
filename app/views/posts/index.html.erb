@@ -2,6 +2,10 @@
 	<span id="swfupload-button"></span>
 </div>
 
+<% content_for :head do %>
+  <%= render 'uploader' %>
+<% end %>
+
 <ul id="swfupload-playlist" class="playlist">
   <% @posts.each do |post| %>
     <li><%= render post %></li>
@@ -13,7 +17,3 @@
     <li><b><%= link_to h(user), user %></b></li>
   <% end if @users %>
 </ul>
-
-<% content_for :head do %>
-  <%= render 'uploader' %>
-<% end %>

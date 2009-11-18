@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091029045018) do
+ActiveRecord::Schema.define(:version => 20091118230146) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -41,11 +41,16 @@ ActiveRecord::Schema.define(:version => 20091029045018) do
 
   create_table "users", :force => true do |t|
     t.string   "login"
-    t.integer  "posts_count",      :default => 0, :null => false
-    t.integer  "followings_count", :default => 0, :null => false
-    t.integer  "followers_count",  :default => 0, :null => false
+    t.integer  "posts_count",         :default => 0, :null => false
+    t.integer  "followings_count",    :default => 0, :null => false
+    t.integer  "followers_count",     :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "password_salt"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
   end
 
 end

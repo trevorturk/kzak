@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  before_filter :require_login, :only => [:create, :destroy]
+  before_filter :require_login, :only => :create
   before_filter :get_mime_type, :get_mp3_info, :only => :create
   
   def index
@@ -17,11 +17,11 @@ class PostsController < ApplicationController
     end
   end
   
-  def destroy
-    @post = current_user.posts.find(params[:id])
-    @post.destroy
-    redirect_to root_path
-  end
+  # def destroy
+  #   @post = current_user.posts.find(params[:id])
+  #   @post.destroy
+  #   redirect_to root_path
+  # end
   
   protected
   

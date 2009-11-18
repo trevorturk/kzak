@@ -8,13 +8,14 @@
   <%= yield :head %>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function(){
-      $.playable('flash/');
+      $.playable('/flash/');
       $('#swfupload-playlist').playable();
     });
   </script>
 </head>
 <body>
   <h1><%= link_to 'KZAK!', root_path %></h1>
+  <%= render 'shared/flash' %>
   <%= yield %>
   <div id="footer">
     <%= image_tag 'bplayer2.gif' %>

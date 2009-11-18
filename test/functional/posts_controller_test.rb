@@ -44,14 +44,13 @@ class PostsControllerTest < ActionController::TestCase
   #   assert_response :success
   # end
   
-  test "should destroy post" do
-    u = login!
-    p = Post.make(:user => u)
-    assert_difference('Post.count', -1) do
-      delete :destroy, :id => p.to_param
-    end
-    assert_redirected_to root_path
-  end
-
-
+  # test "should destroy post" do
+  #   u = login!
+  #   p = Post.make(:user => u)
+  #   assert_difference('Post.count', -1) do
+  #     delete :destroy, :id => p.to_param
+  #   end
+  #   assert_redirected_to root_path
+  # end
+  
 end

@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   
-  attr_accessible # this space intentionally left blank
-    
+  attr_accessible :login, :email, :password, :password_confirmation, :remember_me
+  
+  devise :authenticatable, :rememberable, :remember_for => 2.months
+  
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items
   

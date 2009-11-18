@@ -12,6 +12,7 @@ namespace :db do
     end
  
     puts 'creating users...'
+    User.make(:login => 'test', :email => 'test@example.com', :password => 'test')
     20.times { |i|
       User.make
     }

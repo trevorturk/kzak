@@ -2,21 +2,9 @@ class ApplicationController < ActionController::Base
   helper :all
   # protect_from_forgery # TODO figure out why this isn't working
   filter_parameter_logging :password, :password_confirmation
-  
-  def current_user
-    @current_user ||= User.first
-  end
-  
-  # def current_user
-  #   @current_user ||= ((session[:user_id] && User.find_by_id(session[:user_id])) || 0)
-  # end
-  
-  def logged_in?()
-    current_user != 0
-  end
-  
+    
   def require_login
-    redirect_to login_path and return false unless logged_in?
+    redirect_to bullshit and return false unless user_signed_in?
   end
   
 end
