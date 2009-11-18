@@ -5,6 +5,7 @@ h1 { font-size: 30px; margin-bottom:10px;}
 h1 a { color: #111; }
 p { margin: 1em 0; }
 #nav {float:right;}
+#status {float:right;}
 ul.users { margin-top: 20px; }
 ul.playlist { margin-top: 10px !important; }
 #footer {text-align:center; margin-top:120px;}

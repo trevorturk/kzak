@@ -1,9 +1,13 @@
-<div id="swfupload-control">
-	<span id="swfupload-button"></span>
-</div>
+<% if user_signed_in? %>
 
-<% content_for :head do %>
-  <%= render 'uploader' %>
+  <div id="swfupload-control">
+  	<span id="swfupload-button"></span>
+  </div>
+
+  <% content_for :head do %>
+    <%= render 'uploader' %>
+  <% end %>
+
 <% end %>
 
 <ul id="swfupload-playlist" class="playlist">
