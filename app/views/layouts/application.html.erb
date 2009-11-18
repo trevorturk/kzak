@@ -14,8 +14,10 @@
   </script>
 </head>
 <body>
-  <%= image_tag('bplayer2.gif', :class => 'bplayer2') %>
   <h1><%= link_to 'KZAK!', root_path %></h1>
-  <%= yield %>  
+  <%= yield %>
+  <div id="footer">
+    <%= image_tag 'bplayer2.gif' %>
+  </div>
 </body>
 </html>

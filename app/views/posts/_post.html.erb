@@ -1,4 +1,3 @@
 <a href="<%= post.attachment.url %>">
-  <span><%= h(post.title) %></span>
-  <%=h post.artist %> &nbsp;|&nbsp; <%=h post.album %>
+  <%= h(post.title) %> &mdash; <%=h post.artist %> &mdash; <%=h post.album %>
 </a>

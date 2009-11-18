@@ -1,14 +1,12 @@
 body { margin: 20px 40px; color: #111; }
 a { color: #24a; text-decoration: none; }
 a:hover { text-decoration: underline; }
-h1 { font-size: 30px; margin: 1em 0; }
+h1 { font-size: 30px; margin-bottom:10px;}
 h1 a { color: #111; }
-h2 { font-size: 16px; margin: 1em 0; }
 p { margin: 1em 0; }
 #nav {float:right;}
 ul.users { margin-top: 20px; }
 ul.playlist { margin-top: 10px !important; }
-img.bplayer2 {float:right;}
-
+#footer {text-align:center; margin-top:120px;}
 #swfupload-playlist li .progressbar { margin-top: 2px; border:1px solid #666; height:5px; background:#fff; }
 #swfupload-playlist li .progress { background:#999; width:0%; height:5px; }
