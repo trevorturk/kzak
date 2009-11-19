@@ -5,7 +5,8 @@ h1 { font-size: 30px; margin-bottom:10px;}
 h1 a { color: #111; }
 h2 { border-top: 1px solid #dedede; border-bottom: 1px solid #dedede; padding:5px 0; margin-bottom:5px;}
 p { margin: 1em 0; }
-#status {float:right;}
+#nav {float:right;}
+#nav span {color:#dedede;}
 #users { text-align:right;}
 #footer {text-align:center; margin-top:120px;}
 #swfupload-control {margin-top:10px;}

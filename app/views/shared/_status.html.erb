@@ -1,7 +1,0 @@
-<div id="status">
-  <% if user_signed_in? %>
-     <%= "signed in as #{link_to current_user, current_user}" %> &nbsp; <%= link_to "sign out", destroy_user_session_path %>
-  <% else %>
-    <%= link_to "sign in", new_user_session_path %>
-  <% end %>
-</div>
