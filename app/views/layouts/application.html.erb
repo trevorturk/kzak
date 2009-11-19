@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>KZAK!</title>
-  <%= stylesheet_link_tag 'reset', 'application', 'jquery.playable', :cache => true %>
+  <%= stylesheet_link_tag 'reset', '960', 'application', 'jquery.playable', :cache => true %>
   <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'jquery.playable', 'jquery.playable.ui.simple', 'swfupload', 'jquery.swfupload', :cache => true  %>
   <%= yield :head %>
   <script type="text/javascript" charset="utf-8">
@@ -14,12 +14,22 @@
   </script>
 </head>
 <body>
-  <%= render 'shared/status' %>
-  <h1><%= link_to 'KZAK!', root_path %></h1>
-  <%= render 'shared/flash' %>
-  <%= yield %>
-  <div id="footer">
-    <%= image_tag 'bplayer2.gif' %>
+  <div class="container_12">
+  	<div class="grid_6">
+      <h1><%= link_to 'KZAK!', root_path %></h1>
+  	</div>
+  	<div class="grid_6">
+      <%= render 'shared/status' %>
+  	</div>
+  	<div class="grid_12">
+      <%= render 'shared/flash' %>
+    </div>
+    <div class="clear"></div>
+    <%= yield %>
+    <div class="clear"></div>
+    <div id="footer" class="grid_12">
+      <%= image_tag 'bplayer2.gif' %>
+    </div>
   </div>
 </body>
 </html>

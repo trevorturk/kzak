@@ -1,23 +1,35 @@
-<% if user_signed_in? %>
+<div class="grid_10">
+  
+  <h2>songs</h2>
+  
+  <% if user_signed_in? %>
 
-  <div id="swfupload-control">
-  	<span id="swfupload-button"></span>
-  </div>
+    <div id="swfupload-control">
+    	<span id="swfupload-button"></span>
+    </div>
 
-  <% content_for :head do %>
-    <%= render 'uploader' %>
+    <% content_for :head do %>
+      <%= render 'uploader' %>
+    <% end %>
+
   <% end %>
 
-<% end %>
+  <ul id="swfupload-playlist" class="playlist">
+    <% @posts.each do |post| %>
+      <li><%= render post %></li>
+    <% end if @posts %>
+  </ul>
 
-<ul id="swfupload-playlist" class="playlist">
-  <% @posts.each do |post| %>
-    <li><%= render post %></li>
-  <% end if @posts %>
-</ul>
+</div>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li><b><%= link_to h(user), user %></b></li>
-  <% end if @users %>
-</ul>
+<div id="users" class="grid_2">
+  
+  <h2>users</h2>
+  
+  <ul class="users">
+    <% @users.each do |user| %>
+      <li><b><%= link_to h(user), user %></b></li>
+    <% end if @users %>
+  </ul>
+
+</div>
