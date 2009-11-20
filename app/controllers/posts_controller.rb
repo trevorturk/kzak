@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  # before_filter :authenticate_user!, :only => :create
+  before_filter :authenticate_user!, :only => :create
   before_filter :get_mime_type, :get_mp3_info, :only => :create
   
   def index

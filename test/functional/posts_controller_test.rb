@@ -12,7 +12,7 @@ class PostsControllerTest < ActionController::TestCase
   #   assert_redirected_to login_path
   # end
   
-  test "should create post" do
+  test "should create post if logged in" do
     login!
     assert_difference('Post.count') do
       post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
@@ -25,6 +25,14 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal 'T.S. Eliot', r.artist
     assert_equal 'Prufrock and Other Observations', r.album    
   end
+  
+  test "should not create post if not logged in" do
+    assert_no_difference('Post.count') do
+      post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
+    end
+    assert_redirected_to new_user_session_path(:unauthenticated => true)
+  end
+  
 
   # test "should create post via (stubbed out) url" do
   #   login!

@@ -11,8 +11,12 @@ class ActiveSupport::TestCase
   
   def login!(options = {})
     user = User.make(options)
-    @request.session[:user_id] = user.id
+    sign_in user
     user
   end
       
+end
+
+ActionController::TestCase.class_eval do
+  include Devise::TestHelpers
 end
