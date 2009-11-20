@@ -1,0 +1,4 @@
+* Devise::Timeoutable
+* Use request_ip in session cookies
+* Devise::BruteForceProtection
+* Devise::MagicColumns
