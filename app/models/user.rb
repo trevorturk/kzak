@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :login, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :login, :password, :password_confirmation, :remember_me
   
-  devise :authenticatable, :rememberable, :remember_for => 2.months
+  devise # see config/initializers/devise.rb
   
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items
