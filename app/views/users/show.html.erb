@@ -1,31 +1,31 @@
-<h2><%=h @user %></h2>
+<div class="grid_10">
 
-<ul>
-  <% @user.posts.each do |post| %>
-    <li><%=h post %></li>
-  <% end %>
-</ul>
+  <h2><%=h @user %></h2>
 
-<h2>Feed</h2>
+  <ul class="playlist">
+    <% @user.posts.each do |post| %>
+      <li><%= render post %></li>
+    <% end if @user.posts %>
+  </ul>
+  
+</div>
 
-<ul>
-  <% @feed_items.each do |feed_item| %>
-    <li><b><%= link_to h(feed_item.poster), feed_item.poster %></b> <%=h feed_item.post %></li>
-  <% end %>
-</ul>
+<div class="grid_2">
 
-<h2>Following</h2>
+  <h2>Following</h2>
 
-<ul>
-  <% @user.followings.each do |user| %>
-    <li><b><%= link_to h(user), user %></b></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @user.followings.each do |user| %>
+      <li><b><%= link_to h(user), user %></b></li>
+    <% end %>
+  </ul>
 
-<h2>Followers</h2>
+  <h2>Followers</h2>
 
-<ul>
-  <% @user.followers.each do |user| %>
-    <li><b><%= link_to h(user), user %></b></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @user.followers.each do |user| %>
+      <li><b><%= link_to h(user), user %></b></li>
+    <% end %>
+  </ul>
+  
+</div>
