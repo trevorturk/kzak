@@ -6,12 +6,12 @@
   <%= stylesheet_link_tag 'reset', '960', 'application', :cache => true %>
   <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'swfupload', 'jquery.swfupload', :cache => true  %>
   <%= yield :head %>
-  <script type="text/javascript" charset="utf-8">
+  <script>
 
     var sm = soundManager;
 
     sm.url = '/flash';
-    sm.debugMode = true;
+    sm.debugMode = false;
     sm.useConsole = true;
     
     sm.onready(function(){
@@ -27,19 +27,40 @@
         sm.createSound(this.id,this.href);
       });        
       
-      $('.playable').click(function(){
-        if ($(this).hasClass("playing")) {
-          sm.pause(this.id);
-          $(this).addClass('paused');
+      $('.playable').click(function(e){
+        e.preventDefault();
+        // $(this).togglePlayState();
+        // return false;
+        
+        if ($(this).hasClass('playing')) {
           $(this).removeClass('playing');
+          $(this).addClass('paused');
+          sm.pause(this.id);
         } else {
-          sm.play(this.id);
-          $(this).addClass('playing');
           $(this).removeClass('paused');
+          $(this).addClass('playing');
+          sm.play(this.id);
         }
-        return false;
-      });      
-      
+      });
+            
+      // jQuery.fn.extend({
+      // 
+      //   togglePlayState:function() { 
+      //     
+      //     if (this.hasClass('playing')) {
+      //       this.removeClass('playing');
+      //       this.addClass('paused');
+      //       sm.pause(this.id);
+      //     } else {
+      //       this.removeClass('paused');
+      //       this.addClass('playing');
+      //       console.log(this.id); // TODO why is this undefined?
+      //       sm.play(this.id);
+      //     }
+      //   },
+      // 
+      // });
+                  
     });
   </script>
 </head>
