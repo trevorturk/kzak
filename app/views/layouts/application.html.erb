@@ -3,13 +3,43 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>KZAK!</title>
-  <%= stylesheet_link_tag 'reset', '960', 'application', 'jquery.playable', :cache => true %>
-  <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'jquery.playable', 'jquery.playable.ui.simple', 'swfupload', 'jquery.swfupload', :cache => true  %>
+  <%= stylesheet_link_tag 'reset', '960', 'application', :cache => true %>
+  <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'swfupload', 'jquery.swfupload', :cache => true  %>
   <%= yield :head %>
   <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-      $.playable('/flash/');
-      $('.playlist').playable();
+
+    var sm = soundManager;
+
+    sm.url = '/flash';
+    sm.debugMode = true;
+    sm.useConsole = true;
+    
+    sm.onready(function(){
+    
+      $('a[href$=.mp3]').addClass('playable');
+      
+      // $('a[href$=.mp3]').live(function(){
+      //   $(this).addClass('playable');
+      //   return false;
+      // });
+      
+      $('.playable').each(function(){        
+        sm.createSound(this.id,this.href);
+      });        
+      
+      $('.playable').click(function(){
+        if ($(this).hasClass("playing")) {
+          sm.pause(this.id);
+          $(this).addClass('paused');
+          $(this).removeClass('playing');
+        } else {
+          sm.play(this.id);
+          $(this).addClass('playing');
+          $(this).removeClass('paused');
+        }
+        return false;
+      });      
+      
     });
   </script>
 </head>
