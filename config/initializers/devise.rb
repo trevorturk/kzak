@@ -5,7 +5,7 @@ Devise.setup do |config|
   # because if Devise add a new strategy, it won't be added to your application
   # by default, unless you configure it here.
   # config.all = [:authenticatable, :confirmable, :recoverable, :rememberable, :validatable]
-  config.all = [:authenticatable, :rememberable, :validatable]
+  config.all = [:authenticatable, :rememberable]
   
   # Invoke `rake secret` and use the printed value to setup a pepper to generate
   # the encrypted password. By default no pepper is used.
