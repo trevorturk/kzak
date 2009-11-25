@@ -16,16 +16,9 @@
     
     sm.onready(function(){
     
-      $('a[href$=.mp3]').addClass('playable');
-      
-      // $('a[href$=.mp3]').live(function(){
-      //   $(this).addClass('playable');
-      //   return false;
-      // });
-      
-      $('.playable').each(function(){        
-        sm.createSound(this.id,this.href);
-      });        
+      $('a[href$=.mp3]').each(function(){
+        $(this).makePlayable();
+      });
       
       $('.playable').click(function(e){
         e.preventDefault();
@@ -60,8 +53,14 @@
       //   },
       // 
       // });
-                  
+            
     });
+    
+    $.fn.makePlayable = function() { 
+      $(this).addClass('playable');
+      sm.createSound($(this)[0].id, $(this)[0].href);
+    }
+    
   </script>
 </head>
 <body>
