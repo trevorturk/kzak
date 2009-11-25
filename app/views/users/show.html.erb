@@ -16,16 +16,16 @@
 
   <ul>
     <% @user.followings.each do |user| %>
-      <li><b><%= link_to h(user), user %></b></li>
-    <% end %>
+      <li><%= render user %></li>
+    <% end if @user.followings %>
   </ul>
 
   <h2>Followers</h2>
 
   <ul>
     <% @user.followers.each do |user| %>
-      <li><b><%= link_to h(user), user %></b></li>
-    <% end %>
+      <li><%= render user %></li>
+    <% end if @user.followers %>
   </ul>
   
 </div>

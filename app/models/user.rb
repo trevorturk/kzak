@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :login, :password, :password_confirmation, :remember_me
+  attr_accessible :login, :password, :password_confirmation
   
   devise # see config/initializers/devise.rb
   

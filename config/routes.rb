@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'posts'
   map.resources :posts, :only => [:index, :create]
-  map.login '/login', :controller => 'home'
   map.devise_for :users
   # NOTE users should be last route set to avoid namespace issues
   map.with_options :controller => 'users' do |u|

@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   end
     
   def create
-    @post = current_user.posts.new(:attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album)
+    @post = current_user.posts.new :attachment => params[:Filedata], 
+                                   :title => @title, :artist => @artist, :album => @album
     if @post.save
       render :partial => @post
     else

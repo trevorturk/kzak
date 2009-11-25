@@ -14,11 +14,9 @@ class FeedItem < ActiveRecord::Base
   def self.populate(post)
     users = []
     users << post.user # poster's feed
-    unless post.user.followers.empty?
-      post.user.followers.each do |follower|
-        users << follower # poster's followers' feed
-      end
-    end
+    post.user.followers.each do |follower|
+      users << follower # poster's followers' feed
+    end if post.user.followers.present?
     users.each do |user|
       FeedItem.insert(user, post)
     end
@@ -29,7 +27,8 @@ class FeedItem < ActiveRecord::Base
   end
   
   def self.insert(user, post)
-    FeedItem.create { |f| f.user_id = user.id; f.post_id = post.id; f.poster_id = post.user_id; f.post_created_at = post.created_at }
+    FeedItem.create { |f| f.user_id = user.id; 
+      f.post_id = post.id; f.poster_id = post.user_id; f.post_created_at = post.created_at }
   end
   
 end
