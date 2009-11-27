@@ -15,8 +15,10 @@
   	<div class="grid_6">
       <%= render 'shared/nav' %>
   	</div>
-  	<div class="grid_12">
-      <%= render 'shared/flash' %>
+  	<div id="flash" class="grid_12">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" unless msg.blank? %>
+      <% end %>
     </div>
     <div class="clear"></div>
     <%= yield %>

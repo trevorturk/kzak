@@ -29,4 +29,5 @@ end
 
 User.blueprint do
   login { Sham.login }
+  password 'test'
 end

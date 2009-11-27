@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   attr_accessible :login, :password, :password_confirmation
   
-  devise # see config/initializers/devise.rb
+  devise :all # see config/initializers/devise.rb
   
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items
@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
   validates_length_of :login, :maximum => 15
   validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and underscores"
   validates_format_of :login, :with => /^[a-zA-Z]/, :message => "must begin with a letter"
-  validates_uniqueness_of :login
+  validates_uniqueness_of :login  
+  validates_presence_of :password
+  validates_confirmation_of :password, :if => :password_required?
   
   default_scope :order => 'login ASC'
   
@@ -40,5 +42,11 @@ class User < ActiveRecord::Base
   def to_s
     login
   end
-    
+  
+  protected
+  
+  def password_required?
+    new_record? || !password.nil? || !password_confirmation.nil?
+  end
+  
 end
