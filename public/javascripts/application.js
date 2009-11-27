@@ -5,6 +5,7 @@ function number_to_human_size(bytes) {
 }
 
 $(document).ready(function(){
+  
   var sm = soundManager;
 
   sm.url = '/flash';
@@ -23,20 +24,36 @@ $(document).ready(function(){
 
     $(this).click(function(e) {
       e.preventDefault();
-      $(this).togglePlayState();
+      $(this).playOne();
     });
   }
 
-  $.fn.togglePlayState = function() {
+  $.fn.playOne = function() {
     if ($(this).hasClass('playing')) {
       $(this).removeClass('playing');
       $(this).addClass('paused');
       sm.pause($(this)[0].id);
-    } else {
+      return;
+    } if ($(this).hasClass('paused')) {
       $(this).removeClass('paused');
       $(this).addClass('playing');
+      sm.resume($(this)[0].id);
+      return;
+    } else {
+      sm.stopAll();
+      $('a[href$=.mp3]').each(function() {
+        $(this).resetPlayableStyles();
+      });
+      $(this).addClass('playing');
       sm.play($(this)[0].id);
+      return;
     }
   }
+  
+  $.fn.resetPlayableStyles = function() {
+    $(this).removeClass('playing');
+    $(this).removeClass('paused');
+  }
+  
 });
 
