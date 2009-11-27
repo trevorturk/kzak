@@ -34,6 +34,9 @@
     	})
     	.bind('uploadSuccess', function(event, file, serverData){
     		$('#swfupload-playlist li#'+file.id).html($(serverData).fadeIn(1000));
+    		$('#swfupload-playlist li#'+file.id+'a[href$=.mp3]').each(function(){
+          $(this).makePlayable();
+        });
     	})
     	.bind('uploadComplete', function(event, file){
     		$(this).swfupload('startUpload');

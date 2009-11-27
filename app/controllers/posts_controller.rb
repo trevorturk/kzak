@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   
+  skip_before_filter :verify_authenticity_token, :only => :create
+  
   before_filter :authenticate_user!, :only => :create
   before_filter :get_mime_type, :get_mp3_info, :only => :create
   
   def index
-    @posts = Post.all # :include => [:user]
+    @posts = Post.all # :include => :user
     @users = User.all
   end
     
