@@ -4,66 +4,8 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>KZAK!</title>
   <%= stylesheet_link_tag 'reset', '960', 'application', :cache => true %>
-  <%= javascript_include_tag 'application', 'jquery', 'soundmanager', 'swfupload', 'jquery.swfupload', :cache => true  %>
+  <%= javascript_include_tag 'jquery', 'soundmanager', 'swfupload', 'jquery.swfupload', 'application', :cache => true  %>
   <%= yield :head %>
-  <script>
-
-    var sm = soundManager;
-
-    sm.url = '/flash';
-    sm.debugMode = false;
-    sm.useConsole = true;
-    
-    sm.onready(function(){
-    
-      $('a[href$=.mp3]').each(function(){
-        $(this).makePlayable();
-      });
-                  
-      // jQuery.fn.extend({
-      // 
-      //   togglePlayState:function() { 
-      //     
-      //     if (this.hasClass('playing')) {
-      //       this.removeClass('playing');
-      //       this.addClass('paused');
-      //       sm.pause(this.id);
-      //     } else {
-      //       this.removeClass('paused');
-      //       this.addClass('playing');
-      //       console.log(this.id); // TODO why is this undefined?
-      //       sm.play(this.id);
-      //     }
-      //   },
-      // 
-      // });
-            
-    });
-    
-    $.fn.makePlayable = function() { 
-      $(this).addClass('playable');
-      sm.createSound($(this)[0].id, $(this)[0].href);
-      
-      $(this).click(function(e){
-        e.preventDefault();
-        // $(this).togglePlayState();
-        // return false;
-        
-        if ($(this).hasClass('playing')) {
-          $(this).removeClass('playing');
-          $(this).addClass('paused');
-          sm.pause(this.id);
-        } else {
-          $(this).removeClass('paused');
-          $(this).addClass('playing');
-          sm.play(this.id);
-        }
-      });
-      
-      
-    }
-    
-  </script>
 </head>
 <body>
   <div class="container_12">
