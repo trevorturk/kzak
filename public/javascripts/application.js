@@ -32,9 +32,9 @@ $(document).ready(function(){
      url:$(this)[0].href,
      onfinish:function(){
        console.log(this.sID+' finished playing');
-       // $(this.sID).next().playOne();
-       // console.log($('#'+this.sID).siblings().next());
        console.log($('#'+this.sID));
+       // console.log($('#'+this.sID).siblings());
+       console.log($('#'+this.sID).parent().next());
      }
     });
     
