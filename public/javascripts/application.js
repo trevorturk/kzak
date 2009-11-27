@@ -19,35 +19,45 @@ $(document).ready(function(){
   sm.useConsole = true;
 
   sm.onready(function() {
-    $('a[href$=.mp3]').each(function() {
+    $('a[href$=.mp3]').each(function(){
       $(this).makePlayable();
     });
   });
 
-  $.fn.makePlayable = function() {
+  $.fn.makePlayable = function(){
     $(this).addClass('playable');
-    sm.createSound($(this)[0].id, $(this)[0].href);
-
-    $(this).click(function(e) {
+    
+    soundManager.createSound({
+     id:$(this)[0].id,
+     url:$(this)[0].href,
+     onfinish:function(){
+       console.log(this.sID+' finished playing');
+       // $(this.sID).next().playOne();
+       // console.log($('#'+this.sID).siblings().next());
+       console.log($('#'+this.sID));
+     }
+    });
+    
+    $(this).click(function(e){
       e.preventDefault();
       $(this).playOne();
     });
   }
 
-  $.fn.playOne = function() {
-    if ($(this).hasClass('playing')) {
+  $.fn.playOne = function(){
+    if ($(this).hasClass('playing')){
       $(this).removeClass('playing');
       $(this).addClass('paused');
       sm.pause($(this)[0].id);
       return;
-    } if ($(this).hasClass('paused')) {
+    } if ($(this).hasClass('paused')){
       $(this).removeClass('paused');
       $(this).addClass('playing');
       sm.resume($(this)[0].id);
       return;
     } else {
       sm.stopAll();
-      $('a[href$=.mp3]').each(function() {
+      $('a[href$=.mp3]').each(function(){
         $(this).resetPlayableStyles();
       });
       $(this).addClass('playing');
@@ -56,7 +66,7 @@ $(document).ready(function(){
     }
   }
   
-  $.fn.resetPlayableStyles = function() {
+  $.fn.resetPlayableStyles = function(){
     $(this).removeClass('playing');
     $(this).removeClass('paused');
   }
