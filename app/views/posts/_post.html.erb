@@ -1,3 +1,3 @@
 <a id="<%= "post-#{post.id}" %>" href="<%= post.attachment.url %>">
-  <span class="mp3"><%= h(post.title) %> &mdash; <%=h post.artist %> &mdash; <%=h post.album %></span>
+  [<%=h post.user %>] <%= h(post.title) %> &mdash; <%=h post.artist %> &mdash; <%=h post.album %>
 </a>

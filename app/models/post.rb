@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
                       :s3_credentials => { :access_key_id => CONFIG['s3_access_id'], :secret_access_key => CONFIG['s3_secret_key'] },
                       :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate }
   else
-    has_attached_file :attachment, :storage => :filesystem, :url => "/posts/:filename"
+    has_attached_file :attachment, :storage => :filesystem, :url => "/system/posts/:filename"
   end
   
   belongs_to :user, :counter_cache => :posts_count

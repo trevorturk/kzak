@@ -6,6 +6,12 @@ function number_to_human_size(bytes) {
 
 $(document).ready(function(){
   
+  // misc
+  
+  $('#user_login').focus();
+  
+  // soundmanager
+  
   var sm = soundManager;
 
   sm.url = '/flash';

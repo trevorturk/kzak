@@ -1,5 +1,5 @@
 body { margin: 20px 40px; color: #111; }
-a { color: #24a; text-decoration: none; }
+a { color: #3465a4; text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1 { font-size: 30px; margin-bottom:10px;}
 h1 a { color: #111; }
@@ -13,5 +13,5 @@ p { margin: 1em 0; }
 #swfupload-playlist li .progressbar { margin-top: 2px; border:1px solid #666; height:5px; background:#fff; }
 #swfupload-playlist li .progress { background:#999; width:0%; height:5px; }
 .playable {}
-.playing {background:#ccc;}
-.paused {background:#eee;}
+.playing {background:#eeeeec;}
+.paused {background:#eeeeec;}
