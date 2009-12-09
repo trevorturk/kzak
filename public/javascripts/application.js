@@ -31,20 +31,17 @@ $(document).ready(function(){
      id:$(this)[0].id,
      url:$(this)[0].href,
      onfinish:function(){
-       console.log(this.sID+' finished playing');
-       console.log($('#'+this.sID));
-       // console.log($('#'+this.sID).siblings());
-       console.log($('#'+this.sID).parent().next());
+       $('#'+this.sID).parent().next().find('a.playable').play();
      }
     });
     
     $(this).click(function(e){
       e.preventDefault();
-      $(this).playOne();
+      $(this).play();
     });
   }
 
-  $.fn.playOne = function(){
+  $.fn.play = function(){
     if ($(this).hasClass('playing')){
       $(this).removeClass('playing');
       $(this).addClass('paused');
@@ -58,18 +55,14 @@ $(document).ready(function(){
     } else {
       sm.stopAll();
       $('a[href$=.mp3]').each(function(){
-        $(this).resetPlayableStyles();
+        $(this).removeClass('playing');
+        $(this).removeClass('paused');
       });
       $(this).addClass('playing');
       sm.play($(this)[0].id);
       return;
     }
   }
-  
-  $.fn.resetPlayableStyles = function(){
-    $(this).removeClass('playing');
-    $(this).removeClass('paused');
-  }
-  
+    
 });
 
