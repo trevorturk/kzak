@@ -9,7 +9,7 @@ p { margin: 1em 0; }
 #nav span {color:#dedede;}
 #users { text-align:right;}
 #footer {text-align:center; margin-top:120px;}
-#swfupload-control {margin:10px 0;}
+#swfupload-control {margin:10px 0 5px 0;}
 #swfupload-playlist li .progressbar { margin-top: 2px; border:1px solid #666; height:5px; background:#fff; }
 #swfupload-playlist li .progress { background:#999; width:0%; height:5px; }
 .playable {}
