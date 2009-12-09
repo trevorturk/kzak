@@ -54,10 +54,8 @@ $(document).ready(function(){
       return;
     } else {
       sm.stopAll();
-      $('a[href$=.mp3]').each(function(){
-        $(this).removeClass('playing');
-        $(this).removeClass('paused');
-      });
+      $('.playing').removeClass('playing');
+      $('.paused').removeClass('paused');      
       $(this).addClass('playing');
       sm.play($(this).attr('id'));
       return;
