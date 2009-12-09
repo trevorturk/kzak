@@ -16,7 +16,7 @@ $(document).ready(function(){
 
   sm.url = '/flash';
   sm.debugMode = false;
-  sm.useConsole = true;
+  sm.useConsole = false;
 
   sm.onready(function() {
     $('a[href$=.mp3]').each(function(){
@@ -28,8 +28,8 @@ $(document).ready(function(){
     $(this).addClass('playable');
     
     soundManager.createSound({
-     id:$(this)[0].id,
-     url:$(this)[0].href,
+     id:$(this).attr('id'),
+     url:$(this).attr('href'),
      onfinish:function(){
        $('#'+this.sID).parent().next().find('a.playable').play();
      }
@@ -45,12 +45,12 @@ $(document).ready(function(){
     if ($(this).hasClass('playing')){
       $(this).removeClass('playing');
       $(this).addClass('paused');
-      sm.pause($(this)[0].id);
+      sm.pause($(this).attr('id'));
       return;
     } if ($(this).hasClass('paused')){
       $(this).removeClass('paused');
       $(this).addClass('playing');
-      sm.resume($(this)[0].id);
+      sm.resume($(this).attr('id'));
       return;
     } else {
       sm.stopAll();
@@ -59,7 +59,7 @@ $(document).ready(function(){
         $(this).removeClass('paused');
       });
       $(this).addClass('playing');
-      sm.play($(this)[0].id);
+      sm.play($(this).attr('id'));
       return;
     }
   }
