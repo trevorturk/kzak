@@ -10,22 +10,30 @@
   
 </div>
 
-<div class="grid_2">
+<div id="users" class="grid_2">
 
   <h2>Following</h2>
 
   <ul>
-    <% @user.followings.each do |user| %>
-      <li><%= render user %></li>
-    <% end if @user.followings %>
+    <% if @user.followings.present? %>
+      <% @user.followings.each do |user| %>
+        <li><%= render user %></li>
+      <% end %>
+    <% else %>
+      <li class="disabled">n/a</li>
+    <% end %>
   </ul>
 
-  <h2>Followers</h2>
+  <h2 class="pad_top">Followers</h2>
 
   <ul>
-    <% @user.followers.each do |user| %>
-      <li><%= render user %></li>
-    <% end if @user.followers %>
+    <% if @user.followers %>
+      <% @user.followers.each do |user| %>
+        <li><%= render user %></li>
+      <% end %>
+    <% else %>
+      <li class="disabled">n/a</li>
+    <% end %>
   </ul>
   
 </div>

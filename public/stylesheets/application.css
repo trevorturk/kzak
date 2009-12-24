@@ -16,3 +16,5 @@ p { margin: 1em 0; }
 .playing {background:#eeeeec;}
 .paused {background:#eeeeec;}
 #flash div {text-align:center; padding:5px 0; margin-bottom:15px;}
+.pad_top {margin-top:20px;}
+.disabled {color:#999;}
