@@ -10,11 +10,9 @@ p { margin: 1em 0; }
 #users { text-align:right;}
 #footer {text-align:center; margin-top:120px;}
 #swfupload-control {margin:10px 0 5px 0;}
-#swfupload-playlist li .progressbar { margin-top: 2px; border:1px solid #666; height:5px; background:#fff; }
-#swfupload-playlist li .progress { background:#999; width:0%; height:5px; }
 .playable {}
 .playing {background:#eeeeec;}
 .paused {background:#eeeeec;}
 #flash div {text-align:center; padding:5px 0; margin-bottom:15px;}
 .pad_top {margin-top:20px;}
-.disabled {color:#999;}
+.disabled, .pending {color:#999;}
