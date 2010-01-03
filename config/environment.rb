@@ -8,13 +8,6 @@ Rails::Initializer.run do |config|
   CONFIG['s3'] = true if CONFIG['s3_access_id'] && CONFIG['s3_secret_key'] && CONFIG['s3_bucket_name']  
   config.frameworks -= [:active_resource, :action_mailer]
   config.time_zone = 'UTC'
-  config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :version => '2.3.0'
-  config.gem 'right_aws', :version => '1.9.0'
-  config.gem 'right_http_connection', :version => '1.2.4'
-  config.gem 'ruby-mp3info', :lib => 'mp3info', :version => '0.6.13'
-  config.gem 'mime-types', :lib => 'mime/types', :version => '1.16'
-  config.gem 'warden', :version => '0.6.5'
-  config.gem 'devise', :version => '0.7.5'
   config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
   config.action_controller.session = {
     :key => CONFIG['session_key'],

@@ -14,6 +14,8 @@ Git: http://book.git-scm.com/2_installing_git.html
 
 git clone git://github.com/trevorturk/kzak.git
 cd kzak
+sudo gem install bundler
+gem bundle
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
@@ -37,7 +39,9 @@ heroku open
 
 == Upgrading
 
+heroku db:pull sqlite://db/backup.sqlite3
 git pull
+gem bundle
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master
