@@ -1,19 +1,17 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  
-  # test "create requires login" do
-  #   post :create, :post => Post.plan
-  #   assert_redirected_to login_path
-  # end
-  # 
-  # test "destroy requires login" do
-  #   delete :destroy, :id => Post.make.id
-  #   assert_redirected_to login_path
-  # end
-  
-  test "should create post if logged in" do
-    login!
+    
+  test "index" do
+    get :index
+    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    sign_in!
+    get :index
+    assert_response :success
+  end
+        
+  test "create" do
+    sign_in!
     assert_difference('Post.count') do
       post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
     end
@@ -26,16 +24,15 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal 'Prufrock and Other Observations', r.album    
   end
   
-  test "should not create post if not logged in" do
+  test "create requires login" do
     assert_no_difference('Post.count') do
       post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
     end
     assert_redirected_to new_user_session_path(:unauthenticated => true)
   end
-  
 
   # test "should create post via (stubbed out) url" do
-  #   login!
+  #   sign_in!
   #   Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/audio.mp3"))
   #   assert_difference 'Post.count' do
   #     post :create, :Filedata => 'audio.mp3'
@@ -44,7 +41,7 @@ class PostsControllerTest < ActionController::TestCase
   # end
   # 
   # test "should not bomb on post via bogus (stubbed out) url" do
-  #   login!
+  #   sign_in!
   #   Post.any_instance.expects(:do_download_remote_file).returns(nil)
   #   assert_no_difference 'Post.count' do
   #     post :create, :Filedata => 'invalid'
@@ -53,12 +50,17 @@ class PostsControllerTest < ActionController::TestCase
   # end
   
   # test "should destroy post" do
-  #   u = login!
+  #   u = sign_in!
   #   p = Post.make(:user => u)
   #   assert_difference('Post.count', -1) do
   #     delete :destroy, :id => p.to_param
   #   end
   #   assert_redirected_to root_path
   # end
+  
+  # test "destroy requires login" do
+  #   delete :destroy, :id => Post.make.id
+  #   assert_redirected_to login_path
+  # end  
   
 end

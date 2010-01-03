@@ -13,10 +13,14 @@ Rails::Initializer.run do |config|
   config.gem 'right_http_connection', :version => '1.2.4'
   config.gem 'ruby-mp3info', :lib => 'mp3info', :version => '0.6.13'
   config.gem 'mime-types', :lib => 'mime/types', :version => '1.16'
-  config.gem 'warden', :version => '0.6.4'
-  config.gem 'devise', :version => '0.5.5'
+  config.gem 'warden', :version => '0.6.5'
+  config.gem 'devise', :version => '0.7.5'
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
   }
+end
+
+SessionsController.class_eval do
+  skip_before_filter :authenticate_user!, :only => [:new, :create]
 end

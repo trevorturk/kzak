@@ -3,6 +3,6 @@ en:
     sessions:
       signed_in: ''
       signed_out: ''
-      unauthenticated: 'Please sign in.'
+      unauthenticated: ''
       unconfirmed: 'You have to confirm your account before continuing.'
       invalid: 'Invalid login or password.'
