@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   
-  skip_filter :request_forgery_protection, :only => :create
+  skip_filter :request_forgery_protection, :only => :create # work around occasion invalid auth token in forms
   
   before_filter :get_mime_type, :get_mp3_info, :only => :create
   
