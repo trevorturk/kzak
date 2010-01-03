@@ -15,6 +15,7 @@ Rails::Initializer.run do |config|
   config.gem 'mime-types', :lib => 'mime/types', :version => '1.16'
   config.gem 'warden', :version => '0.6.5'
   config.gem 'devise', :version => '0.7.5'
+  config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
