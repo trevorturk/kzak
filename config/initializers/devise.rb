@@ -1,12 +1,15 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
-  # Configure the frameworks used by default. You should always set this value
-  # because if Devise add a new strategy, it won't be added to your application
+  # Configure Devise modules used by default. You should always set this value
+  # because if Devise adds a new strategy, it won't be added to your application
   # by default, unless you configure it here.
-  # config.all = [:authenticatable, :confirmable, :recoverable, :rememberable, :validatable]
+  #
+  # Remember that Devise includes other modules on its own (like :activatable
+  # and :timeoutable) which are not included here and also plugins. So be sure
+  # to check the docs for a complete set.
   config.all = [:authenticatable, :rememberable]
-  
+
   # Invoke `rake secret` and use the printed value to setup a pepper to generate
   # the encrypted password. By default no pepper is used.
   # config.pepper = "rake secret output"
@@ -35,18 +38,28 @@ Devise.setup do |config|
   # The time the user will be remembered without asking for credentials again.
   config.remember_for = 2.months
 
-  # Configure the e-mail address which will be shown in DeviseMailer.
-  # config.mailer_sender = "foo.bar@yourapp.com"
+  # The time you want to timeout the user session without activity. After this
+  # time the user will be asked for credentials again.
+  # config.timeout_in = 10.minutes
 
-  # Configure the ORM. Supports :active_record and :mongo_mapper
-  # config.orm = :active_record
+  # Configure the e-mail address which will be shown in DeviseMailer.
+  # config.mailer_sender = "please-change-me@config-initializers-devise.com"
+
+  # Load and configure the ORM. Supports :active_record, :data_mapper and :mongo_mapper.
+  # require 'devise/orm/mongo_mapper'
+  # config.orm = :mongo_mapper
+
+  # Turn scoped views on. Before rendering "sessions/new", it will first check for
+  # "sessions/users/new". It's turned off by default because it's slower if you
+  # are using only default views.
+  # config.scoped_views = true
 
   # If you want to use other strategies, that are not (yet) supported by Devise,
   # you can configure them inside the config.warden block. The example below
   # allows you to setup OAuth, using http://github.com/roman/warden_oauth
   #
   # config.warden do |manager|
-  #   manager.oauth(  :twitter) do |twitter|
+  #   manager.oauth(:twitter) do |twitter|
   #     twitter.consumer_secret = <YOUR CONSUMER SECRET>
   #     twitter.consumer_key  = <YOUR CONSUMER KEY>
   #     twitter.options :site => 'http://twitter.com'
@@ -60,4 +73,10 @@ Devise.setup do |config|
   # config.default_url_options do
   #   { :locale => I18n.locale }
   # end
+end
+
+# require signed in user for entire app aside from sign in actions
+
+SessionsController.class_eval do
+  skip_before_filter :authenticate_user!, :only => [:new, :create]
 end

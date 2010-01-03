@@ -9,8 +9,8 @@ gem "right_aws", "1.9.0"
 gem "right_http_connection", "1.2.4"
 gem "warden", "0.6.5"
 gem "devise", "0.7.5"
-gem "mime-types", "1.16"
-gem "ruby-mp3info", "0.6.13"
+gem "mime-types", "1.16", :require_as => "mime/types"
+gem "ruby-mp3info", "0.6.13", :require_as => "mp3info"
 
 only :test do
   gem "faker", "0.3.1"

@@ -9,12 +9,9 @@ Rails::Initializer.run do |config|
   config.frameworks -= [:active_resource, :action_mailer]
   config.time_zone = 'UTC'
   config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
+  config.gem 'devise'
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
   }
-end
-
-SessionsController.class_eval do
-  skip_before_filter :authenticate_user!, :only => [:new, :create]
 end
