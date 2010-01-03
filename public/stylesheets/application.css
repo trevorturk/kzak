@@ -8,7 +8,7 @@ p { margin: 1em 0; }
 #nav {float:right;}
 #nav span {color:#dedede;}
 #users { text-align:right;}
-#footer {text-align:center; margin-top:120px;}
+#footer {text-align:center; margin-top:50px; padding-bottom:50px;}
 #swfupload-control {margin:10px 0 5px 0;}
 .playable {}
 .playing {background:#eeeeec;}
