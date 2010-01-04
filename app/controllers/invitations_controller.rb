@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
       flash[:notice] = "Invitation sent"
       redirect_to root_path
     else
-      flash[:notice] = "Sorry, there was an error"
+      flash[:error] = "Sorry, there was an error"
       redirect_to root_path
     end
   end
