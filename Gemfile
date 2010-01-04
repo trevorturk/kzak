@@ -1,5 +1,6 @@
 clear_sources
 source "http://gems.rubyforge.org"
+source "http://gems.github.com" # for ambethia-smtp-tls
 
 bundle_path "vendor/bundler_gems"
 
@@ -11,6 +12,7 @@ gem "warden", "0.6.5"
 gem "devise", "0.7.5"
 gem "mime-types", "1.16", :require_as => "mime/types"
 gem "ruby-mp3info", "0.6.13", :require_as => "mp3info"
+gem "ambethia-smtp-tls", "1.1.2"
 
 only :test do
   gem "faker", "0.3.1"
