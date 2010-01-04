@@ -8,6 +8,7 @@ Sham.sentence { Faker::Lorem.sentence }
 Sham.sentences { Faker::Lorem.sentences(rand(10) + 1) }
 Sham.paragraphs { Faker::Lorem.paragraphs }
 Sham.mp3_file_name { "#{Faker::Lorem.words(1)}.mp3" }
+Sham.email { Faker::Internet.email }
 
 FeedItem.blueprint do
   post { Post.make }
@@ -20,6 +21,11 @@ end
 Follow.blueprint do
   follower { User.make }
   following { User.make }
+end
+
+Invitation.blueprint do
+  user { User.make }
+  email { Sham.email }
 end
 
 Post.blueprint do

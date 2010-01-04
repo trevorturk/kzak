@@ -44,6 +44,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal u.posts, [r]
   end
   
+  test "has many invitations" do
+    u = User.make
+    r = Invitation.make(:user => u)
+    assert_equal u.invitations, [r]
+  end
+  
   test "has many followings/followers" do
     user_doing_the_following = User.make
     user_being_followed = User.make

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items
+  has_many :invitations
   
   has_many :follows_where_they_are_doing_the_following, :foreign_key => :follower_id, :class_name => 'Follow'
   has_many :followings, :through => :follows_where_they_are_doing_the_following
