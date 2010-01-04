@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    #
+    # note who the user was invited by
   end
     
 end
