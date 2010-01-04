@@ -121,7 +121,25 @@ class UserTest < ActiveSupport::TestCase
       User.make.unfollow(User.make)
     end
   end
-    
+  
+  test "follow all users" do
+    user1 = User.make
+    user2 = User.make
+    assert_difference 'Follow.count' do
+      user1.follow_all_users
+    end
+    assert user1.following?(user2)
+  end
+  
+  test "get followed by all users" do
+    user1 = User.make
+    user2 = User.make
+    assert_difference 'Follow.count' do
+      user1.get_followed_by_all_users
+    end
+    assert user2.following?(user1)
+  end
+  
   test "to_param" do
     u = User.make
     assert_equal u.login, u.to_param
