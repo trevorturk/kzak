@@ -20,7 +20,7 @@ class Follow < ActiveRecord::Base
   end
   
   def backfill_posts
-    self.following.posts.each do |post|
+    self.following.posts.find_each do |post|
       FeedItem.insert(self.follower, post)
     end
   end

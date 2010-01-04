@@ -14,7 +14,7 @@ class FeedItem < ActiveRecord::Base
   def self.populate(post)
     users = []
     users << post.user # poster's feed
-    post.user.followers.each do |follower|
+    post.user.followers.find_each do |follower|
       users << follower # poster's followers' feed
     end if post.user.followers.present?
     users.each do |user|
