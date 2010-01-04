@@ -24,11 +24,16 @@ class Post < ActiveRecord::Base
     
   before_create :randomize_file_name
   after_create :create_feed_items
+  after_destroy :destroy_feed_items
   
   default_scope :order => 'created_at DESC'
     
   def create_feed_items
     FeedItem.populate(self)
+  end
+  
+  def destroy_feed_items
+    FeedItem.unpopulate(self)
   end
   
   def to_s

@@ -75,4 +75,16 @@ class FeedItemTest < ActiveSupport::TestCase
     end
   end
   
+  test "post is removed from poster and followers feed_items if destroyed" do
+    poster = User.make
+    follower = User.make
+    follower.follow(poster)
+    assert_difference 'FeedItem.count', 2 do
+      Post.make(:user => poster)
+    end
+    assert_difference 'FeedItem.count', -2 do
+      Post.last.destroy
+    end
+  end
+  
 end

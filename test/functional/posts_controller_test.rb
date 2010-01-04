@@ -57,7 +57,7 @@ class PostsControllerTest < ActionController::TestCase
   #   end
   #   assert_redirected_to root_path
   # end
-  
+  # 
   # test "destroy requires login" do
   #   delete :destroy, :id => Post.make.id
   #   assert_redirected_to login_path

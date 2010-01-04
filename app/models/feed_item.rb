@@ -21,8 +21,12 @@ class FeedItem < ActiveRecord::Base
       FeedItem.insert(user, post)
     end
   end
+  
+  def self.unpopulate(post)
+    FeedItem.find_all_by_post_id(post.id).each {|f| f.destroy} rescue nil
+  end
     
-  def self.unpopulate(follower, following)
+  def self.unbackfill(follower, following)
     FeedItem.find_all_by_user_id_and_poster_id(follower.id, following.id).each {|f| f.destroy} rescue nil
   end
   
