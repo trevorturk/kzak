@@ -5,13 +5,30 @@ function human_size(bytes) {
 }
 
 $(document).ready(function(){
-  
+
   // misc
-  
+
   $('#user_login').focus();
-  
+
+  // new invitations form
+
+  $("input#invitation_email").ezpz_hint();
+
+  function newInvitationSubmit(){
+    $("#new_invitation_status").html('<img src="/images/spinner1.gif" /></div>');
+    $("#invitation_submit").attr("value", "sending...").attr("disabled", true)
+  }
+
+  function newInvitationSuccess(){
+    $("#invitation_submit").attr("value", "send").attr("disabled", false)
+  }
+
+  $('#new_invitation').ajaxForm({
+    target:'#new_invitation_status',beforeSubmit:newInvitationSubmit,success:newInvitationSuccess,clearForm:true,resetForm:true
+  });
+
   // soundmanager
-  
+
   var sm = soundManager;
 
   sm.url = '/flash';
@@ -26,7 +43,7 @@ $(document).ready(function(){
 
   $.fn.makePlayable = function(){
     $(this).addClass('playable');
-    
+
     soundManager.createSound({
      id:$(this).attr('id'),
      url:$(this).attr('href'),
@@ -34,7 +51,7 @@ $(document).ready(function(){
        $('#'+this.sID).parent().next().find('a.playable').play();
      }
     });
-    
+
     $(this).click(function(e){
       e.preventDefault();
       $(this).play();
@@ -55,12 +72,12 @@ $(document).ready(function(){
     } else {
       sm.stopAll();
       $('.playing').removeClass('playing');
-      $('.paused').removeClass('paused');      
+      $('.paused').removeClass('paused');
       $(this).addClass('playing');
       sm.play($(this).attr('id'));
       return;
     }
   }
-    
+
 });
 

@@ -55,13 +55,13 @@ form.inline p { margin-bottom:0; }
 /* Success, notice and error boxes
 -------------------------------------------------------------- */
 
-.error,
-.notice,
-.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; }
+.form_error,
+.form_notice,
+.form_success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; }
 
-.error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
-.notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
-.success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
-.error a    { color: #8a1f11; }
-.notice a   { color: #514721; }
-.success a  { color: #264409; }
+.form_error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
+.form_notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
+.form_success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
+.form_error a    { color: #8a1f11; }
+.form_notice a   { color: #514721; }
+.form_success a  { color: #264409; }

@@ -18,4 +18,7 @@ p { margin: 1em 0; }
 .disabled, .pending {color:#999;}
 .invitation_email {width:100%;padding:4px 0px;text-align:right;color:#999;}
 .invitation_email:focus {color:#111;}
-.invitation_email_submit {margin-top:-1em;}
+.invitation_submit {margin-top:-1em;}
+#new_invitation_status {color:#999;font-size:90%;}
+.error {color:#8a1f11;font-weight:bold;}
+.success {color:#264409;}

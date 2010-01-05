@@ -1,7 +1,5 @@
 <% form_for Invitation.new do |f| -%>
   <p><%= f.text_field :email, :class => 'invitation_email', :title => 'email address' %></p>
-  <p class="invitation_email_submit"><%= f.submit "send" %></p>
+  <p class="invitation_submit"><%= f.submit "send" %></p>
+  <div id="new_invitation_status"></div>
 <% end -%>
-<script type="text/javascript" charset="utf-8">
-  $("input#invitation_email").ezpz_hint();
-</script>
