@@ -35,5 +35,6 @@ end
 
 User.blueprint do
   login { Sham.login }
+  email { Sham.email }
   password 'test'
 end

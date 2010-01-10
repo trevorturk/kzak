@@ -6,25 +6,25 @@ class InvitationTest < ActiveSupport::TestCase
     i = Invitation.make
     assert i.valid?
   end
-  
+
   test "generates code before create" do
     i = Invitation.make
     assert i.code.present?
   end
-  
+
   test "requires user and email" do
     i = Invitation.new
     assert !i.valid?
     assert i.errors.on(:user_id)
     assert i.errors.on(:email)
   end
-  
+
   test "belongs to a user" do
     u = User.make
     i = Invitation.make(:user => u)
     assert_equal u, i.user
   end
-  
+
   test "validates format of email" do
     i = Invitation.new
     i.email = 'with a space'
@@ -37,5 +37,12 @@ class InvitationTest < ActiveSupport::TestCase
     assert !i.valid?
     assert i.errors.on(:email)
   end
-  
+
+  test "validates that email isn't already in use" do
+    u = User.make
+    i = Invitation.new(:email => u.email)
+    assert !i.valid?
+    assert i.errors.on(:email)
+  end
+
 end

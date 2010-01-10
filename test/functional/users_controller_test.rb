@@ -14,4 +14,17 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "new" do
+    get :new
+    assert_response :success
+  end
+
+  # TODO get this test working
+  # test "new signs user out if signed in user tries to access" do
+  #   sign_in!
+  #   assert @controller.current_user.present?
+  #   get :new
+  #   assert @controller.current_user.blank?
+  # end
+
 end

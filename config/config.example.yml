@@ -2,13 +2,13 @@ development:
   session_key: kzak_development
   session_secret: 500cad18bf781eae3800b34aad609361
   app_name: example
-  domain: http://example.local
+  domain: http://kzak.local
   mailer: noreply@example.com
 
 test:
   session_key: kzak_test
   session_secret: 0b5e5ab4ac1797c32911814431a5b2fb
-  
+
 production:
   session_key: # any unique string that identifies your app
   session_secret: # run "rake secret" to generate a session secret
@@ -20,7 +20,7 @@ production:
   s3_bucket_name: # ...then choose a name for your bucket, set it here, and run "rake s3:create"
   s3_host_alias: # (optional) provide your cloudfront CNAME http://aws.amazon.com/cloudfront
   hoptoad_key: # Sign up at http://hoptoadapp.com and provide your API key for exception notification emails
-  smtp_address: # smtp.gmail.com 
+  smtp_address: # smtp.gmail.com
   smtp_port: # 587
   smtp_user_name: # example@gmail.com
   smtp_password: # password

@@ -7,35 +7,48 @@ class UserTest < ActiveSupport::TestCase
       User.make
     end
   end
-    
+
   test "is not valid without login" do
     u = User.new
     assert_equal false, u.valid?
     assert u.errors[:login]
   end
-  
+
   test "is not valid without unique login" do
     User.make(:login => 'test')
     u = User.new(:login => 'test')
     assert_equal false, u.valid?
     assert u.errors[:login]
   end
-  
+
   test "is not valid with login greater than 15" do
     u = User.new(:login => '1234567890123456')
     assert_equal false, u.valid?
     assert u.errors[:login]
   end
-  
+
   test "is not valid with login that begins with a number or underscore " do
     u = User.new(:login => '1a'); assert_equal false, u.valid?; assert u.errors[:login]
     u = User.new(:login => '_a'); assert_equal false, u.valid?; assert u.errors[:login]
   end
-  
+
   test "is not valid with login that's not all letters, numbers, and underscores" do
     u = User.new(:login => '@'); assert_equal false, u.valid?; assert u.errors[:login]
     u = User.new(:login => '!'); assert_equal false, u.valid?; assert u.errors[:login]
     u = User.new(:login => '~'); assert_equal false, u.valid?; assert u.errors[:login]
+  end
+
+  test "validates format of email" do
+    i = Invitation.new
+    i.email = 'with a space'
+    assert !i.valid?
+    assert i.errors.on(:email)
+    i.email = 'invalid!chars'
+    assert !i.valid?
+    assert i.errors.on(:email)
+    i.email = 'no_domain'
+    assert !i.valid?
+    assert i.errors.on(:email)
   end
 
   test "has many posts" do
@@ -43,13 +56,13 @@ class UserTest < ActiveSupport::TestCase
     r = Post.make(:user => u)
     assert_equal u.posts, [r]
   end
-  
+
   test "has many invitations" do
     u = User.make
     r = Invitation.make(:user => u)
     assert_equal u.invitations, [r]
   end
-  
+
   test "has many followings/followers" do
     user_doing_the_following = User.make
     user_being_followed = User.make
@@ -57,7 +70,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal [user_doing_the_following], user_being_followed.followers
     assert_equal [user_being_followed], user_doing_the_following.followings
   end
-  
+
   test "follow" do
     user_doing_the_following = User.make
     user_being_followed = User.make
@@ -71,7 +84,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 1, user_being_followed.followers_count
     end
   end
-  
+
   test "unfollow" do
     user1 = User.make
     user2 = User.make
@@ -82,7 +95,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal [], user2.followers
     end
   end
-  
+
   test "following?" do
     user_doing_the_following = User.make
     user_being_followed = User.make
@@ -90,7 +103,7 @@ class UserTest < ActiveSupport::TestCase
     user_doing_the_following.follow(user_being_followed)
     assert user_doing_the_following.following?(user_being_followed)
   end
-  
+
   test "follows are unique and attempts to create two followings doesn't bomb" do
     user1 = User.make
     user2 = User.make
@@ -101,7 +114,7 @@ class UserTest < ActiveSupport::TestCase
       user1.follow(user2)
     end
   end
-  
+
   test "can follow each other" do
     user1 = User.make
     user2 = User.make
@@ -112,7 +125,7 @@ class UserTest < ActiveSupport::TestCase
       user2.follow(user1)
     end
   end
-  
+
   test "cannot follow self but doesn't bomb" do
     user = User.make
     assert_nothing_raised do
@@ -121,13 +134,13 @@ class UserTest < ActiveSupport::TestCase
       end
     end
   end
-  
+
   test "unfollow doesn't bomb if nothing found" do
     assert_nothing_raised do
       User.make.unfollow(User.make)
     end
   end
-  
+
   test "follow all users" do
     user1 = User.make
     user2 = User.make
@@ -136,7 +149,7 @@ class UserTest < ActiveSupport::TestCase
     end
     assert user1.following?(user2)
   end
-  
+
   test "get followed by all users" do
     user1 = User.make
     user2 = User.make
@@ -145,12 +158,12 @@ class UserTest < ActiveSupport::TestCase
     end
     assert user2.following?(user1)
   end
-  
+
   test "to_param" do
     u = User.make
     assert_equal u.login, u.to_param
   end
-  
+
   test "to_s" do
     u = User.make
     assert_equal u.login, u.to_s
