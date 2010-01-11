@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :follows_where_they_are_being_followed, :foreign_key => :following_id, :class_name => 'Follow'
   has_many :followers, :through => :follows_where_they_are_being_followed
 
+  belongs_to :inviter, :class_name => 'User'
+
   validates_presence_of :login, :email
   validates_length_of :login, :maximum => 15
   validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and underscores"

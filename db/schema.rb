@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100110232748) do
+ActiveRecord::Schema.define(:version => 20100111001727) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20100110232748) do
     t.string   "password_salt"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "invited_by"
+    t.integer  "inviter_id"
     t.string   "email"
   end
 

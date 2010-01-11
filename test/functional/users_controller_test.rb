@@ -15,7 +15,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "new" do
-    get :new
+    get :new, :invitation => Invitation.make.code
     assert_response :success
   end
 
@@ -26,5 +26,18 @@ class UsersControllerTest < ActionController::TestCase
   #   get :new
   #   assert @controller.current_user.blank?
   # end
+
+  test "create" do
+    i = Invitation.make(:email => 'test@example.com')
+    assert_difference 'User.count' do
+      post :create, :user => {:invitation => i.code, :email => i.email, :login => 'test', :password => 'test', :password_confirmation => 'test'}
+      assert_redirected_to root_path
+    end
+    i.reload
+    u = User.last
+    assert_equal nil, i.code
+    assert_equal u, i.new_user
+    assert_equal i.user, u.inviter
+  end
 
 end

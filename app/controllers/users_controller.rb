@@ -8,12 +8,21 @@ class UsersController < ApplicationController
   end
 
   def new
+    @invitation = Invitation.find_by_code!(params[:invitation])
   end
 
   def create
-    # track invited_by
-    # save used invitations
-    # invite new users and create initial follows
+    @invitation = Invitation.find_by_code!(params[:user][:invitation])
+    @user = User.new(params[:user])
+    @user.inviter = @invitation.user
+    if @user.save
+      @invitation.redeem_for(@user)
+      # create initial follows
+      redirect_to root_path
+    else
+      flash[:error] = 'Sorry, there was a problem signing you up'
+      render :action => 'new'
+    end
   end
 
   protected
