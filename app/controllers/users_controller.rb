@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     @user.inviter = @invitation.user
     if @user.save
       @invitation.redeem_for(@user)
-      # create initial follows
+      @user.follow_all_users
+      @user.get_followed_by_all_users
       redirect_to root_path
     else
       flash[:error] = 'Sorry, there was a problem signing you up'

@@ -28,16 +28,24 @@ class UsersControllerTest < ActionController::TestCase
   # end
 
   test "create" do
-    i = Invitation.make(:email => 'test@example.com')
+    u0 = User.make
+    u1 = User.make
+    i = Invitation.make(:user => u1, :email => 'test@example.com')
+    assert_equal 2, User.count
+    assert_equal 0, Follow.count
     assert_difference 'User.count' do
       post :create, :user => {:invitation => i.code, :email => i.email, :login => 'test', :password => 'test', :password_confirmation => 'test'}
       assert_redirected_to root_path
     end
     i.reload
-    u = User.last
+    u2 = User.last
     assert_equal nil, i.code
-    assert_equal u, i.new_user
-    assert_equal i.user, u.inviter
+    assert_equal u2, i.new_user
+    assert_equal i.user, u2.inviter
+    assert_equal 4, Follow.count # new users follow and are followed by all users
+    assert u0.following?(u2)
+    assert u1.following?(u2)
+    assert u2.following?(u1)
   end
 
 end
