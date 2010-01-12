@@ -4,7 +4,7 @@ Code: http://github.com/trevorturk/kzak/
 Demo: http://kzak.heroku.com/
 
 
-== Requirements 
+== Requirements
 
 Rails: http://guides.rubyonrails.org/getting_started.html
 Git: http://book.git-scm.com/2_installing_git.html
@@ -33,6 +33,7 @@ rake s3:create
 rake heroku:config
 git push heroku master
 heroku rake db:schema:load
+heroku rake db:seed
 heroku open
 # Read more about Heroku here: http://heroku.com/
 
