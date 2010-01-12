@@ -9,7 +9,8 @@ class Post < ActiveRecord::Base
     has_attached_file :attachment, :storage => :s3, :path => ":filename", :bucket => CONFIG['s3_bucket_name'],
                       :s3_host_alias => CONFIG['s3_host_alias'], :url => CONFIG['s3_host_alias'] ? ':s3_alias_url' : nil,
                       :s3_credentials => { :access_key_id => CONFIG['s3_access_id'], :secret_access_key => CONFIG['s3_secret_key'] },
-                      :s3_permissions => 'private', :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate }
+                      :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate },
+                      :s3_permissions => 'public'
   else
     has_attached_file :attachment, :storage => :filesystem, :url => "/system/:filename"
   end
@@ -37,7 +38,8 @@ class Post < ActiveRecord::Base
   end
 
   def attachment_url
-    CONFIG['s3'] ? attachment.s3.interface.get_link(attachment.s3_bucket.to_s, attachment.path, 8.hours) : attachment.url
+    # CONFIG['s3'] ? attachment.s3.interface.get_link(attachment.s3_bucket.to_s, attachment.path, 1.hour) : attachment.url
+    attachment.url
   end
 
   def to_s
