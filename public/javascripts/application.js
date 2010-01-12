@@ -36,7 +36,7 @@ $(document).ready(function(){
   sm.useConsole = false;
 
   sm.onready(function() {
-    $('a[href$=.mp3]').each(function(){
+    $('a.post').each(function(){
       $(this).makePlayable();
     });
   });

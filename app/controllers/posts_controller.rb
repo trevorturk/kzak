@@ -11,8 +11,12 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new :attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album
-    @post.save!
-    render :partial => @post
+    if @post.save!
+      render :partial => @post
+    else
+      flash[:error] = 'Sorry, there as an error processing this file'
+      redirect_to root_path
+    end
   end
 
   # def destroy
