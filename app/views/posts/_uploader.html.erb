@@ -28,7 +28,11 @@
     	})
     	.bind('uploadProgress', function(event, file, bytesLoaded){
     		var percentage=Math.round((bytesLoaded/file.size)*100);
-    		$('#swfupload-playlist li#'+file.id).find('.progress').text('Uploading... '+percentage+'%');
+    		if (percentage < 100 ){
+    		  $('#swfupload-playlist li#'+file.id).find('.progress').text('Uploading... '+percentage+'%');
+    		}else{
+    		  $('#swfupload-playlist li#'+file.id).find('.progress').text('Processing...');
+    		}
     	})
     	.bind('uploadSuccess', function(event, file, serverData){
     		$('#swfupload-playlist li#'+file.id).html($(serverData).fadeIn(1000)).removeClass('pending');
