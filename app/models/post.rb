@@ -36,12 +36,8 @@ class Post < ActiveRecord::Base
     FeedItem.unpopulate(self)
   end
 
-  def url
-    if CONFIG['s3']
-      attachment.s3.interface.get_link(attachment.s3_bucket.to_s, attachment, 8.hours)
-    else
-      attachment.url
-    end
+  def attachment_url
+    CONFIG['s3'] ? attachment.s3.interface.get_link(attachment.s3_bucket.to_s, attachment.path, 8.hours) : attachment.url
   end
 
   def to_s
