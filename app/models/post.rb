@@ -37,6 +37,7 @@ class Post < ActiveRecord::Base
   end
 
   def attachment_url
+    # TODO why are authenticated reads so slow?!
     # CONFIG['s3'] ? attachment.s3.interface.get_link(attachment.s3_bucket.to_s, attachment.path, 1.hour) : attachment.url
     attachment.url
   end
