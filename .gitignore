@@ -12,4 +12,3 @@ db/*.sqlite3
 public/system/**/*
 bin/*
 vendor/bundler_gems/*
-!vendor/bundler_gems/cache/
