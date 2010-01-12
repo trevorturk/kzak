@@ -54,6 +54,9 @@ class UsersControllerTest < ActionController::TestCase
     assert u1.following?(u2) # existing users follow new user
     assert u2.following?(u0) # new users follow all existing users
     assert u2.following?(u1) # new users follow all existing users
+    # sign in and redirect
+    # assert @controller.signed_in?(:user) # TODO how to test?
+    assert_redirected_to root_path
   end
 
 end
