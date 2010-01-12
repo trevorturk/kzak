@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100111001727) do
+ActiveRecord::Schema.define(:version => 20100112014742) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20100111001727) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "new_user_id"
+    t.datetime "redeemed_at"
   end
 
   create_table "posts", :force => true do |t|

@@ -22,6 +22,7 @@ class Invitation < ActiveRecord::Base
   def redeem_for(user)
     self.code = nil
     self.new_user = user
+    self.redeemed_at = Time.zone.now
     self.save!
   end
 
