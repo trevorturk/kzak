@@ -15,9 +15,9 @@
   <% end %>
 
   <ul id="swfupload-playlist" class="playlist">
-    <% @posts.each do |post| %>
-      <li><%= render post %></li>
-    <% end if @posts %>
+    <% @feed_items.each do |feed_item| %>
+      <li><%= render feed_item.post %></li>
+    <% end if @feed_items %>
   </ul>
 
 </div>

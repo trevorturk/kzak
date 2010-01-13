@@ -3,9 +3,13 @@
   <h2><%=h @user %></h2>
 
   <ul class="playlist">
-    <% @user.posts.each do |post| %>
-      <li><%= render post %></li>
-    <% end if @user.posts %>
+    <% if @user.posts %>
+      <% @user.posts.each do |post| %>
+        <li><%= render post %></li>
+      <% end %>
+    <% else %>
+      <li class="disabled">n/a</li>
+    <% end %>
   </ul>
 
 </div>

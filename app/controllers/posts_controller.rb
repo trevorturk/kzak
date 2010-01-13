@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_filter :get_mime_type, :get_mp3_info, :only => :create
 
   def index
-    @posts = Post.all :include => :user
+    @feed_items = current_user.feed_items.all :include => {:post => :user}
     @users = User.all
   end
 
