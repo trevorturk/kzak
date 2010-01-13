@@ -21,16 +21,3 @@ HoptoadNotifier.configure do |config|
   config.api_key = CONFIG['hoptoad_key']
   config.ignore_only = []
 end if CONFIG['hoptoad_key']
-
-if CONFIG['smtp_address']
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => CONFIG['smtp_address'],
-    :port => CONFIG['smtp_port'],
-    :domain => CONFIG['smtp_domain'],
-    :user_name => CONFIG['smtp_user_name'],
-    :password => CONFIG['smtp_password'],
-    :authentication => CONFIG['smtp_authentication'].to_sym,
-    :enable_starttls_auto => CONFIG['smtp_enable_starttls_auto']
-  }
-end
