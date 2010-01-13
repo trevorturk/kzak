@@ -1,13 +1,13 @@
 == About
 
 Code: http://github.com/trevorturk/kzak/
-Demo: http://kzak.heroku.com/
 
 
 == Requirements
 
-Rails: http://guides.rubyonrails.org/getting_started.html
-Git: http://book.git-scm.com/2_installing_git.html
+Ruby 1.8.7 - http://www.ruby-lang.org/en/downloads/
+Rails 2.3.5 - http://guides.rubyonrails.org/getting_started.html
+Git 1.6.6 - http://book.git-scm.com/2_installing_git.html
 
 
 == Installation
