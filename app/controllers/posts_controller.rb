@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build :attachment => params[:Filedata],
         :title => @title || 'Unknown', :artist => @artist || 'Unknown', :album => @album || 'Unknown'
-    if @post.save!
+    if @post.save
       render :partial => @post
     else
       flash[:error] = 'Sorry, there as an error processing this file'
@@ -32,15 +32,15 @@ class PostsController < ApplicationController
   protected
 
   def get_audio_info
-    params[:Filename] ||= params[:Filedata].original_filename rescue nil # via form on posts/new
+    params[:Filename] ||= params[:Filedata].original_filename rescue nil # posts/new form
 
-    if params[:Filename] =~ /mp3/
+    if params[:Filename] =~ /.mp3$/
       Mp3Info.open(params[:Filedata].path) do |r|
         @title = r.tag.title
         @artist = r.tag.artist
         @album = r.tag.album
       end
-    elsif params[:Filename] =~ /mp4|m4a/
+    elsif params[:Filename] =~ /.mp4$|.m4a$/
       info = MP4Info.open(params[:Filedata].path)
       @title = info.send(:NAM)
       @artist = info.send(:ART)
