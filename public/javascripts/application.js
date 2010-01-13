@@ -34,6 +34,7 @@ $(document).ready(function(){
   sm.url = '/flash';
   sm.debugMode = false;
   sm.useConsole = false;
+  sm.useHighPerformance = true;
 
   sm.onready(function() {
     $('a.post').each(function(){
