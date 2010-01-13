@@ -10,21 +10,47 @@ $(document).ready(function(){
 
   $('#user_login').focus();
 
-  // new invitations form
+  // new invitation form
 
   $("input#invitation_email").ezpz_hint();
 
   function newInvitationSubmit() {
     $("#new_invitation_status").html('<img src="/images/spinner1.gif" /></div>');
-    $("#invitation_submit").attr("value", "sending...").attr("disabled", true)
+    $("#new_invitation_submit").attr("value", "sending...").attr("disabled", true);
   }
 
   function newInvitationSuccess() {
-    $("#invitation_submit").attr("value", "send").attr("disabled", false)
+    $("#new_invitation_submit").attr("value", "send").attr("disabled", false);
   }
 
   $('#new_invitation').ajaxForm({
-    target:'#new_invitation_status',beforeSubmit:newInvitationSubmit,success:newInvitationSuccess,clearForm:true,resetForm:true
+    target : '#new_invitation_status',
+    beforeSubmit : newInvitationSubmit,
+    success : newInvitationSuccess,
+    clearForm : true,
+    resetForm : true
+  });
+
+  // new post form
+
+  function newPostSubmit() {
+    $("#new_post_status").html('<img src="/images/spinner1.gif" /></div>');
+    $("#new_post_submit").attr("value", "uploading...").attr("disabled", true);
+  }
+
+  function newPostSuccess(response) {
+    $("#new_post_submit").attr("value", "upload").attr("disabled", false);
+    $("#new_post_status").html('');
+    $("#swfupload-playlist").prepend('<li>'+response+'</li>');
+    $(".post:first").makePlayable();
+
+  }
+
+  $('#new_post').ajaxForm({
+    beforeSubmit : newPostSubmit,
+    success : newPostSuccess,
+    clearForm : true,
+    resetForm : true
   });
 
   // soundmanager

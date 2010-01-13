@@ -1,0 +1,14 @@
+<div class="grid_12">
+
+  <h2>Upload</h2>
+
+  <% form_tag posts_path, :id => 'new_post', :multipart => true do %>
+    <p><%= file_field_tag "Filedata" %></p>
+    <p><%= submit_tag "upload", :id => "new_post_submit" %></p>
+    <div id="new_post_status"></div>
+  <% end %>
+
+  <ul id="swfupload-playlist" class="playlist">
+  </ul>
+
+</div>

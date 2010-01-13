@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'posts'
-  map.resources :posts, :only => [:index, :create]
+  map.resources :posts, :only => [:index, :new, :create]
   map.resources :invitations, :only => [:create]
   map.resources :users, :only => [:new, :create]
   map.devise_for :users

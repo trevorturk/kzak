@@ -62,23 +62,13 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path(:unauthenticated => true)
   end
 
-  # test "should create post via (stubbed out) url" do
-  #   sign_in!
-  #   Post.any_instance.expects(:do_download_remote_file).returns(File.open("#{Rails.root}/test/fixtures/files/audio.mp3"))
-  #   assert_difference 'Post.count' do
-  #     post :create, :Filedata => 'audio.mp3'
-  #   end
-  #   assert_redirected_to root_path
-  # end
-  #
-  # test "should not bomb on post via bogus (stubbed out) url" do
-  #   sign_in!
-  #   Post.any_instance.expects(:do_download_remote_file).returns(nil)
-  #   assert_no_difference 'Post.count' do
-  #     post :create, :Filedata => 'invalid'
-  #   end
-  #   assert_response :success
-  # end
+  test "new" do
+    get :new
+    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    sign_in!
+    get :new
+    assert_response :success
+  end
 
   # test "should destroy post" do
   #   u = sign_in!

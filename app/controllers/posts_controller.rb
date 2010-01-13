@@ -8,8 +8,12 @@ class PostsController < ApplicationController
     @users = User.all
   end
 
+  def new
+    @post = Post.new
+  end
+
   def create
-    @post = current_user.posts.new :attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album
+    @post = current_user.posts.build :attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album
     if @post.save!
       render :partial => @post
     else
@@ -27,6 +31,8 @@ class PostsController < ApplicationController
   protected
 
   def get_audio_info
+    params[:Filename] ||= params[:Filedata].original_filename rescue nil # via form on posts/new
+
     if params[:Filename] =~ /mp3/
       Mp3Info.open(params[:Filedata].path) do |r|
         @title = r.tag.title || 'Unknown'
