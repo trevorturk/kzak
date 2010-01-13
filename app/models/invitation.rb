@@ -16,7 +16,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def generate_code
-    self.code = ActiveSupport::SecureRandom.hex(16)
+    self.code = ActiveSupport::SecureRandom.hex(20)
   end
 
   def redeem_for(user)
