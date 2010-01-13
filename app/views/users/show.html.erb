@@ -2,15 +2,13 @@
 
   <h2><%=h @user %></h2>
 
-  <ul class="playlist">
-    <% if @user.posts %>
+  <% if @user.posts.present? %>
+    <ul class="playlist">
       <% @user.posts.each do |post| %>
         <li><%= render post %></li>
       <% end %>
-    <% else %>
-      <li class="disabled">n/a</li>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
 
 </div>
 
@@ -18,26 +16,26 @@
 
   <h2>following</h2>
 
-  <ul>
-    <% if @user.followings.present? %>
-      <% @user.followings.each do |user| %>
+  <% if @user.followings.present? %>
+    <ul>
+      <% @user.followings.sort_by(&:login).each do |user| %>
         <li><%= render user %></li>
       <% end %>
-    <% else %>
-      <li class="disabled">n/a</li>
-    <% end %>
-  </ul>
+    </ul>
+  <% else %>
+    <li class="disabled">n/a</li>
+  <% end %>
 
   <h2 class="pad_top">followers</h2>
 
-  <ul>
-    <% if @user.followers %>
-      <% @user.followers.each do |user| %>
+  <% if @user.followers %>
+    <ul>
+      <% @user.followers.sort_by(&:login).each do |user| %>
         <li><%= render user %></li>
       <% end %>
-    <% else %>
-      <li class="disabled">n/a</li>
-    <% end %>
-  </ul>
+    </ul>
+  <% else %>
+    <li class="disabled">n/a</li>
+  <% end %>
 
 </div>

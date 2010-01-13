@@ -14,11 +14,13 @@
 
   <% end %>
 
-  <ul id="swfupload-playlist" class="playlist">
-    <% @feed_items.each do |feed_item| %>
-      <li><%= render feed_item.post %></li>
-    <% end if @feed_items %>
-  </ul>
+  <% if @feed_items.present? %>
+    <ul id="swfupload-playlist" class="playlist">
+      <% @feed_items.each do |feed_item| %>
+        <li><%= render feed_item.post %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
 </div>
 
@@ -29,7 +31,7 @@
   <ul class="users">
     <% @users.each do |user| %>
       <li><%= render user %></li>
-    <% end if @users %>
+    <% end %>
   </ul>
 
   <h2 class="pad_top">invite a new user</h2>

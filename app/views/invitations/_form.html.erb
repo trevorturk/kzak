@@ -1,5 +1,5 @@
-<% form_for Invitation.new do |f| -%>
+<% form_for Invitation.new do |f| %>
   <p><%= f.text_field :email, :class => 'invitation_email', :title => 'email address' %></p>
   <p class="invitation_submit"><%= f.submit "send" %></p>
   <div id="new_invitation_status"></div>
-<% end -%>
+<% end %>
