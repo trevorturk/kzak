@@ -14,12 +14,12 @@ $(document).ready(function(){
 
   $("input#invitation_email").ezpz_hint();
 
-  function newInvitationSubmit(){
+  function newInvitationSubmit() {
     $("#new_invitation_status").html('<img src="/images/spinner1.gif" /></div>');
     $("#invitation_submit").attr("value", "sending...").attr("disabled", true)
   }
 
-  function newInvitationSuccess(){
+  function newInvitationSuccess() {
     $("#invitation_submit").attr("value", "send").attr("disabled", false)
   }
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
   sm.useHighPerformance = true;
   sm.useMovieStar = true; // MP4/M4A/AAC
 
-  sm.onready(function() {
+  sm.onready(function(){
     $('a.post').each(function(){
       $(this).makePlayable();
     });
@@ -83,4 +83,3 @@ $(document).ready(function(){
   }
 
 });
-

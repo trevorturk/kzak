@@ -50,7 +50,7 @@ SWFUpload.prototype.initSWFUpload = function (userSettings) {
 /* *************** */
 SWFUpload.instances = {};
 SWFUpload.movieCount = 0;
-SWFUpload.version = "2.5.0 2009-11-04 Alpha";
+SWFUpload.version = "2.5.0 2009-12-23 Beta 1";
 SWFUpload.QUEUE_ERROR = {
 	QUEUE_LIMIT_EXCEEDED            : -100,
 	FILE_EXCEEDS_SIZE_LIMIT         : -110,
@@ -68,7 +68,7 @@ SWFUpload.UPLOAD_ERROR = {
 	FILE_VALIDATION_FAILED          : -270,
 	FILE_CANCELLED                  : -280,
 	UPLOAD_STOPPED                  : -290,
-	RESIZE_ERROR                    : -300
+	RESIZE                          : -300
 };
 SWFUpload.FILE_STATUS = {
 	QUEUED       : -1,
@@ -86,7 +86,8 @@ SWFUpload.BUTTON_ACTION = {
 	SELECT_FILE             : -100,
 	SELECT_FILES            : -110,
 	START_UPLOAD            : -120,
-	JAVASCRIPT              : -130
+	JAVASCRIPT              : -130,	// DEPRECATED
+	NONE                    : -130
 };
 SWFUpload.CURSOR = {
 	ARROW : -1,
@@ -196,7 +197,9 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("upload_success_handler", null);
 	this.ensureDefault("upload_complete_handler", null);
 	
-	this.ensureDefault("button_action_handler", null);
+	this.ensureDefault("mouse_click_handler", null);
+	this.ensureDefault("mouse_out_handler", null);
+	this.ensureDefault("mouse_over_handler", null);
 	
 	this.ensureDefault("debug_handler", this.debugMessage);
 
@@ -246,7 +249,6 @@ SWFUpload.prototype.loadFlash = function () {
 		// Oh crap...bail
 	} else if (els.length === 1) {
 		this.movieElement = els[0];
-		this.debug("Got the movie. WOOT!");
 	}
 	
 	targetElement.parentNode.replaceChild(tempParent.firstChild, targetElement);
@@ -265,7 +267,7 @@ SWFUpload.prototype.getFlashHTML = function () {
 				'<param name="wmode" value="', this.settings.button_window_mode, '" />',
 				'<param name="movie" value="', this.settings.flash_url, '" />',
 				'<param name="quality" value="high" />',
-				'<param name="menu" value="false" />',
+				//'<param name="menu" value="false" />',
 				'<param name="allowScriptAccess" value="always" />',
 				'<param name="flashvars" value="' + this.getFlashVars() + '" />',
 				'</object>'].join("");
@@ -428,6 +430,9 @@ SWFUpload.prototype.displayDebugInfo = function () {
 			"\t", "custom_settings:          ", this.settings.custom_settings.toString(), "\n",
 			"Event Handlers:\n",
 			"\t", "swfupload_loaded_handler assigned:  ", (typeof this.settings.swfupload_loaded_handler === "function").toString(), "\n",
+			"\t", "mouse_click_handler assigned:       ", (typeof this.settings.mouse_click_handler === "function").toString(), "\n",
+			"\t", "mouse_over_handler assigned:        ", (typeof this.settings.mouse_over_handler === "function").toString(), "\n",
+			"\t", "mouse_out_handler assigned:         ", (typeof this.settings.mouse_out_handler === "function").toString(), "\n",
 			"\t", "file_dialog_start_handler assigned: ", (typeof this.settings.file_dialog_start_handler === "function").toString(), "\n",
 			"\t", "file_queued_handler assigned:       ", (typeof this.settings.file_queued_handler === "function").toString(), "\n",
 			"\t", "file_queue_error_handler assigned:  ", (typeof this.settings.file_queue_error_handler === "function").toString(), "\n",
@@ -475,14 +480,14 @@ SWFUpload.prototype.callFlash = function (functionName, argumentArray) {
 
 	// Flash's method if calling ExternalInterface methods (code adapted from MooTools).
 	try {
-		if (movieElement && movieElement.CallFunction) {
+		if (movieElement != undefined) {
 			returnString = movieElement.CallFunction('<invoke name="' + functionName + '" returntype="javascript">' + __flash__argumentsToXML(argumentArray, 0) + '</invoke>');
 			returnValue = eval(returnString);
 		} else {
 			this.debug("Can't call flash because the movie wasn't found.");
 		}
 	} catch (ex) {
-		this.debug("Exception calling flash: " + ex.message);
+		this.debug("Exception calling flash function '" + functionName + "': " + ex.message);
 	}
 	
 	// Unescape file post param values
@@ -755,7 +760,6 @@ SWFUpload.prototype.setButtonCursor = function (cursor) {
 	this.callFlash("SetButtonCursor", [cursor]);
 };
 
-
 /* *******************************
 	Flash Event Interfaces
 	These functions are used by Flash to trigger the various
@@ -849,7 +853,7 @@ SWFUpload.prototype.flashReady = function () {
 		return;
 	}
 
-	this.cleanUp();
+	//this.cleanUp();
 	
 	this.queueEvent("swfupload_loaded_handler");
 };
@@ -891,9 +895,15 @@ SWFUpload.prototype.cleanUp = function () {
 	return movieElement;
 };
 
-/* When the button_action is set to JavaScript this event gets fired and executes the button_action_handler */
-SWFUpload.prototype.buttonAction = function () {
-	this.queueEvent("button_action_handler");
+/* When the button_action is set to None this event gets fired and executes the mouse_click_handler */
+SWFUpload.prototype.mouseClick = function () {
+	this.queueEvent("mouse_click_handler");
+};
+SWFUpload.prototype.mouseOver = function () {
+	this.queueEvent("mouse_over_handler");
+};
+SWFUpload.prototype.mouseOut = function () {
+	this.queueEvent("mouse_out_handler");
 };
 
 /* This is a chance to do something before the browse window opens */
