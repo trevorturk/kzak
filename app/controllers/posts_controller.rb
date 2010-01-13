@@ -38,5 +38,4 @@ class PostsController < ApplicationController
       @album = r.tag.album || 'Unknown'
     end
   end
-
 end

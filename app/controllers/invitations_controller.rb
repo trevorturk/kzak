@@ -9,5 +9,4 @@ class InvitationsController < ApplicationController
       render :partial => 'error'
     end
   end
-
 end
