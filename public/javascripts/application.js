@@ -32,9 +32,11 @@ $(document).ready(function(){
   var sm = soundManager;
 
   sm.url = '/flash';
+  sm.flashVersion = 9;
   sm.debugMode = false;
   sm.useConsole = false;
   sm.useHighPerformance = true;
+  sm.useMovieStar = true; // MP4/M4A/AAC
 
   sm.onready(function() {
     $('a.post').each(function(){

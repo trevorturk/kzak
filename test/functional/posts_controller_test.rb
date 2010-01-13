@@ -32,7 +32,7 @@ class PostsControllerTest < ActionController::TestCase
   test "create" do
     sign_in!
     assert_difference('Post.count') do
-      post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
+      post :create, :Filename => 'audio.mp3', :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
     end
     assert_response :success
     r = Post.last
@@ -42,6 +42,17 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal 'The Love Song of J. Alfred Prufrock', r.title
     assert_equal 'T.S. Eliot', r.artist
     assert_equal 'Prufrock and Other Observations', r.album
+  end
+
+  test "m4a files are parsed correctly" do
+    sign_in!
+    assert_difference('Post.count') do
+      post :create, :Filename => 'audio.m4a', :Filedata => fixture_file_upload('files/audio.m4a', 'audio/mpeg')
+    end
+    r = Post.last
+    assert_equal 'Shut Down', r.title
+    assert_equal 'Matt Besser', r.artist
+    assert_equal 'May I Help You (Dumbass)?', r.album
   end
 
   test "create requires login" do

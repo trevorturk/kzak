@@ -17,7 +17,6 @@ class Post < ActiveRecord::Base
   belongs_to :user, :counter_cache => :posts_count
 
   validates_presence_of :user_id, :attachment_file_name
-  validates_attachment_content_type :attachment, :content_type => ['application/mp3','application/x-mp3','audio/mpeg','audio/mp3']
 
   before_create :randomize_file_name
   after_create :cache_s3_url, :create_feed_items
