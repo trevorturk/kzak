@@ -9,5 +9,4 @@ class Mailer < ActionMailer::Base
     sent_on       Time.zone.now
     body          :user => invitation.user, :code => invitation.code
   end
-
 end

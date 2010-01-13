@@ -1,15 +1,15 @@
+require 'mp3info'
+
 class Post < ActiveRecord::Base
-  require 'mp3info'
-  require 'open-uri'
 
   attr_accessible :attachment, :title, :artist, :album
 
   if CONFIG['s3']
     has_attached_file :attachment, :storage => :s3, :path => ":filename", :bucket => CONFIG['s3_bucket_name'],
-                      :s3_permissions => 'private', :s3_protocol => 'http',
-                      :s3_host_alias => CONFIG['s3_host_alias'], :url => CONFIG['s3_host_alias'] ? ':s3_alias_url' : nil,
-                      :s3_credentials => { :access_key_id => CONFIG['s3_access_id'], :secret_access_key => CONFIG['s3_secret_key'] },
-                      :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate }
+        :s3_permissions => 'private', :s3_protocol => 'http',
+        :s3_host_alias => CONFIG['s3_host_alias'], :url => CONFIG['s3_host_alias'] ? ':s3_alias_url' : nil,
+        :s3_credentials => { :access_key_id => CONFIG['s3_access_id'], :secret_access_key => CONFIG['s3_secret_key'] },
+        :s3_headers => { 'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate }
   else
     has_attached_file :attachment, :storage => :filesystem, :url => "/system/:filename"
   end

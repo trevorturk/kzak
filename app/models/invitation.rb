@@ -25,5 +25,4 @@ class Invitation < ActiveRecord::Base
     self.redeemed_at = Time.zone.now
     self.save!
   end
-
 end

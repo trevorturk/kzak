@@ -65,5 +65,4 @@ class User < ActiveRecord::Base
   def password_required?
     new_record? || !password.nil? || !password_confirmation.nil?
   end
-
 end
