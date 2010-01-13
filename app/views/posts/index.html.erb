@@ -1,7 +1,7 @@
 <div class="grid_10">
-  
+
   <h2>songs</h2>
-  
+
   <% if user_signed_in? %>
 
     <div id="swfupload-control">
@@ -23,17 +23,17 @@
 </div>
 
 <div id="users" class="grid_2">
-  
+
   <h2>users</h2>
-  
+
   <ul class="users">
     <% @users.each do |user| %>
       <li><%= render user %></li>
     <% end if @users %>
   </ul>
-  
+
   <h2 class="pad_top">invite a new user</h2>
-  
+
   <%= render 'invitations/form' %>
 
 </div>
