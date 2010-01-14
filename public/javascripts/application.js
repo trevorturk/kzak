@@ -81,7 +81,7 @@ $(document).ready(function(){
       e.preventDefault();
       $(this).play();
     });
-  }
+  };
 
   $.fn.play = function(){
     if ($(this).hasClass('playing')){
@@ -102,6 +102,6 @@ $(document).ready(function(){
       sm.play($(this).attr('id'));
       return;
     }
-  }
+  };
 
 });
