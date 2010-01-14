@@ -5,7 +5,7 @@
   <% form_for resource_name, resource, :url => password_path(resource_name) do |f| %>
     <%= f.error_messages %>
     <p><%= f.label :email %> <br /> <%= f.text_field :email, :class => 'text' %></p>
-    <p><%= f.submit "Get password reset instructions" %></p>
+    <p><%= f.submit "Send password reset instructions" %></p>
   <% end %>
 
 </div>
