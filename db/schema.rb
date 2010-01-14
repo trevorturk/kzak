@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100112045619) do
+ActiveRecord::Schema.define(:version => 20100113234711) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(:version => 20100112045619) do
 
   create_table "users", :force => true do |t|
     t.string   "login"
-    t.integer  "posts_count",         :default => 0, :null => false
-    t.integer  "followings_count",    :default => 0, :null => false
-    t.integer  "followers_count",     :default => 0, :null => false
+    t.integer  "posts_count",                         :default => 0, :null => false
+    t.integer  "followings_count",                    :default => 0, :null => false
+    t.integer  "followers_count",                     :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password"
@@ -63,6 +63,12 @@ ActiveRecord::Schema.define(:version => 20100112045619) do
     t.datetime "remember_created_at"
     t.integer  "inviter_id"
     t.string   "email"
+    t.string   "reset_password_token", :limit => 20
+    t.integer  "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip",      :limit => nil
   end
 
 end
