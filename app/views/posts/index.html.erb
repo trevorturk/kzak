@@ -15,13 +15,11 @@
 
   <% end %>
 
-  <% if @feed_items.present? %>
     <ul id="swfupload-playlist" class="playlist">
       <% @feed_items.each do |feed_item| %>
         <li><%= render feed_item.post %></li>
-      <% end %>
+      <% end if @feed_items %>
     </ul>
-  <% end %>
 
 </div>
 
