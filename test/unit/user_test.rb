@@ -39,7 +39,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "validates format of email" do
-    i = Invitation.new
+    i = User.new
     i.email = 'with a space'
     assert !i.valid?
     assert i.errors.on(:email)
@@ -49,6 +49,15 @@ class UserTest < ActiveSupport::TestCase
     i.email = 'no_domain'
     assert !i.valid?
     assert i.errors.on(:email)
+  end
+
+  test "validate unique email" do
+    u1 = User.make(:email => 'test@example.com')
+    assert u1.valid?
+    u2 = User.new
+    u2.email = 'test@example.com'
+    assert !u2.valid?
+    assert u2.errors.on(:email)
   end
 
   test "has many posts" do

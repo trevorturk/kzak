@@ -6,10 +6,6 @@ function human_size(bytes) {
 
 $(document).ready(function(){
 
-  // misc
-
-  $('#user_login').focus();
-
   // new invitation form
 
   $("input#invitation_email").ezpz_hint();

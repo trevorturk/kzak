@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :password, :password_confirmation, :email
   attr_reader :invitation # for users/new action
 
-  devise :authenticatable, :rememberable, :trackable # see config/initializers/devise.rb
+  devise :authenticatable, :rememberable, :trackable, :recoverable # see config/initializers/devise.rb
 
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items, :order => 'feed_items.post_created_at DESC'
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and underscores"
   validates_format_of :login, :with => /^[a-zA-Z]/, :message => "must begin with a letter"
   validates_format_of :email, :with => Devise::EMAIL_REGEX
-  validates_uniqueness_of :login
+  validates_uniqueness_of :login, :email
   validates_presence_of :password
   validates_confirmation_of :password, :if => :password_required?
 

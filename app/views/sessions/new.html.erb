@@ -7,6 +7,9 @@
     <p><%= f.label :password %> <br /> <%= f.password_field :password, :class => 'text' %></p>
     <%= f.hidden_field :remember_me, :value => true %>
     <p><%= f.submit "Sign in" %></p>
+    <p><%= link_to 'Forgot your password?', new_user_password_path, :class => 'light small' %></p>
   <% end %>
 
 </div>
+
+<script>$('#user_login').focus();</script>
