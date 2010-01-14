@@ -6,7 +6,7 @@ class AddMoreDeviseFields < ActiveRecord::Migration
     add_column :users, :current_sign_in_at, :datetime
     add_column :users, :last_sign_in_at, :datetime
     add_column :users, :current_sign_in_ip, :string
-    add_column :users, :last_sign_in_ip, :String
+    add_column :users, :last_sign_in_ip, :string
   end
 
   def self.down
@@ -15,6 +15,6 @@ class AddMoreDeviseFields < ActiveRecord::Migration
     remove_column :users, :current_sign_in_at, :datetime
     remove_column :users, :last_sign_in_at, :datetime
     remove_column :users, :current_sign_in_ip, :string
-    remove_column :users, :last_sign_in_ip, :String
+    remove_column :users, :last_sign_in_ip, :string
   end
 end
