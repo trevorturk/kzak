@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => :create
-  before_filter :get_audio_info, :only => :create
+  before_filter :get_filename, :get_audio_info, :only => :create
 
   def index
     @feed_items = current_user.feed_items.all :include => {:post => :user}
@@ -13,14 +13,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build :attachment => params[:Filedata],
-        :title => @title || 'Unknown', :artist => @artist || 'Unknown', :album => @album || 'Unknown'
-    if @post.save
-      render :partial => @post
-    else
-      flash[:error] = 'Sorry, there as an error processing this file'
-      redirect_to root_path
-    end
+    @post = current_user.posts.build :attachment => params[:Filedata], :title => @title || 'Unknown', :artist => @artist || 'Unknown', :album => @album || 'Unknown'
+    @post.save!
+    render :partial => @post
+  rescue => e
+    ToadHopper(CONFIG['hoptoad_key']).post!(e) if CONFIG['hoptoad_key']
+    render :partial => 'error', :locals => {:filename => @filename}
   end
 
   # def destroy
@@ -31,16 +29,18 @@ class PostsController < ApplicationController
 
   protected
 
-  def get_audio_info
-    params[:Filename] ||= params[:Filedata].original_filename rescue nil # posts/new form
+  def get_filename
+    @filename ||= params[:Filedata].original_filename rescue nil # for posts/new form
+  end
 
-    if params[:Filename] =~ /.mp3$/
+  def get_audio_info
+    if @filename =~ /.mp3$/
       Mp3Info.open(params[:Filedata].path) do |r|
         @title = r.tag.title
         @artist = r.tag.artist
         @album = r.tag.album
       end
-    elsif params[:Filename] =~ /.mp4$|.m4a$/
+    elsif @filename =~ /.mp4$|.m4a$/
       info = MP4Info.open(params[:Filedata].path)
       @title = info.send(:NAM)
       @artist = info.send(:ART)

@@ -62,6 +62,14 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_path(:unauthenticated => true)
   end
 
+  test "create fails gracefully" do
+    sign_in!
+    assert_no_difference('Post.count') do
+      post :create
+    end
+    assert_response :success
+  end
+
   test "new" do
     get :new
     assert_redirected_to new_user_session_path(:unauthenticated => true)
