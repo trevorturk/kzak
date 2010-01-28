@@ -46,5 +46,7 @@ class PostsController < ApplicationController
       @artist = info.send(:ART)
       @album = info.send(:ALB)
     end
+  rescue
+    nil
   end
 end
