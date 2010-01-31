@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password
   validates_confirmation_of :password, :if => :password_required?
 
-  default_scope :order => 'login DESC'
+  default_scope :order => 'id ASC'
 
   def follow(user)
     Follow.create {|r| r.follower = self; r.following = user}
