@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post.save!
     render :partial => @post
   rescue => e
-    notify_hoptoad(e) if CONFIG['hoptoad_key']
+    notify_hoptoad(e) if CONFIG['hoptoad_key'].present?
     render :partial => 'error', :locals => {:filename => @filename}
   end
 
