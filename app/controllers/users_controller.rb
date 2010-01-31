@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   skip_before_filter :authenticate_user!, :only => [:new, :create]
   before_filter :deauthenticate_user!, :only => [:new, :create]
 
-  # TODO ordering is not being respected for followings/followers here (using sort_by in the view)
   def show
+    # TODO followings/followers ordering not working (using sort_by in the view)
     @user = User.find_by_login! params[:id], :include => [{:posts => :user}, :followings, :followers]
   end
 

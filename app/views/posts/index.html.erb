@@ -25,10 +25,10 @@
 
 <div id="users" class="grid_2">
 
-  <h2>users</h2>
+  <h2>following</h2>
 
   <ul class="users">
-    <% @users.each do |user| %>
+    <% @users.each.sort_by(&:login).each do |user| %>
       <li><%= render user %></li>
     <% end %>
   </ul>
