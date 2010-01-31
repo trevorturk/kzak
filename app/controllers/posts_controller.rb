@@ -1,3 +1,5 @@
+require "base64"
+
 class PostsController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => :create
@@ -46,9 +48,9 @@ class PostsController < ApplicationController
       @artist = info.send(:ART)
       @album = info.send(:ALB)
     end
-    @title ||= 'Unknown'; @title.toutf8
-    @artist ||= 'Unknown'; @artist.toutf8
-    @album || 'Unknown'; @album.toutf8
+    @title ||= 'Unknown'; Base64.decode64(@title)
+    @artist ||= 'Unknown'; Base64.decode64(@artist)
+    @album || 'Unknown'; Base64.decode64(@album)
   rescue
     nil
   end
