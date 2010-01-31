@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build :attachment => params[:Filedata], :title => @title || 'Unknown', :artist => @artist || 'Unknown', :album => @album || 'Unknown'
+    @post = current_user.posts.build :attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album
     @post.save!
     render :partial => @post
   rescue => e
@@ -46,5 +46,10 @@ class PostsController < ApplicationController
       @artist = info.send(:ART)
       @album = info.send(:ALB)
     end
+    @title ||= 'Unknown'; @title.toutf8
+    @artist ||= 'Unknown'; @artist.toutf8
+    @album || 'Unknown'; @album.toutf8
+  rescue
+    nil
   end
 end
