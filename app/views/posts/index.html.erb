@@ -28,9 +28,9 @@
   <h2>following</h2>
 
   <ul class="users">
-    <% @users.each.sort_by(&:login).each do |user| %>
+    <% @followings.each.sort_by(&:login).each do |user| %>
       <li><%= render user %></li>
-    <% end %>
+    <% end if @followings %>
   </ul>
 
   <h2 class="pad_top">invite a new user</h2>

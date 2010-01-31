@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     @feed_items = current_user.feed_items.all :include => {:post => :user}
     # TODO followings/followers ordering not working (using sort_by in the view)
-    @users = current_user.followings :include => :user
+    @followings = current_user.followings :include => :user
   end
 
   def new
