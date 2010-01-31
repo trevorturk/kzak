@@ -28,7 +28,7 @@
   <h2>following</h2>
 
   <ul class="users">
-    <% @followings.each.sort_by(&:login).each do |user| %>
+    <% @followings.sort_by(&:login).each do |user| %>
       <li><%= render user %></li>
     <% end if @followings %>
   </ul>
