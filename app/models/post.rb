@@ -2,6 +2,9 @@ require 'mp3info'
 
 class Post < ActiveRecord::Base
 
+  include ActionView::Helpers::TextHelper # truncate
+  include ERB::Util # h
+
   attr_accessible :attachment, :title, :artist, :album
 
   if CONFIG['s3']
@@ -46,6 +49,10 @@ class Post < ActiveRecord::Base
 
   def to_s
     attachment_file_name
+  end
+
+  def to_string
+    truncate "[#{h user}] #{h title} &mdash; #{h artist} &mdash; #{h album}", :length => 120
   end
 
   protected
