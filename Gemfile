@@ -14,7 +14,7 @@ gem "mime-types", "1.16", :require_as => "mime/types"
 gem "ruby-mp3info", "0.6.13", :require_as => "mp3info"
 gem "MP4Info", "0.3.3", :require_as => "mp4info"
 gem "ambethia-smtp-tls", "1.1.2", :require_as => "smtp-tls"
-gem "gbuesing-toadhopper", "0.3.0", :require_as => "toadhopper"
+gem "hoptoad_notifier", "2.1.3"
 
 only :test do
   gem "faker", "0.3.1"
