@@ -13,8 +13,6 @@ class Follow < ActiveRecord::Base
   after_create :backfill_posts
   after_destroy :unbackfill_posts
 
-  default_scope :order => 'created_at DESC'
-
   def cannot_follow_self
     errors.add(:following_id) if follower == following
   end

@@ -25,8 +25,6 @@ class Post < ActiveRecord::Base
   after_create :cache_s3_url, :create_feed_items
   after_destroy :destroy_feed_items
 
-  default_scope :order => 'created_at DESC'
-
   def create_feed_items
     FeedItem.populate(self)
   end
