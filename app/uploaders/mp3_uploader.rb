@@ -20,4 +20,8 @@ class Mp3Uploader < CarrierWave::Uploader::Base
   def s3_headers
     {'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate} # TODO specify globally instead
   end
+
+  def cache_dir
+    "#{RAILS_ROOT}/tmp/uploads" # for heroku read-only filesystem http://codingfrontier.com/carrierwave-on-heroku
+  end
 end
