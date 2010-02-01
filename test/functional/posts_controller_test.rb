@@ -36,9 +36,7 @@ class PostsControllerTest < ActionController::TestCase
     end
     assert_response :success
     r = Post.last
-    assert r.attachment_file_name != 'audio.mp3' # check for random file name
-    assert_equal 'audio/mpeg', r.attachment_content_type
-    assert_equal 174208, r.attachment_file_size # check for correct file size
+    assert r.mp3 != 'audio.mp3' # check for random file name
     assert_equal 'The Love Song of J. Alfred Prufrock', r.title
     assert_equal 'T.S. Eliot', r.artist
     assert_equal 'Prufrock and Other Observations', r.album

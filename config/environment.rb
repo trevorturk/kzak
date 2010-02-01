@@ -9,15 +9,10 @@ Rails::Initializer.run do |config|
   config.frameworks -= [:active_resource]
   config.time_zone = 'UTC'
   config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
-  config.gem 'devise'
+  config.gem 'devise' # TODO this seems necessary for rails 2.x
   config.action_mailer.default_url_options = { :host => CONFIG['host'] }
   config.action_controller.session = {
     :key => CONFIG['session_key'],
     :secret => CONFIG['session_secret']
   }
 end
-
-HoptoadNotifier.configure do |config|
-  config.api_key = CONFIG['hoptoad_key']
-  config.ignore_only = []
-end if CONFIG['hoptoad_key']

@@ -5,7 +5,6 @@ class PostsController < ApplicationController
 
   def index
     @feed_items = current_user.feed_items.all :include => {:post => :user}
-    # TODO followings/followers ordering not working (using sort_by in the view)
     @followings = current_user.followings :include => :user
   end
 
@@ -14,19 +13,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build :attachment => params[:Filedata], :title => @title, :artist => @artist, :album => @album
+    @post = current_user.posts.build :mp3 => params[:Filedata], :title => @title, :artist => @artist, :album => @album
     @post.save!
     render :partial => @post
   rescue => e
     notify_hoptoad(e) if CONFIG['hoptoad_key'].present?
     render :partial => 'error', :locals => {:filename => @filename}
   end
-
-  # def destroy
-  #   @post = current_user.posts.find(params[:id])
-  #   @post.destroy
-  #   redirect_to root_path
-  # end
 
   protected
 

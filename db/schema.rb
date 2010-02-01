@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113234711) do
+ActiveRecord::Schema.define(:version => 20100131234711) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
@@ -40,21 +40,17 @@ ActiveRecord::Schema.define(:version => 20100113234711) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
+    t.string   "mp3"
     t.string   "title"
     t.string   "artist"
     t.string   "album"
-    t.string   "s3_url"
-    t.datetime "s3_url_created_at"
   end
 
   create_table "users", :force => true do |t|
     t.string   "login"
-    t.integer  "posts_count",                         :default => 0, :null => false
-    t.integer  "followings_count",                    :default => 0, :null => false
-    t.integer  "followers_count",                     :default => 0, :null => false
+    t.integer  "posts_count",                        :default => 0, :null => false
+    t.integer  "followings_count",                   :default => 0, :null => false
+    t.integer  "followers_count",                    :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password"
@@ -68,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20100113234711) do
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip",      :limit => nil
+    t.string   "last_sign_in_ip"
   end
 
 end

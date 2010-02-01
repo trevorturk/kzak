@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_filter :deauthenticate_user!, :only => [:new, :create]
 
   def show
-    # TODO followings/followers ordering not working (using sort_by in the view)
     @user = User.find_by_login! params[:id], :include => [{:posts => :user}, :followings, :followers]
   end
 

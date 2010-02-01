@@ -28,6 +28,7 @@
   <h2>following</h2>
 
   <ul class="users">
+    <% # TODO followings/followers ordering not working, so using sort_by here %>
     <% @followings.sort_by(&:login).each do |user| %>
       <li><%= render user %></li>
     <% end if @followings %>
