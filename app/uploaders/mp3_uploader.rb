@@ -22,6 +22,6 @@ class Mp3Uploader < CarrierWave::Uploader::Base
   end
 
   def cache_dir
-    "#{RAILS_ROOT}/tmp/uploads" # for heroku read-only filesystem http://codingfrontier.com/carrierwave-on-heroku
+    "#{Rails.root}/tmp/uploads" # for heroku read-only filesystem http://codingfrontier.com/carrierwave-on-heroku
   end
 end
