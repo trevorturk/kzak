@@ -14,6 +14,7 @@ if Rails.env.test?
   end
 end
 
+# TODO is there a better way to avoid the double slash?
 CarrierWave::Storage::S3::File.class_eval do
   def url
     if @uploader.s3_cnamed
