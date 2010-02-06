@@ -19,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # TODO get this test working
+  # TODO fix test
   # test "new signs user out if signed in user tries to access" do
   #   sign_in!
   #   assert @controller.current_user.present?
@@ -55,7 +55,7 @@ class UsersControllerTest < ActionController::TestCase
     assert u2.following?(u0) # new users follow all existing users
     assert u2.following?(u1) # new users follow all existing users
     # sign in and redirect
-    # assert @controller.signed_in?(:user) # TODO how to test?
+    # assert @controller.signed_in?(:user) # TODO fix test
     assert_redirected_to root_path
   end
 

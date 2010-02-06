@@ -14,7 +14,7 @@ if Rails.env.test?
   end
 end
 
-# TODO is there a better way to avoid the double slash?
+# TODO patch to allow blank/nil for :s3 and :right_s3 http://github.com/jnicklas/carrierwave/issues/#issue/36
 CarrierWave::Storage::S3::File.class_eval do
   def url
     if @uploader.s3_cnamed

@@ -14,7 +14,7 @@ class PostTest < ActiveSupport::TestCase
     assert p.errors[:user_id]
   end
 
-  # TODO test this
+  # TODO fix test
   # test "to_s returns nice string" do
   #   r = Post.make
   #   assert_equal "[#{r.user}]  &mdash;  &mdash;", r.to_s

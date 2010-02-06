@@ -6,6 +6,7 @@ class Mp3Uploader < CarrierWave::Uploader::Base
 
   if CONFIG['s3']
     storage :s3
+    # TODO patch to allow blank/nil for :s3 and :right_s3 http://github.com/jnicklas/carrierwave/issues/#issue/36
     def store_dir; ""; end
   else
     storage :file
@@ -18,7 +19,8 @@ class Mp3Uploader < CarrierWave::Uploader::Base
   end
 
   def s3_headers
-    {'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate} # TODO specify globally instead
+    # TODO specify globally when gem gets fixed http://github.com/jnicklas/carrierwave/issues/closed#issue/32
+    {'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate}
   end
 
   def cache_dir
