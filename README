@@ -1,17 +1,13 @@
 == About
 
-Code: http://github.com/trevorturk/kzak/
+KZAK is a web-based jukebox.
 
-
-== Requirements
-
-Ruby 1.8.7 - http://www.ruby-lang.org/en/downloads/
-Rails 2.3.5 - http://guides.rubyonrails.org/getting_started.html
-Git 1.6.6 - http://book.git-scm.com/2_installing_git.html
+http://almosteffortless.com/kzak/
 
 
 == Installation
 
+# Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/kzak.git
 cd kzak
 sudo gem install bundler
@@ -70,7 +66,7 @@ heroku open
 
 == MIT License
 
-Copyright (c) 2009 Trevor Turk
+Copyright (c) 2009... Trevor Turk
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
