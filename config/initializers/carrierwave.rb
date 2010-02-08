@@ -15,11 +15,15 @@ if Rails.env.test?
 end
 
 # TODO use carrierwave's cname support instead?
-# CarrierWave::Storage::S3::File.class_eval do
-#   def url
-#     "http://s3.amazonaws.com/#{@uploader.s3_bucket}/#{@path}"
-#   end
-# end
+CarrierWave::Storage::S3::File.class_eval do
+  def url
+    if CONFIG['s3_host_alias']
+      "http://#{CONFIG['s3_host_alias']}/#{@uploader.s3_bucket}/#{@path}"
+    else
+      "http://s3.amazonaws.com/#{@uploader.s3_bucket}/#{@path}"
+    end
+  end
+end
 
 # TODO remove when this is fixed in carrierwave http://github.com/jnicklas/carrierwave/issues#issue/36
 CarrierWave::Uploader::Store.class_eval do
