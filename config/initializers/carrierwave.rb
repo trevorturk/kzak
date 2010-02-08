@@ -18,7 +18,7 @@ end
 CarrierWave::Storage::S3::File.class_eval do
   def url
     if CONFIG['s3_host_alias']
-      "http://#{CONFIG['s3_host_alias']}/#{@uploader.s3_bucket}/#{@path}"
+      "http://#{CONFIG['s3_host_alias']}/#{@path}"
     else
       "http://s3.amazonaws.com/#{@uploader.s3_bucket}/#{@path}"
     end
