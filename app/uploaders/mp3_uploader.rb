@@ -6,11 +6,14 @@ class Mp3Uploader < CarrierWave::Uploader::Base
 
   if CONFIG['s3']
     storage :s3
-    # TODO patch to allow blank/nil for :s3 and :right_s3 http://github.com/jnicklas/carrierwave/issues/#issue/36
-    def store_dir; ""; end
+    def store_dir
+      nil
+    end
   else
     storage :file
-    def store_dir; "system"; end
+    def store_dir
+      "system"
+    end
   end
 
   def filename

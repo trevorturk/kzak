@@ -14,13 +14,16 @@ if Rails.env.test?
   end
 end
 
-# TODO patch to allow blank/nil for :s3 and :right_s3 http://github.com/jnicklas/carrierwave/issues/#issue/36
+# TODO use carrierwave's cname support instead?
 CarrierWave::Storage::S3::File.class_eval do
   def url
-    if @uploader.s3_cnamed
-      ["http://", @uploader.s3_bucket, "/", @path].compact.join
-    else
-      ["http://s3.amazonaws.com/", @uploader.s3_bucket, @path].compact.join
-    end
+    "http://s3.amazonaws.com/#{@uploader.s3_bucket}/#{@path}"
+  end
+end
+
+# TODO remove when this is fixed in carrierwave http://github.com/jnicklas/carrierwave/issues#issue/36
+CarrierWave::Uploader::Store.class_eval do
+  def store_path(for_file=filename)
+    File.join([store_dir, full_filename(for_file)].compact)
   end
 end
