@@ -18,7 +18,7 @@
 
   <% if @user.followings.present? %>
     <ul>
-      <% @user.followings.sort_by(&:login).each do |user| %>
+      <% @user.followings.sort_by{|u| u.login.downcase}.each do |user| %>
         <li><%= render user %></li>
       <% end %>
     </ul>
@@ -31,7 +31,7 @@
   <% if @user.followers %>
     <ul>
       <% # TODO followings/followers ordering not working, so using sort_by here %>
-      <% @user.followers.sort_by(&:login).each do |user| %>
+      <% @user.followers.sort_by{|u| u.login.downcase}.each do |user| %>
         <li><%= render user %></li>
       <% end %>
     </ul>
