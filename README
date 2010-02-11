@@ -46,6 +46,12 @@ heroku rake db:migrate
 heroku open
 
 
+== Changes
+
+0.1
+- Initial public release
+
+
 == Stats
 
 +----------------------+-------+-------+---------+---------+-----+-------+
