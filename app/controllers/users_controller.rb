@@ -8,7 +8,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    @invitation = Invitation.find_by_code! params[:invitation]
+    @invitation = Invitation.find_by_code params[:invitation]
+    if @invitation.blank?
+      flash[:notice] = 'Invitation not found'
+      redirect_to root_path
+    end
   end
 
   def create

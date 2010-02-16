@@ -19,6 +19,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "new with bad invite" do
+    get :new, :invitation => 'invalid'
+    assert_redirected_to root_path
+  end
+
   # TODO fix test
   # test "new signs user out if signed in user tries to access" do
   #   sign_in!
