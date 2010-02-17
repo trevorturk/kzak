@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   # TODO this seems necessary for rails 2.3.5 / bundler 0.9 / passenger 2.2.9
   config.gem 'devise'
   config.gem 'carrierwave'
+  config.gem 'hoptoad_notifier'
   config.action_mailer.default_url_options = { :host => CONFIG['host'] }
   config.action_controller.session = {
     :key => CONFIG['session_key'],
