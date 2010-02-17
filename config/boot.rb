@@ -106,5 +106,39 @@ module Rails
   end
 end
 
+class Rails::Boot
+  def run
+    load_initializer
+    extend_environment
+    Rails::Initializer.run(:set_load_path)
+  end
+
+  def extend_environment
+    Rails::Initializer.class_eval do
+      old_load = instance_method(:load_environment)
+      define_method(:load_environment) do
+        Bundler.require :default, Rails.env
+        old_load.bind(self).call
+      end
+    end
+  end
+end
+
 # All that for this:
 Rails.boot!
+
+class Rails::Plugin::GemLocator
+  def plugins
+    dirs = []
+    Bundler::SPECS.each do |spec|
+      spec[:load_paths].each do |path|
+        if File.exist?(File.join(path, "..", "rails", "init.rb")) || File.exist?(File.join(path, "..", "init.rb"))
+          dirs << File.expand_path(File.join(path, ".."))
+        end
+      end
+    end
+    dirs.uniq.collect do |dir|
+      Rails::Plugin.new(dir) # TODO ordering
+    end
+  end
+end
