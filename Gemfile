@@ -16,6 +16,10 @@ group :development do
   gem "sqlite3-ruby", :require => "sqlite3"
 end
 
+group :production do
+  gem "pg"
+end
+
 group :test do
   gem "faker", "0.3.1"
   gem "mocha", "0.9.8"
