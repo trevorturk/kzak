@@ -1,1 +1,1 @@
-require "#{File.dirname(__FILE__)}/../vendor/bundler_gems/environment"
+ENV["GEM_HOME"] = File.expand_path('../../vendor/bundler_gems', __FILE__)
