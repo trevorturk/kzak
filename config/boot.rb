@@ -126,19 +126,3 @@ end
 
 # All that for this:
 Rails.boot!
-
-class Rails::Plugin::GemLocator
-  def plugins
-    dirs = []
-    Bundler::SPECS.each do |spec|
-      spec[:load_paths].each do |path|
-        if File.exist?(File.join(path, "..", "rails", "init.rb")) || File.exist?(File.join(path, "..", "init.rb"))
-          dirs << File.expand_path(File.join(path, ".."))
-        end
-      end
-    end
-    dirs.uniq.collect do |dir|
-      Rails::Plugin.new(dir) # TODO ordering
-    end
-  end
-end
