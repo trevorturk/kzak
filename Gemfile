@@ -10,7 +10,7 @@ gem "ambethia-smtp-tls", "1.1.2", :require => "smtp-tls"
 gem "mime-types", "1.16", :require => "mime/types"
 gem "ruby-mp3info", "0.6.13", :require => "mp3info"
 gem "MP4Info", "0.3.3", :require => "mp4info"
-gem "devise", :git => "git://github.com/plataformatec/devise.git", :ref => "7f451ed9" # TODO update with 1.0.3
+gem "devise", :git => "git://github.com/plataformatec/devise.git", :ref => "v1.0" # TODO update with 1.0.3
 
 group :development do
   gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
