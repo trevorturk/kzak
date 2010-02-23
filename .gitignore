@@ -1,4 +1,5 @@
 .DS_Store
+.bundle
 *.log
 log/*
 public/uploads/**/*
@@ -11,5 +12,3 @@ config/smtp.yml
 config/deploy.rb
 db/*.sqlite3
 public/system/*
-vendor/bundler_gems/*
-.bundle

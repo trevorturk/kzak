@@ -128,13 +128,13 @@ specs:
     version: 2.3.5
 - rails: 
     version: 2.3.5
-hash: d842e0aa6bdb1063095624cb97c193e05fe592d7
+hash: 780600450dec07f56e4caef0999b6272beff319c
 sources: 
 - Git: 
     uri: git://github.com/plataformatec/devise.git
     git: git://github.com/plataformatec/devise.git
     ref: 7f451ed9cca0e1f2dfe0cc88af50322401071753
 - Rubygems: 
-    uri: http://gems.rubyforge.org
+    uri: http://rubygems.org
 - Rubygems: 
     uri: http://gems.github.com
