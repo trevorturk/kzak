@@ -5,7 +5,6 @@
       swfu = new SWFUpload({
         debug : false,
         flash_url : '/flash/swfupload.swf',
-        flash9_url : '/flash/swfupload_fp9.swf',
         upload_url : '<%= posts_path %>',
         post_params : {
           '<%= ActionController::Base.session_options[:key] %>' : '<%= cookies[ActionController::Base.session_options[:key]] %>',

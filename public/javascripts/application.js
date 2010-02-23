@@ -54,7 +54,6 @@ $(document).ready(function(){
   var sm = soundManager;
 
   sm.url = '/flash';
-  sm.flashVersion = 9;
   sm.debugMode = false;
   sm.useConsole = false;
   sm.useHighPerformance = true;
