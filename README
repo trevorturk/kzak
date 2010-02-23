@@ -1,4 +1,4 @@
-== NOTE
+== WARN
 
 !!! KZAK IS IN A NON-WORKING STATE DUE TO ISSUES WITH BUNDLER !!!
 
@@ -42,7 +42,7 @@ heroku open
 
 heroku db:pull sqlite://db/backup.sqlite3
 git pull
-bundle install vendor/bundler_gems
+bundle install vendor/bundler_gems --without production
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master
