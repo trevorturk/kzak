@@ -57,6 +57,7 @@ $(document).ready(function(){
   sm.debugMode = false;
   sm.useConsole = false;
   sm.useHighPerformance = true;
+  soundManager.flashVersion = 9;
   sm.useMovieStar = true; // MP4/M4A/AAC
 
   sm.onready(function(){
