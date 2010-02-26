@@ -9,8 +9,7 @@ http://almosteffortless.com/kzak/
 # Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/kzak.git
 cd kzak
-sudo gem install bundler
-bundle install # adjust Gemfile if necessary
+sudo rake gems:install
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
@@ -38,7 +37,7 @@ heroku open
 
 heroku db:pull sqlite://db/backup.sqlite3
 git pull
-bundle install # adjust Gemfile if necessary
+sudo rake gems:install
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master

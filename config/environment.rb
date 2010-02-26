@@ -9,9 +9,15 @@ Rails::Initializer.run do |config|
   config.frameworks -= [:active_resource]
   config.time_zone = 'UTC'
   config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
-  config.action_mailer.default_url_options = { :host => CONFIG['host'] }
-  config.action_controller.session = {
-    :key => CONFIG['session_key'],
-    :secret => CONFIG['session_secret']
-  }
+  config.action_mailer.default_url_options = {:host => CONFIG['host']}
+  config.action_controller.session = {:key => CONFIG['session_key'], :secret => CONFIG['session_secret']}
+  config.gem "warden"
+  config.gem "devise"
+  config.gem "hoptoad_notifier"
+  config.gem "carrierwave"
+  config.gem "aws-s3", :lib => "aws/s3"
+  config.gem "ambethia-smtp-tls", :lib => "smtp-tls"
+  config.gem "mime-types", :lib => "mime/types"
+  config.gem "ruby-mp3info", :lib => "mp3info"
+  config.gem "MP4Info", :lib => "mp4info"
 end
