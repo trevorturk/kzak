@@ -3,7 +3,7 @@ source "http://gems.github.com" # for ambethia-smtp-tls
 
 gem "rails", "2.3.5"
 gem "warden", "0.9.4"
-gem "devise", :git => "git://github.com/plataformatec/devise.git", :ref => "v1.0" # TODO use gem with rails3
+gem "devise", "1.0.3"
 gem "hoptoad_notifier", "2.1.3"
 gem "carrierwave", "0.4.4"
 gem "aws-s3", "0.6.2", :require => "aws/s3"
