@@ -7,3 +7,4 @@ ambethia-smtp-tls --source http://gems.github.com
 mime-types
 ruby-mp3info
 MP4Info
+rails
