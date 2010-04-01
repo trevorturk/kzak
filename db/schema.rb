@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100325033047) do
+ActiveRecord::Schema.define(:version => 20100401044301) do
 
   create_table "feed_items", :force => true do |t|
     t.integer  "user_id"
