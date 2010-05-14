@@ -26,6 +26,16 @@ class User < ActiveRecord::Base
   validates_presence_of :password
   validates_confirmation_of :password, :if => :password_required?
 
+  before_destroy :destroy_not_implemented
+
+  def destroy_not_implemented
+    raise 'NotImplemented' # would have to clean things up on destroy
+    # Follow.find_each {|f| f.destroy if f.follower.nil?}
+    # Follow.find_each {|f| f.destroy if f.following.nil?}
+    # FeedItem.find_each {|f| f.destroy if f.user.nil?}
+    # FeedItem.find_each {|f| f.destroy if f.poster.nil?}
+  end
+
   def follow(user)
     Follow.create {|r| r.follower = self; r.following = user}
   end
