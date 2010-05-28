@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   attr_accessible :login, :password, :password_confirmation, :email
   attr_reader :invitation # for users/new action
 
-  devise :authenticatable, :rememberable, :trackable, :recoverable # see config/initializers/devise.rb
+  # see also config/initializers/devise.rb
+  devise :database_authenticatable, :rememberable, :trackable, :recoverable
 
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items, :order => 'feed_items.post_created_at DESC'

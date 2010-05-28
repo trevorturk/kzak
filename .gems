@@ -1,5 +1,5 @@
-warden -v 0.10.3
-devise -v 1.0.6
+warden -v 0.10.5
+devise -v 1.0.7
 hoptoad_notifier -v 2.2.2
 carrierwave -v 0.4.5
 aws-s3 -v 0.6.2
