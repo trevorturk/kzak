@@ -9,7 +9,7 @@ http://github.com/trevorturk/kzak/
 # Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/kzak.git
 cd kzak
-sudo rake gems:install
+# see .gems and install required gems
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
@@ -43,33 +43,6 @@ rake heroku:config
 git push heroku master
 heroku rake db:migrate
 heroku open
-
-
-== Changes
-
-HEAD
-- bundler 0.9x support
-
-0.1
-- Initial public release
-
-
-== Stats
-
-+----------------------+-------+-------+---------+---------+-----+-------+
-| Name                 | Lines |   LOC | Classes | Methods | M/C | LOC/M |
-+----------------------+-------+-------+---------+---------+-----+-------+
-| Controllers          |    99 |    85 |       4 |      10 |   2 |     6 |
-| Helpers              |     2 |     2 |       0 |       0 |   0 |     0 |
-| Models               |   196 |   149 |       6 |      22 |   3 |     4 |
-| Libraries            |    16 |    13 |       1 |       2 |   2 |     4 |
-| Integration tests    |    19 |    15 |       1 |       0 |   0 |     0 |
-| Functional tests     |   215 |   163 |       4 |       0 |   0 |     0 |
-| Unit tests           |   381 |   322 |       5 |       0 |   0 |     0 |
-+----------------------+-------+-------+---------+---------+-----+-------+
-| Total                |   928 |   749 |      21 |      34 |   1 |    20 |
-+----------------------+-------+-------+---------+---------+-----+-------+
-  Code LOC: 249     Test LOC: 500     Code to Test Ratio: 1:2.0
 
 
 == MIT License

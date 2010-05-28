@@ -1,12 +1,14 @@
-warden
-devise
-hoptoad_notifier
-carrierwave
-aws-s3
-ambethia-smtp-tls --source http://gems.github.com
-mime-types
-ruby-mp3info
-MP4Info
-rails
-right_aws
-toadhopper
+warden -v 0.10.3
+devise -v 1.0.6
+hoptoad_notifier -v 2.2.2
+carrierwave -v 0.4.5
+aws-s3 -v 0.6.2
+ambethia-smtp-tls -v 1.1.2 -s http://gems.github.com
+mime-types -v 1.16
+ruby-mp3info -v 0.6.13
+MP4Info -v 0.3.3
+rails -v 2.3.5
+right_aws -v 1.10.0
+toadhopper -v 1.0.3
+thin -v 1.2.7
+pg -v 0.9.0
