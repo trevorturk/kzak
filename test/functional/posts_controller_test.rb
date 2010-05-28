@@ -29,6 +29,23 @@ class PostsControllerTest < ActionController::TestCase
     assert assigns(:feed_items).blank?
   end
 
+  test "rss" do
+    u = User.make
+    get :index, :format => 'rss' # no token
+    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    get :index, :format => 'rss', :auth_token => '' # blank token
+    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    get :index, :format => 'rss', :auth_token => 'invalid' # invalid token
+    assert_redirected_to new_user_session_path(:invalid_token => true)
+    # TODO get rss tests working somehow
+    # get :index, :format => 'rss', :auth_token => u.authentication_token # valid token
+    # assert_response :success
+    # Post.make
+    # u.posts.make
+    # get :index, :format => 'rss', :auth_token => u.authentication_token # with content
+    # assert_response :success
+  end
+
   test "create" do
     sign_in!
     assert_difference('Post.count') do

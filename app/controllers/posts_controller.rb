@@ -6,6 +6,11 @@ class PostsController < ApplicationController
   def index
     @feed_items = current_user.feed_items.all :include => {:post => :user}
     @followings = current_user.followings :include => :user
+
+    respond_to do |format|
+      format.html
+      format.rss
+    end
   end
 
   def new

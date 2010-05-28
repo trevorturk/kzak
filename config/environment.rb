@@ -11,13 +11,13 @@ Rails::Initializer.run do |config|
   config.middleware.use 'NoWWW' if RAILS_ENV == 'production'
   config.action_mailer.default_url_options = {:host => CONFIG['host']}
   config.action_controller.session = {:key => CONFIG['session_key'], :secret => CONFIG['session_secret']}
-  config.gem "warden"
-  config.gem "devise"
-  config.gem "hoptoad_notifier"
-  config.gem "carrierwave"
-  config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "ambethia-smtp-tls", :lib => "smtp-tls"
-  config.gem "mime-types", :lib => "mime/types"
-  config.gem "ruby-mp3info", :lib => "mp3info"
-  config.gem "MP4Info", :lib => "mp4info"
+  config.gem "warden", :version => '0.10.4'
+  config.gem "devise", :version => '1.0.7'
+  config.gem "hoptoad_notifier", :version => '2.2.2'
+  config.gem "carrierwave", :version => '0.4.5'
+  config.gem "mp4info", :version => '1.7.3'
+  config.gem "aws-s3", :version => '0.6.2', :lib => "aws/s3"
+  config.gem "ambethia-smtp-tls", :version => '1.1.2', :lib => "smtp-tls"
+  config.gem "mime-types", :version => '1.16', :lib => "mime/types"
+  config.gem "ruby-mp3info", :version => '0.6.13', :lib => "mp3info"
 end
