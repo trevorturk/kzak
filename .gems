@@ -7,7 +7,7 @@ ambethia-smtp-tls -v 1.1.2 -s http://gems.github.com
 mime-types -v 1.16
 ruby-mp3info -v 0.6.13
 mp4info -v 1.7.3
-rails -v 2.3.5
+rails -v 2.3.8
 right_aws -v 1.10.0
 toadhopper -v 1.0.3
 thin -v 1.2.7
