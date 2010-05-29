@@ -5,7 +5,13 @@ function human_size(bytes) {
 }
 
 $(document).ready(function(){
-
+  
+  // shuffle
+  
+  $(".shuffle").click(function(){
+    $('.playlist li').shuffle();
+  });
+  
   // new invitation form
 
   $("input#invitation_email").ezpz_hint();

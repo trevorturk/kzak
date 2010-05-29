@@ -13,6 +13,7 @@ p { margin: 1em 0; }
 .playable {}
 .playing {background:#eeeeec;}
 .paused {background:#eeeeec;}
+.shuffle {float:right; font-weight:normal; color:#dedede;}
 #flash div {text-align:center; padding:5px 0; margin-bottom:15px;}
 .pad_top {margin-top:20px;}
 .disabled, .pending {color:#999;}
