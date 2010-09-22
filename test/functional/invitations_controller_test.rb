@@ -14,7 +14,7 @@ class InvitationsControllerTest < ActionController::TestCase
     assert_no_difference 'Invitation.count' do
       post :create, :invitation => Invitation.plan
     end
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_redirected_to new_user_session_path
   end
 
   test "create fails gracefully" do
@@ -26,9 +26,10 @@ class InvitationsControllerTest < ActionController::TestCase
   end
 
   test "create sends an email" do
-    Mailer.expects(:deliver_invitation)
     sign_in!
-    post :create, :invitation => Invitation.plan
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, :invitation => Invitation.plan
+    end
   end
 
 end

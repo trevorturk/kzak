@@ -3,7 +3,8 @@
 <head>
   <title>KZAK!</title>
   <%= stylesheet_link_tag 'reset', '960', 'forms', 'application', :cache => true %>
-  <%= javascript_include_tag 'jquery', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application', :cache => true  %>
+  <%= javascript_include_tag 'jquery', 'rails', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application', :cache => true  %>
+  <%= csrf_meta_tag %>
   <%= auto_discovery_link_tag :rss, rss_url, 'RSS' if user_signed_in? %>
   <%= yield :head %>
 </head>

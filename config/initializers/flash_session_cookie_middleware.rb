@@ -1,18 +1,23 @@
 require 'rack/utils'
- 
+
 class FlashSessionCookieMiddleware
   def initialize(app, session_key = '_session_id')
     @app = app
     @session_key = session_key
   end
- 
+
   def call(env)
     if env['HTTP_USER_AGENT'] =~ /^(Adobe|Shockwave) Flash/
-      params = ::Rack::Request.new(env).params
-      env['HTTP_COOKIE'] = [ @session_key, params[@session_key] ].join('=').freeze unless params[@session_key].nil?
+      req = Rack::Request.new(env)
+      env['HTTP_COOKIE'] = [ @session_key, req.params[@session_key] ].join('=').freeze unless req.params[@session_key].nil?
+      env['HTTP_ACCEPT'] = "#{req.params['_http_accept']}".freeze unless req.params['_http_accept'].nil?
     end
+
     @app.call(env)
   end
 end
 
-ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, FlashSessionCookieMiddleware, ActionController::Base.session_options[:key])
+Rails.application.config.middleware.insert_before(
+  ActionDispatch::Session::CookieStore,
+  FlashSessionCookieMiddleware,
+  Rails.application.config.session_options[:key])

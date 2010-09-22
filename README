@@ -6,10 +6,9 @@ http://github.com/trevorturk/kzak/
 
 == Installation
 
-# Requires Ruby >= 1.8.7
 git clone git://github.com/trevorturk/kzak.git
-cd kzak
-# see .gems and install required gems
+gem install bundler
+bundle install
 cp config/database.example.yml config/database.yml
 cp config/config.example.yml config/config.yml
 rake db:create
@@ -21,10 +20,10 @@ script/server
 
 == Deployment
 
-sudo gem install heroku
+gem install heroku
 heroku create
 # Set the variables for your production environment in config/config.yml
-rake s3:create
+# Create the bucked you'd like to use on S3
 rake heroku:config
 git push heroku master
 heroku rake db:schema:load
@@ -37,7 +36,7 @@ heroku open
 
 heroku db:pull sqlite://db/backup.sqlite3
 git pull
-sudo rake gems:install
+bundle install
 # Review possible config changes in config/config.example.yml
 rake heroku:config
 git push heroku master

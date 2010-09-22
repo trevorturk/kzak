@@ -6,7 +6,7 @@ class Invitation < ActiveRecord::Base
   belongs_to :new_user, :class_name => 'User'
 
   validates_presence_of :user_id, :email
-  validates_format_of :email, :with => Devise::EMAIL_REGEX
+  validates_format_of :email, :with => Devise.email_regexp
   validate :validate_email_is_not_already_in_use, :if => :new_record?
 
   before_create :generate_code

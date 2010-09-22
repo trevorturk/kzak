@@ -4,7 +4,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "index" do
     get :index
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_redirected_to new_user_session_path
     u = sign_in!
     get :index
     assert_response :success
@@ -32,11 +32,11 @@ class PostsControllerTest < ActionController::TestCase
   test "rss" do
     u = User.make
     get :index, :format => 'rss' # no token
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_response :unauthorized
     get :index, :format => 'rss', :auth_token => '' # blank token
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_response :unauthorized
     get :index, :format => 'rss', :auth_token => 'invalid' # invalid token
-    assert_redirected_to new_user_session_path(:invalid_token => true)
+    assert_response :unauthorized
     # TODO get rss tests working somehow
     # get :index, :format => 'rss', :auth_token => u.authentication_token # valid token
     # assert_response :success
@@ -74,7 +74,7 @@ class PostsControllerTest < ActionController::TestCase
     assert_no_difference('Post.count') do
       post :create, :Filedata => fixture_file_upload('files/audio.mp3', 'audio/mpeg')
     end
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_redirected_to new_user_session_path
   end
 
   test "create fails gracefully" do
@@ -87,7 +87,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "new" do
     get :new
-    assert_redirected_to new_user_session_path(:unauthenticated => true)
+    assert_redirected_to new_user_session_path
     sign_in!
     get :new
     assert_response :success

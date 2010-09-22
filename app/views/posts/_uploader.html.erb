@@ -1,3 +1,4 @@
+<% session_key_name = Rails.application.config.session_options[:key] %>
 <script type="text/javascript">
   $(document).ready(function(){
     if ($('#swfupload-button').length) {
@@ -7,8 +8,8 @@
         flash_url : '/flash/swfupload.swf',
         upload_url : '<%= posts_path %>',
         post_params : {
-          '<%= ActionController::Base.session_options[:key] %>' : '<%= cookies[ActionController::Base.session_options[:key]] %>',
-          'authenticity_token' : '<%= form_authenticity_token %>'
+          '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+          'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
         },
         button_image_url : '/images/upload.png',
         button_placeholder_id : "swfupload-button",

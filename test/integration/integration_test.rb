@@ -6,7 +6,7 @@ class IntegrationTest < ActionController::IntegrationTest
     u = User.make
     get 'users/password/new'
     assert_response :success
-    assert_emails 1 do
+    assert_difference 'ActionMailer::Base.deliveries.size' do
       post 'users/password', :user => {:email => u.email}
     end
     assert_redirected_to new_user_session_path

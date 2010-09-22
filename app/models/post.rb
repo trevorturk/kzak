@@ -22,6 +22,6 @@ class Post < ActiveRecord::Base
   end
 
   def to_s
-    truncate "[#{h user}] #{h title} &mdash; #{h artist} &mdash; #{h album}", :length => 120
+    sanitize(truncate("[#{h user}] #{h title} &mdash; #{h artist} &mdash; #{h album}", :length => 120))
   end
 end

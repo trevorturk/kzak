@@ -42,13 +42,13 @@ class UserTest < ActiveSupport::TestCase
     i = User.new
     i.email = 'with a space'
     assert !i.valid?
-    assert i.errors.on(:email)
+    assert i.errors[:email]
     i.email = 'invalid!chars'
     assert !i.valid?
-    assert i.errors.on(:email)
+    assert i.errors[:email]
     i.email = 'no_domain'
     assert !i.valid?
-    assert i.errors.on(:email)
+    assert i.errors[:email]
   end
 
   test "validate unique email" do
@@ -57,7 +57,7 @@ class UserTest < ActiveSupport::TestCase
     u2 = User.new
     u2.email = 'test@example.com'
     assert !u2.valid?
-    assert u2.errors.on(:email)
+    assert u2.errors[:email]
   end
 
   test "has many posts" do

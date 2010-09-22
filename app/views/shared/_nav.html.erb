@@ -1,5 +1,5 @@
 <div id="nav">
   <% if user_signed_in? %>
-     <%= "signed in as #{link_to current_user, current_user}" %> &nbsp; <span>(<%= link_to "sign out", destroy_user_session_path %>)</span>
+     <%=raw "signed in as #{link_to current_user, current_user}" %> &nbsp; <span>(<%= link_to "sign out", destroy_user_session_path %>)</span>
   <% end %>
 </div>

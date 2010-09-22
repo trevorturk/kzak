@@ -5,10 +5,10 @@ class FeedItemTest < ActiveSupport::TestCase
   test "requires user_id, post_id, poster_id, post_created_at" do
     assert_no_difference 'FeedItem.count' do
       r = FeedItem.create
-      assert r.errors.on(:user_id)
-      assert r.errors.on(:post_id)
-      assert r.errors.on(:poster_id)
-      assert r.errors.on(:post_created_at)
+      assert r.errors[:user_id]
+      assert r.errors[:post_id]
+      assert r.errors[:poster_id]
+      assert r.errors[:post_created_at]
     end
   end
     

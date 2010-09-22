@@ -4,28 +4,25 @@ class User < ActiveRecord::Base
   attr_reader :invitation # for users/new action
 
   # see also config/initializers/devise.rb
-  devise :token_authenticatable, :database_authenticatable, :rememberable, :trackable, :recoverable
+  devise :token_authenticatable, :database_authenticatable, :rememberable, :trackable, :recoverable, :validatable
 
   has_many :posts, :order => 'posts.created_at DESC'
   has_many :feed_items, :order => 'feed_items.post_created_at DESC'
   has_many :invitations, :order => 'invitations.created_at DESC'
 
   has_many :follows_where_they_are_doing_the_following, :foreign_key => :follower_id, :class_name => 'Follow'
-  has_many :followings, :through => :follows_where_they_are_doing_the_following, :order => 'users.login DESC'
+  has_many :followings, :through => :follows_where_they_are_doing_the_following
 
   has_many :follows_where_they_are_being_followed, :foreign_key => :following_id, :class_name => 'Follow'
-  has_many :followers, :through => :follows_where_they_are_being_followed, :order => 'users.login DESC'
+  has_many :followers, :through => :follows_where_they_are_being_followed
 
   belongs_to :inviter, :class_name => 'User'
 
   validates_presence_of :login, :email
   validates_length_of :login, :maximum => 15
-  validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and underscores"
+  validates_format_of :login, :with => /^[a-zA-Z0-9\_]*?$/, :message => "can only contain letters, numbers and _"
   validates_format_of :login, :with => /^[a-zA-Z]/, :message => "must begin with a letter"
-  validates_format_of :email, :with => Devise::EMAIL_REGEX
   validates_uniqueness_of :login, :email
-  validates_presence_of :password
-  validates_confirmation_of :password, :if => :password_required?
 
   before_destroy :destroy_not_implemented
 
@@ -69,9 +66,4 @@ class User < ActiveRecord::Base
     login
   end
 
-  protected
-
-  def password_required?
-    new_record? || !password.nil? || !password_confirmation.nil?
-  end
 end
