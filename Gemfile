@@ -3,13 +3,13 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'devise', '1.1.2'
 gem 'hoptoad_notifier', '2.3.7'
-gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '1003d623f350fc353c31'
-gem 'fog', '0.2.30'
+gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '54978a71b21bd5029326'
+gem 'fog', '0.3.7'
 gem 'mime-types', '1.16', :require => "mime/types"
 gem 'ruby-mp3info', '0.6.13', :require => "mp3info"
 gem 'mp4info', '1.7.3'
 gem 'toadhopper', '1.0.4'
-gem 'heroku_s3_backup', :git => 'git://github.com/kamui/heroku_s3_backup.git'
+gem 'heroku_s3_backup', :git => 'git://github.com/trevorturk/heroku_s3_backup.git', :ref => '58bf17abc550cfd479a6'
 
 group :production do
   gem 'thin', '1.2.7'

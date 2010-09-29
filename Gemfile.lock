@@ -1,17 +1,18 @@
 GIT
   remote: git://github.com/jnicklas/carrierwave.git
-  revision: 1003d623f350fc353c31d7dfce6ddc78268509f8
-  ref: 1003d623f350fc353c31
+  revision: 54978a71b21bd5029326dc508b893280e921b05c
+  ref: 54978a71b21bd5029326
   specs:
-    carrierwave (0.5.0.beta2)
-      activesupport (~> 3.0.0)
+    carrierwave (0.5.0)
+      activesupport (~> 3.0)
 
 GIT
-  remote: git://github.com/kamui/heroku_s3_backup.git
-  revision: f2789d064e3b41739ea2449fa7efbe61e40d3d22
+  remote: git://github.com/trevorturk/heroku_s3_backup.git
+  revision: 58bf17abc550cfd479a6d35af9e9d8d5168f5945
+  ref: 58bf17abc550cfd479a6
   specs:
     heroku_s3_backup (0.0.1)
-      fog (~> 0.2.28)
+      fog (~> 0.3.7)
 
 GEM
   remote: http://rubygems.org/
@@ -58,16 +59,16 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
-    excon (0.2.2)
+    excon (0.2.3)
     faker (0.3.1)
-    fog (0.2.30)
+    fog (0.3.7)
       builder
-      excon (>= 0.2.0)
+      excon (>= 0.2.3)
       formatador (>= 0.0.15)
       json
       mime-types
-      net-ssh
-      nokogiri (>= 1.4.3.1)
+      net-ssh (~> 2.0.23)
+      nokogiri (~> 1.4.3.1)
       ruby-hmac
     formatador (0.0.15)
     heroku (1.10.5)
@@ -99,7 +100,7 @@ GEM
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
-    rack-test (0.5.4)
+    rack-test (0.5.6)
       rack (>= 1.0)
     rails (3.0.0)
       actionmailer (= 3.0.0)
@@ -124,7 +125,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.14.1)
+    thor (0.14.2)
     toadhopper (1.0.4)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -140,7 +141,7 @@ DEPENDENCIES
   carrierwave!
   devise (= 1.1.2)
   faker (= 0.3.1)
-  fog (= 0.2.30)
+  fog (= 0.3.7)
   heroku (= 1.10.5)
   heroku_s3_backup!
   hoptoad_notifier (= 2.3.7)
