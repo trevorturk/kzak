@@ -9,6 +9,7 @@ gem 'mime-types', '1.16', :require => "mime/types"
 gem 'ruby-mp3info', '0.6.13', :require => "mp3info"
 gem 'mp4info', '1.7.3'
 gem 'toadhopper', '1.0.4'
+gem 'yajl-ruby', '0.7.8'
 gem 'heroku_s3_backup', :git => 'git://github.com/trevorturk/heroku_s3_backup.git', :ref => '58bf17abc550cfd479a6'
 
 group :production do

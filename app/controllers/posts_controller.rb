@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     @post.save!
     render :partial => @post
   rescue => e
-    notify_hoptoad(e) if CONFIG['hoptoad_key'].present?
+    Toadhopper(CONFIG['hoptoad_key']).post!(e) if CONFIG['hoptoad_key']
     render :partial => 'error', :locals => {:filename => @filename}
   end
 
