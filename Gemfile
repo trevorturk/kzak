@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'devise', '1.1.2'
 gem 'hoptoad_notifier', '2.3.7'
-gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '54978a71b21bd5029326'
+gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '84f36027a9f11d926527'
 gem 'fog', '0.3.7'
 gem 'mime-types', '1.16', :require => "mime/types"
 gem 'ruby-mp3info', '0.6.13', :require => "mp3info"

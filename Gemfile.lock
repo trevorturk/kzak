@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/jnicklas/carrierwave.git
-  revision: 54978a71b21bd5029326dc508b893280e921b05c
-  ref: 54978a71b21bd5029326
+  revision: 84f36027a9f11d9265279e2235da5d8c4e4f2ff7
+  ref: 84f36027a9f11d926527
   specs:
     carrierwave (0.5.0)
       activesupport (~> 3.0)
@@ -59,7 +59,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
-    excon (0.2.3)
+    excon (0.2.4)
     faker (0.3.1)
     fog (0.3.7)
       builder
@@ -84,7 +84,7 @@ GEM
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
     machinist (1.0.6)
-    mail (2.2.6.1)
+    mail (2.2.7)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
@@ -125,7 +125,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.14.2)
+    thor (0.14.3)
     toadhopper (1.0.4)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
