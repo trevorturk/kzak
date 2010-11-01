@@ -3,7 +3,7 @@ if CONFIG['s3']
     config.s3_access_key_id = CONFIG['s3_access_id']
     config.s3_secret_access_key = CONFIG['s3_secret_key']
     config.s3_bucket = CONFIG['s3_bucket_name']
-    config.s3_access = :public_read
+    config.s3_access_policy = :public_read
   end
 end
 
