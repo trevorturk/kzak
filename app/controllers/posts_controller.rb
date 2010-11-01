@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     @post.save!
     render :partial => @post
   rescue => e
-    Toadhopper(CONFIG['hoptoad_key']).post!(e) if CONFIG['hoptoad_key']
+    Toadhopper(CONFIG['HOPTOAD_API_KEY']).post!(e) if CONFIG['HOPTOAD_API_KEY']
     render :partial => 'error', :locals => {:filename => @filename}
   end
 

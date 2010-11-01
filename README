@@ -44,6 +44,15 @@ heroku rake db:migrate
 heroku open
 
 
+== Todo
+
+check hoptoad errors
+use flash cookie session gem
+update soundmanager
+update jquery
+kill follows, move into na?
+
+
 == MIT License
 
 Copyright (c) 2009... Trevor Turk
