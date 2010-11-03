@@ -1,4 +1,3 @@
-<% session_key_name = Rails.application.config.session_options[:key] %>
 <script type="text/javascript">
   $(document).ready(function(){
     if ($('#swfupload-button').length) {
@@ -8,8 +7,8 @@
         flash_url : '/flash/swfupload.swf',
         upload_url : '<%= posts_path %>',
         post_params : {
-          '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
-          'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+          "<%= key = Rails.application.config.session_options[:key] %>" : "<%= cookies[key] %>",
+          "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>",
         },
         button_image_url : '/images/upload.png',
         button_placeholder_id : "swfupload-button",
@@ -19,6 +18,7 @@
         file_upload_limit : 0,
         file_types : '*.mp3;*.mp4;*.m4a',
         file_queued_handler : fileQueued,
+        file_queue_error_handler : fileQueueError,
         upload_start_handler : uploadStart,
         upload_progress_handler : uploadProgress,
         upload_success_handler : uploadSuccess,
@@ -32,7 +32,11 @@
       this.startUpload();
     }
 
-    function uploadStart(file){
+    function fileQueueError(file, errorCode, message) {
+      alert(message);
+    }
+
+    function uploadStart(file) {
       $('#swfupload-playlist li#'+file.id).find('.progress').text('Uploading... 0%');
     	return true;
     }
@@ -54,7 +58,9 @@
     }
 
     function uploadComplete(file){
-      this.startUpload();
+      if (this.getStats().files_queued > 0) {
+        this.startUpload();
+      }
     }
   });
 </script>
