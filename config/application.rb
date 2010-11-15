@@ -17,7 +17,6 @@ module Kzak
     config.session_store :cookie_store, :key => CONFIG['session_key'], :secret => CONFIG['session_secret']
     config.secret_token = CONFIG['secret_token']
     config.action_mailer.default_url_options = {:host => CONFIG['host']}
-    config.middleware.use Rack::NoWWW if Rails.env.production?
     config.time_zone = 'UTC'
     config.encoding = "utf-8"
     config.filter_parameters += [:password]

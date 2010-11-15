@@ -11,7 +11,6 @@ gem 'mp4info', '1.7.3'
 gem 'toadhopper', '1.0.4'
 gem 'yajl-ruby', '0.7.8'
 gem 'heroku_s3_backup', :git => 'git://github.com/trevorturk/heroku_s3_backup.git', :ref => '58bf17abc550cfd479a6'
-gem 'rack-no-www', '0.0.1'
 gem 'flash_cookie_session', '1.0.1'
 
 group :production do
