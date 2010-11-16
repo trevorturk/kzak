@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.3'
 gem 'devise', '1.1.2'
 gem 'hoptoad_notifier', '2.3.12'
 gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '84f36027a9f11d926527'
