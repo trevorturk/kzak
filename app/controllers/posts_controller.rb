@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   def get_audio_info
     return unless params[:Filedata]
 
-    path = params[:Filedata].try(:path) || params[:Filedata].tempfile.path
+    path = params[:Filedata].respond_to?(:path) ? params[:Filedata].path : params[:Filedata].tempfile.path
 
     if @filename =~ /.mp3$/
       Mp3Info.open(path) do |r|
