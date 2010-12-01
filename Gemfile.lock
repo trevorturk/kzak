@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/jnicklas/carrierwave.git
-  revision: 84f36027a9f11d9265279e2235da5d8c4e4f2ff7
-  ref: 84f36027a9f11d926527
-  specs:
-    carrierwave (0.5.0)
-      activesupport (~> 3.0)
-
-GIT
   remote: git://github.com/trevorturk/heroku_s3_backup.git
   revision: 58bf17abc550cfd479a6d35af9e9d8d5168f5945
   ref: 58bf17abc550cfd479a6
@@ -50,6 +42,8 @@ GEM
       ZenTest
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
+    carrierwave (0.5.1)
+      activesupport (~> 3.0)
     configuration (1.1.0)
     daemons (1.1.0)
     devise (1.1.2)
@@ -58,20 +52,20 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
-    excon (0.2.4)
+    excon (0.2.8)
     faker (0.3.1)
     flash_cookie_session (1.0.1)
       rails (~> 3.0)
-    fog (0.3.7)
+    fog (0.3.25)
       builder
-      excon (>= 0.2.3)
-      formatador (>= 0.0.15)
+      excon (>= 0.2.4)
+      formatador (>= 0.0.16)
       json
       mime-types
       net-ssh (~> 2.0.23)
       nokogiri (~> 1.4.3.1)
       ruby-hmac
-    formatador (0.0.15)
+    formatador (0.0.16)
     heroku (1.10.5)
       json_pure (>= 1.2.0, < 1.5.0)
       launchy (~> 0.3.2)
@@ -142,11 +136,11 @@ PLATFORMS
 
 DEPENDENCIES
   autotest-rails (= 4.1.0)
-  carrierwave!
+  carrierwave (= 0.5.1)
   devise (= 1.1.2)
   faker (= 0.3.1)
   flash_cookie_session (= 1.0.1)
-  fog (= 0.3.7)
+  fog (= 0.3.25)
   heroku (= 1.10.5)
   heroku_s3_backup!
   hoptoad_notifier (= 2.3.12)
