@@ -20,10 +20,10 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build :mp3 => params[:Filedata], :title => @title, :artist => @artist, :album => @album
     @post.save!
-    render :partial => @post
+    render :partial => 'posts/post.html.erb', :locals => {:post => @post}
   rescue => e
     Toadhopper(CONFIG['HOPTOAD_API_KEY']).post!(e) if CONFIG['HOPTOAD_API_KEY']
-    render :partial => 'error', :locals => {:filename => @filename}
+    render :partial => 'posts/error.html.erb', :locals => {:filename => @filename}
   end
 
   protected

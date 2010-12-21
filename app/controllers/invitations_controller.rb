@@ -4,9 +4,9 @@ class InvitationsController < ApplicationController
     @invitation = current_user.invitations.new params[:invitation]
     if @invitation.save
       Mailer.invitation(@invitation).deliver
-      render :partial => 'success'
+      render :partial => 'invitations/success.html.erb'
     else
-      render :partial => 'error'
+      render :partial => 'invitations/error.html.erb'
     end
   end
 end
