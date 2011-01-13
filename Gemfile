@@ -21,6 +21,7 @@ end
 group :development do
   gem 'sqlite3-ruby', '1.3.0', :require => 'sqlite3'
   gem 'heroku', '1.10.5'
+  gem 'ruby-debug', '0.10.4'
 end
 
 group :test do
