@@ -3,16 +3,10 @@
   <h2>playlist <a href="#shuffle" class="shuffle">shuffle</a></h2>
 
   <% if user_signed_in? %>
-
     <div id="swfupload-control">
     	<span id="swfupload-button"></span>
     	<span id="upload-link"><%= link_to '»', new_post_path, :confirm => "Use the regular upload form instead?" %></span>
     </div>
-
-    <% content_for :head do %>
-      <%= render 'uploader' %>
-    <% end %>
-
   <% end %>
 
     <ul id="swfupload-playlist" class="playlist">
@@ -39,3 +33,7 @@
   <%= render 'invitations/form' %>
 
 </div>
+
+<% content_for :footer do %>
+  <%= render 'uploader' %>
+<% end %>

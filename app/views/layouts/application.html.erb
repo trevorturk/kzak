@@ -2,11 +2,10 @@
 <html>
 <head>
   <title>KZAK!</title>
-  <%= stylesheet_link_tag 'reset', '960', 'forms', 'application' %>
-  <%= javascript_include_tag 'jquery', 'rails', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application' %>
-  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'reset', '960', 'forms', 'application', :cache => "#{Rails.root}/tmp/all.css" %>
+  <%= javascript_include_tag 'jquery', 'rails', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application', :cache => "#{Rails.root}/tmp/all.js" %>
   <%= auto_discovery_link_tag :rss, rss_url, 'RSS' if user_signed_in? %>
-  <%= yield :head %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
   <div class="container_12">
@@ -28,5 +27,6 @@
       <%= image_tag 'bplayer2.gif' %>
     </div>
   </div>
+  <%= yield :footer %>
 </body>
 </html>
