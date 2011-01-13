@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>KZAK!</title>
-  <%= stylesheet_link_tag 'reset', '960', 'forms', 'application', :cache => "../tmp/all.css" %>
-  <%= javascript_include_tag 'jquery', 'rails', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application', :cache => "../tmp/all.js" %>
+  <%= stylesheet_link_tag 'reset', '960', 'forms', 'application' %>
+  <%= javascript_include_tag 'jquery', 'rails', 'jquery.form', 'jquery.hint', 'jquery.shuffle', 'soundmanager2', 'swfupload', 'application' %>
   <%= auto_discovery_link_tag :rss, rss_url, 'RSS' if user_signed_in? %>
   <%= csrf_meta_tag %>
 </head>
