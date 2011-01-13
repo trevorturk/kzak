@@ -12,7 +12,7 @@ task :cache_assets => :environment do
   session.get('/')
   session.follow_redirect!
 
-  %x[git add #{javascript}]
-  %x[git add #{stylesheet}]
-  %x[git commit 'cache_assets']
+  system("git add #{javascript}") ? puts("git add #{javascript}") : fail
+  system("git add #{stylesheet}") ? puts("git add #{stylesheet}") : fail
+  system("git commit -m 'cache_assets'") ? puts("git commit -m 'cache_assets'") : fail
 end

@@ -1,10 +1,6 @@
 desc "deploy"
 task :deploy => :environment do
-  puts "running rake cache_assets"
-  Rake::Task['cache_assets'].invoke
-  puts "pushing to github..."
-  %x[git push origin master]
-  puts "deploying to heroku..."
-  %x[git push heroku master]
-  puts "done..."
+  system("rake cache_assets") ? puts("rake cache_assets") : fail
+  system("git push origin master") ? puts("git push origin master") : fail
+  system("git push heroku master") ? puts("git push heroku master") : fail
 end
