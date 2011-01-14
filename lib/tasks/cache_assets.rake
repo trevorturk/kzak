@@ -24,7 +24,7 @@ task :cache_assets => :environment do
     end
   end
 
-  if system('git diff-index HEAD').present?
+  if %x[git diff-index HEAD].present?
     puts "-----> committing cached assets"
     system("git commit -m 'cache_assets'") ? true : fail
   else
