@@ -1,3 +1,5 @@
+// application.js
+
 function human_size(bytes) {
   var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
   var e = Math.floor(Math.log(bytes)/Math.log(1024));
