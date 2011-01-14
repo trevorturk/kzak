@@ -1,10 +1,12 @@
 desc "cache assets"
 task :cache_assets => :environment do
-  javascript = 'public/javascripts/all.js'
-  stylesheet = 'public/stylesheets/all.css'
+  puts "-----> caching assets"
 
-  FileUtils.rm(javascript) if File.exist?(javascript)
-  FileUtils.rm(stylesheet) if File.exist?(stylesheet)
+  paths = ['public/javascripts/all.js', 'public/stylesheets/all.css']
+
+  paths.each do |path|
+    FileUtils.rm(path) if File.exist?(path)
+  end
 
   ActionController::Base.perform_caching = true
 
@@ -12,7 +14,22 @@ task :cache_assets => :environment do
   session.get('/')
   session.follow_redirect!
 
-  system("git add #{javascript}") ? puts("git add #{javascript}") : fail
-  system("git add #{stylesheet}") ? puts("git add #{stylesheet}") : fail
-  system("git commit -m 'cache_assets'") ? puts("git commit -m 'cache_assets'") : fail
+  paths.each do |path|
+    if File.exist?(path)
+      system("git add #{path}") ? true : fail
+    end
+  end
+
+  paths.each do |path|
+    @changes = true if File.exist?(path)
+  end
+
+  if @changes
+    puts "-----> committing cached assets"
+    system("git commit -m 'cache_assets'") ? true : fail
+  else
+    puts "-----> no cached assets found"
+  end
+
+  puts "-----> done"
 end
