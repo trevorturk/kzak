@@ -1,8 +1,12 @@
 desc "cache assets"
 task :cache_assets => :environment do
-  puts "-----> caching assets"
 
   paths = ['public/javascripts/all.js', 'public/stylesheets/all.css']
+
+  puts "-----> caching assets..."
+  paths.each do |path|
+    puts "-----> #{path}"
+  end
 
   paths.each do |path|
     FileUtils.rm(path) if File.exist?(path)
@@ -20,15 +24,11 @@ task :cache_assets => :environment do
     end
   end
 
-  paths.each do |path|
-    @changes = true if File.exist?(path)
-  end
-
-  if @changes
+  if system('git diff-index HEAD').present?
     puts "-----> committing cached assets"
     system("git commit -m 'cache_assets'") ? true : fail
   else
-    puts "-----> no cached assets found"
+    puts "-----> nothing to commit"
   end
 
   puts "-----> done"

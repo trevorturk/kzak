@@ -1,6 +1,6 @@
 desc "push to github, deploy to heroku, and notify hoptoad"
 task :deploy => :environment do
-  puts "-----> caching assets"
+  puts "-----> running rake cache_assets"
   system("rake cache_assets") ? true : fail
 
   puts "-----> pushing to github"
