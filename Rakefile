@@ -3,9 +3,10 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
+require "heroku_backup_task"
 
 Kzak::Application.load_tasks
 
-task :cron => :environment do
-  HerokuS3Backup.backup
+task :cron do
+  HerokuBackupTask.execute
 end

@@ -1,34 +1,34 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
-gem 'devise', '1.1.2'
-gem 'hoptoad_notifier', '2.3.12'
-gem 'carrierwave', '0.5.1'
-gem 'fog', '0.3.25'
-gem 'mime-types', '1.16', :require => "mime/types"
-gem 'ruby-mp3info', '0.6.13', :require => "mp3info"
-gem 'mp4info', '1.7.3'
-gem 'toadhopper', '1.0.4'
-gem 'yajl-ruby', '0.7.8'
-gem 'heroku_s3_backup', :git => 'git://github.com/trevorturk/heroku_s3_backup.git', :ref => '58bf17abc550cfd479a6'
-gem 'flash_cookie_session', '1.0.1'
+gem 'rails'
+gem 'devise'
+gem 'hoptoad_notifier'
+gem 'mime-types', :require => "mime/types"
+gem 'ruby-mp3info', :require => "mp3info"
+gem 'mp4info'
+gem 'toadhopper'
+gem 'yajl-ruby'
+gem 'heroku_backup_task'
+gem 'flash_cookie_session'
+gem 'carrierwave', :git => 'git@github.com:jnicklas/carrierwave.git', :ref => '4dc1a5c357d8a6adcf02'
+gem 'fog'
 
 group :production do
-  gem 'thin', '1.2.7'
-  gem 'pg', '0.9.0'
+  gem 'thin'
+  gem 'pg'
 end
 
 group :development do
-  gem 'sqlite3-ruby', '1.3.0', :require => 'sqlite3'
-  gem 'heroku', '1.10.5'
-  gem 'ruby-debug', '0.10.4'
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'heroku'
+  gem 'ruby-debug'
 end
 
 group :test do
-  gem 'sqlite3-ruby', '1.3.0', :require => 'sqlite3'
-  gem 'populator', '0.2.5'
-  gem 'machinist', '1.0.6'
-  gem 'faker', '0.3.1'
-  gem 'autotest-rails', '4.1.0'
-  gem 'mocha', '0.9.8'
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'populator'
+  gem 'machinist'
+  gem 'faker'
+  gem 'autotest-rails'
+  gem 'mocha'
 end
