@@ -31,3 +31,5 @@ CarrierWave::Uploader::Store.class_eval do
     File.join([store_dir, full_filename(for_file)].compact)
   end
 end
+
+# TODO use cache_dir config?
