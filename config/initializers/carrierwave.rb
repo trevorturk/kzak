@@ -4,6 +4,8 @@ if CONFIG['s3']
     config.s3_secret_access_key = CONFIG['s3_secret_key']
     config.s3_bucket = CONFIG['s3_bucket_name']
     config.s3_access_policy = :public_read
+    config.s3_headers = {'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate}
+    config.cache_dir = "#{Rails.root}/tmp/uploads"
   end
 end
 
@@ -14,7 +16,7 @@ if Rails.env.test?
   end
 end
 
-# TODO use carrierwave's cname support instead?
+# TODO use carrierwave's cname support instead (or fog)
 CarrierWave::Storage::S3::File.class_eval do
   def url
     if CONFIG['s3_host_alias']
@@ -24,12 +26,3 @@ CarrierWave::Storage::S3::File.class_eval do
     end
   end
 end
-
-# TODO remove when this is fixed in carrierwave http://github.com/jnicklas/carrierwave/issues#issue/36
-CarrierWave::Uploader::Store.class_eval do
-  def store_path(for_file=filename)
-    File.join([store_dir, full_filename(for_file)].compact)
-  end
-end
-
-# TODO use cache_dir config?

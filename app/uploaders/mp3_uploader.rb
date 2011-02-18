@@ -21,12 +21,4 @@ class Mp3Uploader < CarrierWave::Uploader::Base
     "#{@random_filename}#{File.extname(original_filename).downcase}" if original_filename
   end
 
-  def s3_headers
-    # TODO specify globally when gem gets fixed http://github.com/jnicklas/carrierwave/issues/closed#issue/32
-    {'Cache-Control' => 'max-age=315576000', 'Expires' => 99.years.from_now.httpdate}
-  end
-
-  def cache_dir
-    "#{Rails.root}/tmp/uploads" # for heroku read-only filesystem http://codingfrontier.com/carrierwave-on-heroku
-  end
 end
