@@ -10,9 +10,11 @@ gem 'toadhopper'
 gem 'yajl-ruby'
 gem 'heroku_backup_task'
 gem 'flash_cookie_session'
-gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => 'aa73528801060c49bf63'
-# gem 'carrierwave', '0.5.2'
 gem 'fog', '0.5.3'
+
+# gem 'carrierwave', :path => '~/code/carrierwave'
+gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '6804a7e033412d186542'
+# gem 'carrierwave', '0.5.2'
 
 group :production do
   gem 'thin'
