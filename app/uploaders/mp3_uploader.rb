@@ -5,14 +5,12 @@ require 'carrierwave/orm/activerecord'
 class Mp3Uploader < CarrierWave::Uploader::Base
 
   if CONFIG['s3']
-    storage :s3
     def store_dir
       nil
     end
   else
-    storage :file
     def store_dir
-      "system"
+      'system'
     end
   end
 
