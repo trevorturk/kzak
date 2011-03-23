@@ -50,10 +50,10 @@ GEM
       i18n (~> 0.4)
     flash_cookie_session (1.1.0)
       rails (~> 3.0)
-    fog (0.7.1)
+    fog (0.7.0)
       builder
-      excon (>= 0.5.7)
-      formatador (>= 0.1.2)
+      excon (>= 0.5.5)
+      formatador (>= 0.1.1)
       json
       mime-types
       net-ssh (>= 2.0.23)
@@ -145,7 +145,7 @@ DEPENDENCIES
   devise
   faker
   flash_cookie_session
-  fog (= 0.7.1)
+  fog (= 0.7.0)
   heroku
   heroku_backup_task
   hoptoad_notifier
