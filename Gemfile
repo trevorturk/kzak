@@ -15,7 +15,7 @@ gem 'flash_cookie_session'
 # gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => 'xxx'
 gem 'carrierwave', '0.5.3'
 
-gem 'fog', '0.7.1'
+gem 'fog', '0.7.0'
 
 group :production do
   gem 'thin'
