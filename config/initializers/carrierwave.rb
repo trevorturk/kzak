@@ -4,7 +4,8 @@ if CONFIG['s3']
     config.fog_credentials = {
       :provider               => 'AWS',
       :aws_access_key_id      => CONFIG['s3_access_id'],
-      :aws_secret_access_key  => CONFIG['s3_secret_key']
+      :aws_secret_access_key  => CONFIG['s3_secret_key'],
+      :persistent => false
     }
     config.fog_directory  = CONFIG['s3_bucket_name']
     config.fog_host       = CONFIG['s3_host_alias']
