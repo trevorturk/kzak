@@ -8,6 +8,7 @@ gem 'ruby-mp3info', :require => "mp3info"
 gem 'mp4info'
 gem 'toadhopper'
 gem 'yajl-ruby'
+gem 'heroku_backup_task'
 gem 'flash_cookie_session'
 
 # gem 'carrierwave', :path => '~/code/carrierwave'
