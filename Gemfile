@@ -8,7 +8,6 @@ gem 'ruby-mp3info', :require => "mp3info"
 gem 'mp4info'
 gem 'toadhopper'
 gem 'yajl-ruby'
-gem 'heroku_backup_task'
 gem 'flash_cookie_session'
 
 # gem 'carrierwave', :path => '~/code/carrierwave'
@@ -24,8 +23,8 @@ end
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
-  gem 'heroku'
-  gem 'ruby-debug'
+  gem 'ruby-debug19', :platforms => [:ruby_19]
+  gem 'ruby-debug', :platforms => [:ruby_18, :jruby]
 end
 
 group :test do
