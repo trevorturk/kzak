@@ -12,8 +12,8 @@ gem 'heroku_backup_task'
 gem 'flash_cookie_session'
 
 # gem 'carrierwave', :path => '~/code/carrierwave'
-gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '3f4d5bd88db8768e35e0'
-# gem 'carrierwave', '0.5.4'
+# gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :ref => '3f4d5bd88db8768e35e0'
+gem 'carrierwave', '0.5.5'
 
 gem 'fog', '0.7.1'
 
