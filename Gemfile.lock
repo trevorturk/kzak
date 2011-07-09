@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/jnicklas/carrierwave.git
+  revision: 3f4d5bd88db8768e35e0b59433d0dc104d0ce07d
+  ref: 3f4d5bd88db8768e35e0
+  specs:
+    carrierwave (0.5.4)
+      activesupport (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -35,8 +43,6 @@ GEM
       ZenTest
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
-    carrierwave (0.5.4)
-      activesupport (~> 3.0)
     columnize (0.3.2)
     configuration (1.2.0)
     daemons (1.1.0)
@@ -154,7 +160,7 @@ PLATFORMS
 
 DEPENDENCIES
   autotest-rails
-  carrierwave (= 0.5.4)
+  carrierwave!
   devise
   faker
   flash_cookie_session
